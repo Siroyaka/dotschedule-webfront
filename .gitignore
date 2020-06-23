@@ -32,4 +32,3 @@ yarn-error.log*
 firebase.ts
 /src/component/test
 .vercel
-src/modules/InitialMetaData.ts
