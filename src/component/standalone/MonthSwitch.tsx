@@ -29,17 +29,16 @@ const f = (year: number, month: number) => {
 }
 
 interface LinkComponentProps {
-  prefetch: boolean,
   disabled: boolean,
   href: string,
   as?: string,
 }
 
 const LinkComponent: React.FC<LinkComponentProps> = (props) => {
-  const { prefetch, disabled, href, as, children } = props;
+  const { disabled, href, as, children } = props;
   return(
     !disabled ? (
-      <Link href={href} as={as} prefetch={prefetch}>
+      <Link href={href} as={as}>
         <a className={clsx('py-2', 'px-2', 'focus:outline-none', 'transition', 'duration-200', 'rounded-full', 'hover:bg-gray-200')} >
           {children}
         </a>
@@ -69,7 +68,7 @@ const MonthSwitch: React.FC<Props> = (props) => {
   return(
     <React.Fragment>
       <section id='monthSwitch' className={clsx('flex', 'items-center', 'justify-between', 'py-2', 'px-2')}>
-        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${before.year}/${before.month}`} prefetch={false} disabled={oldest}>
+        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${before.year}/${before.month}`} disabled={oldest}>
           <LeftArrowSvg color={oldest ? 'gray' : 'black'}/>
         </LinkComponent>
         <div className={clsx('w-32', 'text-center')}>
@@ -77,7 +76,7 @@ const MonthSwitch: React.FC<Props> = (props) => {
             <span className={clsx('text-lg')}>{year}年{month}月</span>
           </div>
         </div>
-        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${after.year}/${after.month}`} prefetch={false} disabled={newest}>
+        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${after.year}/${after.month}`} disabled={newest}>
           <RightArrowSvg color={newest ? 'gray' : 'black'} />
         </LinkComponent>
       </section>
