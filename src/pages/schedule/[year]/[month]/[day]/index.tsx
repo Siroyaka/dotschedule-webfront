@@ -51,6 +51,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
+const calcRevalidateTime = (year: number, month: number, day: number) => {
+  const time = (new Date(year, month - 1, day)).getTime();
+
+  // 午前3時を日付変更点とするため、現在日時から3を引く。加えて、デプロイ先がutcなのでそれを考慮する。
+  const nd = new Date();
+  nd.setHours(nd.getHours() + 6);
+
+  // 本日と1日前は15分とする
+  const ld = new Date(nd);
+  ld.setDate(ld.getDate() - 2);
+  if (time > ld.getTime()) return 60 * 15;
+
+  // 直近1か月は1日とする
+  const lmd = new Date(nd);
+  lmd.setMonth(lmd.getMonth() - 1);
+  if (time > lmd.getTime()) return 60 * 60 * 24;
+
+  // それ以外は1か月とする
+  return 60 * 60 * 24 * 31;
+}
+
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const sYear = Array.isArray(params?.year) ? params?.year[0] : params.year;
   const sMonth = Array.isArray(params?.month) ? params?.month[0] : params.month;
@@ -59,9 +80,8 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   const month = parseInt(sMonth);
   const day = parseInt(sDay);
   const cardData = await fetchScheduleData(year, month, day, VideoScheduleToCardType);
-  const d = new Date();
-  d.setHours(d.getHours() + 6);
-  const revalidateTime = year > d.getFullYear() || (year === d.getFullYear() && (month > d.getMonth() + 1 || (month === d.getMonth() + 1 && day >= (d.getDate() - 1)))) ? 60 * 15 : (24 - d.getHours()) * 3600;
+  
+  const revalidateTime = calcRevalidateTime(year, month, day);
 
   return {
     props: {

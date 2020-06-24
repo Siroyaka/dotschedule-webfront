@@ -46,6 +46,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
+const calcRevalidateTime = (year: number, month: number) => {
+  const yesterday = new Date();
+  yesterday.setHours(yesterday.getHours() + 6);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yY = yesterday.getFullYear();
+  const yM = yesterday.getMonth() + 1;
+
+  // 今日の月と昨日の月(異なる場合もあるから)は1hで更新されるようにする
+  if (year > yY || (year === yY && month >= yM)) return 60 * 60;
+
+  // それ以前は1か月で更新されるようにする
+  return 60 * 60 * 24 * 31;
+}
+
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const sYear = Array.isArray(params?.year) ? params?.year[0] : params.year;
   const sMonth = Array.isArray(params?.month) ? params?.month[0] : params.month;
@@ -59,14 +73,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   const start = { year: 2017, month: 1, day: 1 };
   const end = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
 
-  const yesterday = new Date(now);
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  const revalidate = (() => {
-    if(year === now.getFullYear() && month === (now.getMonth() + 1)) return 60 * 15;
-    if(year === yesterday.getFullYear() && month === (yesterday.getMonth() + 1)) return 60 * 60 * 2;
-    return (24 - now.getHours()) * 3600;
-  })();
+  const revalidateTime = calcRevalidateTime(year, month);
 
   return {
     props: {
@@ -76,7 +83,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       start,
       end,
     },
-    unstable_revalidate: revalidate
+    unstable_revalidate: revalidateTime
   }
 }
 
