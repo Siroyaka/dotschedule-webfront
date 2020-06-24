@@ -28,6 +28,18 @@ const DrawerItems: React.FC<Props> = (props) => {
           </Link>
         </li>
         <li className={'w-full'}>
+          <Link href='/privacypolicy'>
+            <a className={'block px-4 py-2 text-left hover:bg-red-200 flex'}>
+              <div className={'mr-4'}>
+                <NoticeIconSvg />
+              </div>
+              <div>
+                <span className={'text-lg'}>プライバシーポリシー</span>
+              </div>
+            </a>
+          </Link>
+        </li>
+        <li className={'w-full'}>
           <a className={'block px-4 py-2 text-left hover:bg-red-200 flex'} href={'https://forms.office.com/Pages/ResponsePage.aspx?id=ThwL2RuzK0KlbUGjoK6habx0cw6yroJPt2erS48Y7LVUMlJHOVU4MlhYSU5QSlg1UUtYUU9YSFpKRy4u'}>
             <div className={'mr-4'}>
               <MessageIconSvg />
