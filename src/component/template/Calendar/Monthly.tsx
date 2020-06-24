@@ -33,6 +33,9 @@ const Monthly: React.FC<Props> = (props) => {
     return afterStart && beforeEnd;
   }
 
+  // 3か月以内はprefetchする。それ以前はしない。
+  const prefetch = ((end.year - year) * 12 + end.month - month) <= 3;
+
   return(
     <ol className={clsx('flex', 'flex-col', 'h-full')}>
       {monthCalendar.map((week, i) => (
@@ -40,7 +43,7 @@ const Monthly: React.FC<Props> = (props) => {
           {week.map((day) => (
             <li key={`cal-${year}-${month}-week-${i + 1}-wd-${day.weekDay}` } className={clsx('w-full')}>
               {check({...day}) ? (
-                <Link href={'/schedule/[year]/[month]/[day]'} as={`/schedule/${day.year}/${day.month}/${day.day}`} prefetch={false}>
+                <Link href={'/schedule/[year]/[month]/[day]'} as={`/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
                   <a>
                     <div className={clsx('h-full', 'text-center', 'rounded-sm', 'border')}>
                       <span className={clsx({['text-gray-400']: day.year !== year || day.month !== month}, 'text-sm')}>

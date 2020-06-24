@@ -42,6 +42,9 @@ const ListCalendar: React.FC<Props> = (props) => {
     return avaters[day];
   }
 
+  // 3か月以内はprefetchする。それ以前はしない。
+  const prefetch = ((end.year - year) * 12 + end.month - month) <= 3;
+
   return(
     <section className={clsx('w-full', 'h-full', 'overflow-y-auto')} id='list'>
       <ol className={clsx('w-full', 'mt-1', 'mb-8')}>
@@ -52,12 +55,12 @@ const ListCalendar: React.FC<Props> = (props) => {
                 <div className={clsx('w-8')}>
                   <span>{day.day}</span>
                 </div>
-                <Link href={'/schedule/[year]/[month]/[day]'} as={`/schedule/${day.year}/${day.month}/${day.day}`} prefetch={false}>
-                  <a className={clsx('w-full', 'flex', 'flex-wrap', 'flex-row', 'mx-1', 'my-1', 'md:h-16', 'h-12')}>
+                <Link href={'/schedule/[year]/[month]/[day]'} as={`/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
+                  <a className={clsx('w-full', 'flex', 'flex-wrap', 'flex-row', 'mx-1', 'my-1', 'h-20')}>
                     {getAvaters(day.day).map((avater, i) => (
                       <img
                         key={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
-                        className={clsx('md:w-8', 'md:h-8', 'w-5', 'h-5', 'rounded-full')}
+                        className={clsx('w-8', 'h-8', 'rounded-full', 'mr-1', 'mb-1')}
                         src={avater}
                       />
                     ))}
