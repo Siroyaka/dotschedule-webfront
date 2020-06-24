@@ -45,6 +45,10 @@ const ListCalendar: React.FC<Props> = (props) => {
   // 3か月以内はprefetchする。それ以前はしない。
   const prefetch = ((end.year - year) * 12 + end.month - month) <= 3;
 
+  const isToday = (d: {year: number, month: number, day: number}) => {
+    return d.year === end.year && d.month === end.month && d.day === end.day;
+  }
+
   return(
     <section className={clsx('w-full', 'h-full', 'overflow-y-auto')} id='list'>
       <ol className={clsx('w-full', 'mt-1', 'mb-8')}>
@@ -55,7 +59,7 @@ const ListCalendar: React.FC<Props> = (props) => {
                 <div className={clsx('w-8')}>
                   <span>{day.day}</span>
                 </div>
-                <Link href={'/schedule/[year]/[month]/[day]'} as={`/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
+                <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
                   <a className={clsx('w-full', 'flex', 'flex-wrap', 'flex-row', 'mx-1', 'my-1', 'h-20')}>
                     {getAvaters(day.day).map((avater, i) => (
                       <img
