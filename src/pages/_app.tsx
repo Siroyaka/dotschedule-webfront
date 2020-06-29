@@ -29,13 +29,13 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <React.Fragment>
       <Head>
+        <meta name="description" content={InitialMetaData.ogDescription}/>
         <meta name="twitter:card" content={InitialMetaData.twCardType} />
         <meta name="twitter:site" content={InitialMetaData.twSite}/>
         <meta property="og:url" content={InitialMetaData.ogUrl}/>
         <meta property="og:title" content={InitialMetaData.ogTitle}/>
         <meta property="og:description" content={InitialMetaData.ogDescription}/>
         <meta property="og:image" content={InitialMetaData.ogImage} />
-
       </Head>
       <Header title=".Schedule" onMenuClick={() => setDrawerOpen(true)}/>
       <div className={clsx('py-12', 'h-screen')}>

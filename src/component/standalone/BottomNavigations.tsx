@@ -27,7 +27,7 @@ const TabItems: React.FC<{value: string, link: string, as?: string, isLink: bool
         </div>
       ) : (
         <Link href={link} as={as} >
-          <a className='flex flex-col border border-white rounded hover:border-gray-200 hover:bg-gray-200 py-1 px-1 items-center text-center text-xs text-gray-600'>
+          <a className='flex flex-col border border-white rounded hover:border-blue-200 hover:bg-blue-200 py-1 px-1 items-center text-center text-xs text-gray-600'>
             {children}
           </a>
         </Link>

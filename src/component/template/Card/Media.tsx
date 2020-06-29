@@ -13,8 +13,8 @@ const Media: React.FC<Props> = (props) => {
 
   return(
     <div className={clsx('overflow-hideen')}>
-      <a className={clsx('thumbnail', 'relative', 'block')} href={href}>
-        <img className={clsx('absolute', 'object-cover', 'h-full', 'w-full')} src={src}/>
+      <a className={clsx('thumbnail', 'relative', 'block')} href={href} aria-label={'youtube link'}>
+        <img alt={`${href}-img`} className={clsx('absolute', 'object-cover', 'h-full', 'w-full')} src={src}/>
         <div className={clsx('absolute', 'h-full', 'w-full', 'hover:bg-gray-200', 'hover:bg-opacity-25')}></div>
       </a>
     </div>

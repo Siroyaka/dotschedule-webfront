@@ -64,6 +64,7 @@ const ListCalendar: React.FC<Props> = (props) => {
                     {getAvaters(day.day).map((avater, i) => (
                       <img
                         key={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
+                        alt={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         className={clsx('w-8', 'h-8', 'rounded-full', 'mr-1', 'mb-1')}
                         src={avater}
                       />
