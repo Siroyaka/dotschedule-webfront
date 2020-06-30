@@ -49,8 +49,8 @@ const Monthly: React.FC<Props> = (props) => {
               {check({...day}) ? (
                 <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
                   <a>
-                    <div className={clsx('h-full', 'text-center', 'rounded-sm', 'border')}>
-                      <span className={clsx({['text-gray-400']: day.year !== year || day.month !== month}, 'text-sm')}>
+                    <div className={clsx('h-full', 'text-center', 'rounded-sm', 'border', 'active:bg-gray-200', 'hover:bg-opacity-25')} >
+                      <span className={clsx({['text-gray-400']: day.year !== year || day.month !== month}, 'text-sm')} style={{transition: 'all .15 ease'}}>
                         {day.day}
                       </span>
                     </div>

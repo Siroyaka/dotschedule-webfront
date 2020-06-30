@@ -60,7 +60,7 @@ const ListCalendar: React.FC<Props> = (props) => {
                   <span>{day.day}</span>
                 </div>
                 <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
-                  <a className={clsx('w-full', 'flex', 'flex-wrap', 'flex-row', 'mx-1', 'my-1', 'h-20')}>
+                  <a className={clsx('w-full', 'flex', 'flex-wrap', 'flex-row', 'mx-1', 'my-1', 'h-20', 'active:bg-gray-100')} style={{transition: 'all .15s ease'}}>
                     {getAvaters(day.day).map((avater, i) => (
                       <img
                         key={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
