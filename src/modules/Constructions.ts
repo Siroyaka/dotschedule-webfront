@@ -1,5 +1,7 @@
 export const OLD_YEAR = 2017;
 
+export const MESSAGE_FORM_URL = 'https://forms.office.com/Pages/ResponsePage.aspx?id=ThwL2RuzK0KlbUGjoK6habx0cw6yroJPt2erS48Y7LVUMlJHOVU4MlhYSU5QSlg1UUtYUU9YSFpKRy4u';
+
 const dateFromTo = (): {year: number, month: number}[] => {
   const n = new Date();
   n.setHours(n.getHours() + 6);
