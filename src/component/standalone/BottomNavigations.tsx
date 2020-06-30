@@ -22,12 +22,12 @@ const TabItems: React.FC<{value: string, link: string, as?: string, isLink: bool
   return(
     <React.Fragment>
       {isLink ? (
-        <div className='flex flex-col border border-blue-500 rounded py-1 px-1 bg-blue-500 hover:bg-blue-700 items-center text-center text-xs text-gray-200'>
+        <div className='flex flex-col border border-blue-500 rounded py-1 px-1 bg-blue-500 items-center text-center text-xs text-gray-200'>
           {children}
         </div>
       ) : (
         <Link href={link} as={as} >
-          <a className='flex flex-col border border-white rounded hover:border-blue-200 hover:bg-blue-200 py-1 px-1 items-center text-center text-xs text-gray-600'>
+          <a className='flex flex-col border border-white rounded hover:border-blue-200 hover:bg-blue-200 py-1 px-1 items-center text-center text-xs text-gray-600 active:bg-blue-300' style={{transition: 'all .15s ease'}} >
             {children}
           </a>
         </Link>

@@ -39,7 +39,7 @@ const LinkComponent: React.FC<LinkComponentProps> = (props) => {
   return(
     !disabled ? (
       <Link href={href} as={as}>
-        <a className={clsx('py-2', 'px-2', 'focus:outline-none', 'transition', 'duration-200', 'rounded-full', 'hover:bg-gray-200')} >
+        <a className={clsx('py-2', 'px-2', 'focus:outline-none', 'transition', 'duration-200', 'rounded-full', 'hover:bg-gray-200', 'active:bg-gray-300')} style={{transition: 'all .15s ease'}} >
           {children}
         </a>
       </Link>
@@ -83,7 +83,7 @@ const MonthSwitch: React.FC<Props> = (props) => {
       {menuVisible ? (
         <section className={clsx('fixed', 'top-0', 'h-full', 'w-full', 'z-50', 'flex', 'justify-center')}>
           <article id={'closeMonthSelectMenuField'} className={clsx('h-full', 'w-full', 'fixed')} onClick={closeMenu} />
-          <article className={clsx('mt-24', 'h-48', 'w-32', 'z-50')}>
+          <article className={clsx('mt-24', 'h-64', 'z-50')}>
             <MonthSelectMenuList start={start} end={end} componentName={componentName} closeMenu={closeMenu} />
           </article>
         </section>
