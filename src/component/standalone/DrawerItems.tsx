@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { MessageIconSvg, NoticeIconSvg } from 'component/parts/svgIcons';
+import { MESSAGE_FORM_URL } from 'modules/Constructions';
 
 interface OwnProps {
   closeDrawer: () => void
@@ -17,7 +18,7 @@ const DrawerItems: React.FC<Props> = (props) => {
       <ul onClick={closeDrawer}>
         <li className={'w-full'}>
           <Link href='/notice'>
-            <a className={'block px-4 py-2 text-left hover:bg-red-200 flex'}>
+            <a className={'block px-4 py-2 text-left hover:bg-red-200 flex active:bg-red-100'} style={{transition: 'all .15s ease'}}>
               <div className={'mr-4'}>
                 <NoticeIconSvg />
               </div>
@@ -29,7 +30,7 @@ const DrawerItems: React.FC<Props> = (props) => {
         </li>
         <li className={'w-full'}>
           <Link href='/privacypolicy'>
-            <a className={'block px-4 py-2 text-left hover:bg-red-200 flex'}>
+            <a className={'block px-4 py-2 text-left hover:bg-red-200 flex active:bg-red-100'} style={{transition: 'all .15s ease'}}>
               <div className={'mr-4'}>
                 <NoticeIconSvg />
               </div>
@@ -40,7 +41,7 @@ const DrawerItems: React.FC<Props> = (props) => {
           </Link>
         </li>
         <li className={'w-full'}>
-          <a className={'block px-4 py-2 text-left hover:bg-red-200 flex'} href={'https://forms.office.com/Pages/ResponsePage.aspx?id=ThwL2RuzK0KlbUGjoK6habx0cw6yroJPt2erS48Y7LVUMlJHOVU4MlhYSU5QSlg1UUtYUU9YSFpKRy4u'}>
+          <a className={'block px-4 py-2 text-left hover:bg-red-200 flex active:bg-red-100'} href={MESSAGE_FORM_URL} style={{transition: 'all .15s ease'}}>
             <div className={'mr-4'}>
               <MessageIconSvg />
             </div>
