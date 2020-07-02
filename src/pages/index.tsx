@@ -19,11 +19,11 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Home: React.FC<Props> = (props) => {
-  const { year, month, day, cardData } = props;
+  const { cardData } = props;
   return (
     <React.Fragment>
       <Head>
-        <title>今日のスケジュール</title>
+        <title>どっとスケジュール</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={clsx('h-full', 'overflow-y-auto')}>
