@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next';
 
 import { fetchScheduleData } from 'modules/firebase';
 import SchedulesField, { CardType } from 'component/field/Schedules';
-import { VideoScheduleToCardType } from 'modules/Converter';
+import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'modules/Converter';
 
 
 interface OwnProps {
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();
-  const cardData = await fetchScheduleData(year, month, day, VideoScheduleToCardType);
+  const {convertData, dayStreamers} = await fetchScheduleData(year, month, day, VideoScheduleToCardType, PickupStreamerFromVideoSchedule);
 
   const revalidateTime = 60 * 15;
 
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async () => {
       year,
       month,
       day,
-      cardData
+      cardData: convertData
     },
     unstable_revalidate: revalidateTime
   }

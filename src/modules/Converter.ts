@@ -1,6 +1,6 @@
 import { VideoSchedule, MonthData } from './firebase';
 import { CardType } from 'component/field/Schedules';
-import { iconsMap } from './Constructions';
+import { streamerDataMap } from './Constructions';
 
 // 1分未満の場合は秒表示、1分以上の場合は~時間~分表示(後者の場合でも1時間未満なら~時間を表示しない)
 const parseDurationNum = (duration: number | undefined) => {
@@ -33,7 +33,7 @@ export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
   const d = s.StartDate.toDate();
   d.setHours(d.getHours() + 9);
   return({
-    headerAvater: s.StreamerID in iconsMap ? iconsMap[s.StreamerID] : '',
+    headerAvater: s.StreamerID in streamerDataMap ? streamerDataMap[s.StreamerID].youtubeIcon : '',
     name: s.StreamerName,
     start: formatDate(d, 'HH:mm'),
     durationValue: parseDurationNum(s.Duration),
@@ -44,11 +44,13 @@ export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
   })
 }
 
+export const PickupStreamerFromVideoSchedule = (s: VideoSchedule): string => s.StreamerID in streamerDataMap ? streamerDataMap[s.StreamerID].textIcon : '';
+
 export const MonthDataToImgData = (d: MonthData | null): { [key: number]: string[] } => {
   if (d === null) return {};
   let res: { [key: number]: string[] } = {};
   for (let i = 1; i <= 31; i++) {
-    if(i in d.Data) res[i] = d.Data[i].map(x => x in iconsMap ? iconsMap[x] : '');
+    if(i in d.Data) res[i] = d.Data[i].map(x => x in streamerDataMap ? streamerDataMap[x].youtubeIcon : '');
   }
   return res;
 }

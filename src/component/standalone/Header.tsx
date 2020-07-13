@@ -26,7 +26,7 @@ const Header: React.FC<Props> = (props) => {
         <MenuButton classes={{button: 'bg-orange-300 hover:bg-orange-200 active:bg-orange-100'}} onClick={onMenuClick} />
         <h6 className={'font-sans font-semibold text-xl text-orange-600'}>{title}</h6>
       </div>
-      <button className={'px-2 py-2 focus:outline-none hover:bg-orange-200 active:bg-orange-100 rounded-full'} style={{ transition: "all .15s ease" }} onClick={reload}><ReloadIconSvg /></button>
+      <button className={'px-2 py-2 focus:outline-none hover:bg-orange-200 active:bg-orange-100 rounded-full'} style={{ transition: "all .15s ease" }} aria-label='reload-button' onClick={reload}><ReloadIconSvg /></button>
     </header>
   )
 }
