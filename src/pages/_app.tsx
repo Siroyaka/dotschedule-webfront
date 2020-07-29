@@ -36,6 +36,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta property="og:title" content={InitialMetaData.ogTitle}/>
         <meta property="og:description" content={InitialMetaData.ogDescription}/>
         <meta property="og:image" content={InitialMetaData.ogImage} />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
       <Header title=".Schedule" onMenuClick={() => setDrawerOpen(true)}/>
       <div className={clsx('py-12', 'h-screen')}>
