@@ -15,7 +15,7 @@ const NoticePage: React.FC = () => {
         <h1 className={'text-2xl'}>プライバシーポリシー</h1>
         <ul className={'px-2 pt-1'}>
           <li className={''}>
-            当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。
+            当サイトでは、利用状況の把握のためGoogleによるアクセス解析ツール「Googleアナリティクス」を使用しています。
           </li>
           <li className={'pb-2'}>
             Googleアナリティクスはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。
