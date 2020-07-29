@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 
+import { NoImageAvater } from 'component/parts/noimage';
+
 interface OwnProps {
   avaterSrc?: string,
   name: string,
@@ -15,7 +17,11 @@ const Header: React.FC<Props> = (props) => {
 
   return (
     <section className={clsx("flex", "flex-row", 'mx-2', 'my-1')}>
-      <img className={clsx('rounded-full', 'h-12', 'w-12', 'px-1', 'py-1')} alt={`${name}-avater`} src={avaterSrc}/>
+      {avaterSrc.length > 0 ? 
+        <img className={clsx('rounded-full', 'h-12', 'w-12', 'px-1', 'py-1', 'flex-shrink-0')} alt={`${name}-avater`} src={avaterSrc}/>
+      : 
+        <NoImageAvater />
+      }
       <article className={clsx('ml-4', 'w-full')}>
         <h1 className={clsx('text-base')}>{name}</h1>
         <div className={clsx('flex', 'flex-row', 'justify-between', 'text-gray-700', 'text-sm')}>
