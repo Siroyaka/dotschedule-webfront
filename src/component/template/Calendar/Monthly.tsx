@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import Link from 'next/link';
+import Link from 'component/parts/ExLink';
 
 import { MonthCalendar } from 'modules/DateFunctions';
 
@@ -47,7 +47,7 @@ const Monthly: React.FC<Props> = (props) => {
           {week.map((day) => (
             <li key={`cal-${year}-${month}-week-${i + 1}-wd-${day.weekDay}` } className={clsx('w-full')}>
               {check({...day}) ? (
-                <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
+                <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
                   <a>
                     <div className={clsx('h-full', 'text-center', 'rounded-sm', 'border', 'active:bg-gray-200', 'hover:bg-opacity-25')} >
                       <span className={clsx({['text-gray-400']: day.year !== year || day.month !== month}, 'text-sm')} style={{transition: 'all .15 ease'}}>

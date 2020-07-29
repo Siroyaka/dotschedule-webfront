@@ -1,9 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import Link from 'next/link';
+import Link from 'component/parts/ExLink';
 
 import { MonthCalendar } from 'modules/DateFunctions';
+import { NoImageAvater } from 'component/parts/noimage';
 
 interface OwnProps {
   monthCalendar: MonthCalendar,
@@ -59,15 +60,18 @@ const ListCalendar: React.FC<Props> = (props) => {
                 <div className={clsx('w-8')}>
                   <span>{day.day}</span>
                 </div>
-                <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} prefetch={prefetch}>
+                <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
                   <a className={clsx('w-full', 'flex', 'flex-wrap', 'flex-row', 'mx-1', 'my-1', 'h-20', 'active:bg-gray-100')} style={{transition: 'all .15s ease'}}>
                     {getAvaters(day.day).map((avater, i) => (
+                      avater.length > 0 ?
                       <img
                         key={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         alt={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         className={clsx('w-8', 'h-8', 'rounded-full', 'mr-1', 'mb-1')}
                         src={avater}
                       />
+                      :
+                      <NoImageAvater key={`list-calendar-${day.year}-${day.month}-${day.day}-no-avater-${i}`} size='small'/>
                     ))}
                   </a>
                 </Link>
