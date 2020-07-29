@@ -101,7 +101,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       cardData: convertData,
       dayStreamers,
     },
-    unstable_revalidate: revalidateTime
+    revalidate: revalidateTime
   }
 }
 

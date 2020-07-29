@@ -83,7 +83,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       start,
       end,
     },
-    unstable_revalidate: revalidateTime
+    revalidate: revalidateTime
   }
 }
 

@@ -34,6 +34,7 @@ const Home: React.FC<Props> = (props) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  console.log("index initialize");
   const d = new Date();
   d.setHours(d.getHours() + 6);
   const year = d.getFullYear();
@@ -50,7 +51,7 @@ export const getStaticProps: GetStaticProps = async () => {
       day,
       cardData: convertData
     },
-    unstable_revalidate: revalidateTime
+    revalidate: revalidateTime
   }
 }
 
