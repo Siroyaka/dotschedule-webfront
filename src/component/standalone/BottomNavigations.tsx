@@ -43,7 +43,7 @@ const BottomNavigations: React.FC<Props> = (props) => {
   const year = routePath.length < 3 ? null : parseInt(splitPath[2]);
   const month = routePath.length < 4 ? null : parseInt(splitPath[3]);
   const n = new Date();
-  n.setHours(n.getHours() + 6);
+  n.setHours(n.getHours());
   const [linkChild, setLinkChild] = React.useState(`/${n.getFullYear()}/${n.getMonth() + 1}`);
 
   React.useEffect(() => {
