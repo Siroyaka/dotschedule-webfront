@@ -39,7 +39,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
       <Header title=".Schedule" onMenuClick={() => setDrawerOpen(true)}/>
-      <div className={clsx('py-12', 'h-screen')}>
+      <div className={clsx('py-12', 'h-full')}>
         <Component {...pageProps} />
       </div>
       <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
