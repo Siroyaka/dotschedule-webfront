@@ -30,8 +30,8 @@ const Full: React.FC<Props> = (props) => {
   return (
     <Card>
       {onLive ? (
-        <div className={clsx('absolute', 'top-0', 'right-0')}>
-          <RoundIconSvg color='red'/>
+        <div className={clsx('absolute', 'top-0', 'right-0 text-red-800')}>
+          <RoundIconSvg />
         </div>
       ): (
         null

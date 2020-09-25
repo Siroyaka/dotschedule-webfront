@@ -61,19 +61,25 @@ const BottomNavigations: React.FC<Props> = (props) => {
       <ul className={clsx('flex', 'h-full')}>
         <li className="flex-1">
           <TabItems link="/" value={routePath} isLink={routePath === ''}>
-            <TodaySvg color={routePath === '' ? 'white' : 'black'}/>
+            <a className={routePath === '' ? 'text-white' : 'text-black'}>
+              <TodaySvg />
+            </a>
             <span>Today</span> 
           </TabItems>
         </li>
         <li className="flex-1">
           <TabItems link={'/calendar/[year]/[month]'} as={calendarLink} value={routePath} isLink={routePath === 'calendar'}>
-            <CalendarSvg color={routePath === 'calendar' ? 'white' : 'black'}/>
+            <a className={routePath === 'calendar' ? 'text-white' : 'text-black'}>
+              <CalendarSvg />
+            </a>
             <span>Calendar</span> 
           </TabItems>
         </li>
         <li className="flex-1">
           <TabItems link={'/list/[year]/[month]'} as={listLink} value={routePath} isLink={routePath === 'list'}>
-            <ListSvg color={routePath === 'list' ? 'white' : 'black'}/>
+            <a className={routePath === 'list' ? 'text-white' : 'text-black'}>
+              <ListSvg />
+            </a>
             <span>List</span> 
           </TabItems>
         </li>

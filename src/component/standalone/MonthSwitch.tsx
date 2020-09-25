@@ -69,7 +69,9 @@ const MonthSwitch: React.FC<Props> = (props) => {
     <React.Fragment>
       <section id='monthSwitch' className={clsx('flex', 'items-center', 'justify-between', 'py-2', 'px-2')}>
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${before.year}/${before.month}`} disabled={oldest}>
-          <LeftArrowSvg color={oldest ? 'gray' : 'black'}/>
+          <a className={`${oldest ? 'text-gray-300' : 'text-black'}`}>
+            <LeftArrowSvg />
+          </a>
         </LinkComponent>
         <div className={clsx('w-32', 'text-center')}>
           <div className={clsx('cursor-pointer')} onClick={openMenu}>
@@ -77,7 +79,9 @@ const MonthSwitch: React.FC<Props> = (props) => {
           </div>
         </div>
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${after.year}/${after.month}`} disabled={newest}>
-          <RightArrowSvg color={newest ? 'gray' : 'black'} />
+          <a className={`${newest ? 'text-gray-300' : 'text-black'}`}>
+            <RightArrowSvg />
+          </a>
         </LinkComponent>
       </section>
       {menuVisible ? (
