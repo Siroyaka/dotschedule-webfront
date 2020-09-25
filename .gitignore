@@ -29,7 +29,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-firebase.ts
 /src/component/test
 .vercel
 openTerminal.bat
