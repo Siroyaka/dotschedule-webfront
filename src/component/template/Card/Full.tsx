@@ -30,7 +30,7 @@ const Full: React.FC<Props> = (props) => {
   return (
     <Card>
       {onLive ? (
-        <div className={clsx('absolute', 'top-0', 'right-0 text-red-800')}>
+        <div className={clsx('absolute', 'top-0', 'right-0')} style={{color:'red'}}>
           <RoundIconSvg />
         </div>
       ): (
