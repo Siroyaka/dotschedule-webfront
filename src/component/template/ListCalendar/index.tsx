@@ -63,15 +63,13 @@ const ListCalendar: React.FC<Props> = (props) => {
                 <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
                   <a className={clsx('w-full', 'flex', 'flex-wrap', 'flex-row', 'mx-1', 'my-1', 'h-20', 'active:bg-gray-100')} style={{transition: 'all .15s ease'}}>
                     {getAvaters(day.day).map((avater, i) => (
-                      avater.length > 0 ?
+                      avater.length > 0 &&
                       <img
                         key={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         alt={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         className={clsx('w-8', 'h-8', 'rounded-full', 'mr-1', 'mb-1')}
                         src={avater}
                       />
-                      :
-                      <NoImageAvater key={`list-calendar-${day.year}-${day.month}-${day.day}-no-avater-${i}`} size='small'/>
                     ))}
                   </a>
                 </Link>
