@@ -36,18 +36,16 @@ interface LinkComponentProps {
 
 const LinkComponent: React.FC<LinkComponentProps> = (props) => {
   const { disabled, href, as, children } = props;
+  const linkOption = disabled ? 'text-gray-300' : 'text-black active:bg-gray-300 hover:bg-gray-200 duration-200 ease-in transition';
   return(
-    !disabled ? (
-      <Link href={href} as={as}>
-        <a className={clsx('py-2', 'px-2', 'focus:outline-none', 'transition', 'duration-200', 'rounded-full', 'hover:bg-gray-200', 'active:bg-gray-300')} style={{transition: 'all .15s ease'}} >
-          {children}
-        </a>
-      </Link>
-    ) : (
-      <a className={clsx('py-2', 'px-2', 'focus:outline-none', 'transition', 'duration-200', 'rounded-full')} >
-        {children}
-      </a>
-    )
+    <div className={`relative py-2 px-2 rounded-full ${linkOption}`}>
+      {!disabled && 
+        <Link href={href} as={as}>
+          <a className='absolute h-full w-full top-0 left-0' />
+        </Link>
+      }
+      {children}
+    </div>
   );
 }
 
@@ -69,9 +67,7 @@ const MonthSwitch: React.FC<Props> = (props) => {
     <React.Fragment>
       <section id='monthSwitch' className={clsx('flex', 'items-center', 'justify-between', 'py-2', 'px-2')}>
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${before.year}/${before.month}`} disabled={oldest}>
-          <a className={`${oldest ? 'text-gray-300' : 'text-black'}`}>
-            <LeftArrowSvg />
-          </a>
+          <LeftArrowSvg />
         </LinkComponent>
         <div className={clsx('w-32', 'text-center')}>
           <div className={clsx('cursor-pointer')} onClick={openMenu}>
@@ -79,9 +75,7 @@ const MonthSwitch: React.FC<Props> = (props) => {
           </div>
         </div>
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${after.year}/${after.month}`} disabled={newest}>
-          <a className={`${newest ? 'text-gray-300' : 'text-black'}`}>
-            <RightArrowSvg />
-          </a>
+          <RightArrowSvg />
         </LinkComponent>
       </section>
       {menuVisible ? (

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { MonthCalendar } from 'modules/DateFunctions';
 import MonthSwitch from 'component/standalone/MonthSwitch';
-import ListCalndar from 'component/template/ListCalendar';
+import ListCalendar from 'component/template/ListCalendar';
 
 interface OwnProps {
   year: number,
@@ -18,7 +18,7 @@ type Props = OwnProps;
 const ListField: React.FC<Props> = (props) => {
   return(
     <React.Fragment>
-      <ListCalndar {...props} />
+      <ListCalendar {...props} />
     </React.Fragment>
   )
 }

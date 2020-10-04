@@ -19,19 +19,20 @@ const TabItems: React.FC<{value: string, link: string, as?: string, isLink: bool
     isLink,
     as
   } = props;
+
+  const linkOption = isLink ? 'bg-blue-500' : 'hover:bg-blue-200 active:bg-blue-300  duration-150 ease-in transform transition-all';
   return(
     <React.Fragment>
-      {isLink ? (
-        <div className='flex flex-col border border-blue-500 rounded py-1 px-1 bg-blue-500 items-center text-center text-xs text-gray-200'>
+      <div className={`relative w-full h-full rounded text-xs text-center px-1 py-1 ${linkOption}`}>
+        {!isLink && 
+          <Link href={link} as={as} >
+            <a className='absolute top-0 left-0 h-full w-full'/>
+          </Link>
+        }
+        <div className={`${isLink ? 'text-white' : 'text-black'} text-xs flex flex-col items-center`}>
           {children}
         </div>
-      ) : (
-        <Link href={link} as={as} >
-          <a className='flex flex-col border border-white rounded hover:border-blue-200 hover:bg-blue-200 py-1 px-1 items-center text-center text-xs text-gray-600 active:bg-blue-300' style={{transition: 'all .15s ease'}} >
-            {children}
-          </a>
-        </Link>
-      )}
+      </div>
     </React.Fragment>
   )
 }
@@ -61,25 +62,19 @@ const BottomNavigations: React.FC<Props> = (props) => {
       <ul className={clsx('flex', 'h-full')}>
         <li className="flex-1">
           <TabItems link="/" value={routePath} isLink={routePath === ''}>
-            <a className={routePath === '' ? 'text-white' : 'text-black'}>
-              <TodaySvg />
-            </a>
+            <TodaySvg />
             <span>Today</span> 
           </TabItems>
         </li>
         <li className="flex-1">
           <TabItems link={'/calendar/[year]/[month]'} as={calendarLink} value={routePath} isLink={routePath === 'calendar'}>
-            <a className={routePath === 'calendar' ? 'text-white' : 'text-black'}>
-              <CalendarSvg />
-            </a>
+            <CalendarSvg />
             <span>Calendar</span> 
           </TabItems>
         </li>
         <li className="flex-1">
           <TabItems link={'/list/[year]/[month]'} as={listLink} value={routePath} isLink={routePath === 'list'}>
-            <a className={routePath === 'list' ? 'text-white' : 'text-black'}>
-              <ListSvg />
-            </a>
+            <ListSvg />
             <span>List</span> 
           </TabItems>
         </li>
