@@ -12,8 +12,8 @@ import Header from 'component/standalone/Header';
 import BottomNavContainer from 'container/BottomNavContainer';
 import Drawer from 'component/template/Drawer';
 import DrawerItems from 'component/standalone/DrawerItems';
-import InitialMetaData from 'modules/InitialMetaData';
-import { pageview } from 'modules/gtag';
+import InitialMetaData from 'lib/InitialMetaData';
+import { pageview } from 'lib/gtag';
 
 const App = ({ Component, pageProps }: AppProps) => {
   React.useEffect(() => {

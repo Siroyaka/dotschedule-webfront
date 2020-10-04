@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { MessageIconSvg, NoticeIconSvg } from 'component/parts/svgIcons';
-import { MESSAGE_FORM_URL } from 'modules/Constructions';
+import { MESSAGE_FORM_URL } from 'lib/Constructions';
 
 interface OwnProps {
   closeDrawer: () => void

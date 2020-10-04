@@ -2,8 +2,7 @@ import React from 'react';
 
 import Head from 'next/head';
 
-import noticeJson from 'modules/Notice.json';
-import clsx from 'clsx';
+import noticeJson from 'lib/Notice.json';
 
 interface Json {
   title: string,

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import Link from 'component/parts/ExLink';
 
-import { MonthCalendar } from 'modules/DateFunctions';
+import { MonthCalendar } from 'lib/DateFunctions';
 
 interface OwnProps {
   monthCalendar: MonthCalendar,

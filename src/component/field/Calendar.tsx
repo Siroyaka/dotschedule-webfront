@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MonthCalendar } from 'modules/DateFunctions';
+import { MonthCalendar } from 'lib/DateFunctions';
 import MonthSwitch from 'component/standalone/MonthSwitch';
 import Calendar from 'component/template/Calendar';
 

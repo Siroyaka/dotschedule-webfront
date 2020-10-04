@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-import { GA_TRACKING_ID } from 'modules/gtag';
+import { GA_TRACKING_ID } from 'lib/gtag';
 import IosMeta from 'component/standalone/IosMeta';
 
 export default class MyDocument extends Document {
