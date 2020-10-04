@@ -18,21 +18,25 @@ const NoticePage: React.FC = () => {
         <title>このサイトについて</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={clsx('overflow-y-auto', 'h-full', 'w-full', 'px-2')}>
-        <ul>
-          {notice.map(({title, text}, i) => (
-            <li key={`notice-${i}`} className={'pb-4 mt-2'}>
-              <h1 className={i===0 ? 'text-2xl' : 'text-xl'}>{title}</h1>
-              <ul className={'px-2 pt-1'}>
-                {text.map((r, xi) => (
-                  <li key={`notice-${i}-row-${xi}`}>
-                    <span>{r}</span>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+      <main className={'overflow-y-auto h-full'}>
+        <article className='max-w-4xl mx-auto my-16'>
+          <h1 className='text-4xl text-center w-full mb-16'>このサイトについて</h1>
+          <ul className='shadow-md border-2 px-8 py-8'>
+            {notice.map(({title, text}, i) => (
+              <li key={`notice-${i}`} className={'pb-4 mt-2'}>
+                <h1 className='text-2xl'>{title}</h1>
+                <ul className={'px-2 pt-1'}>
+                  {text.map((r, xi) => (
+                    <li key={`notice-${i}-row-${xi}`}>
+                      <span>{r}</span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+
+        </article>
       </main>
     </React.Fragment>
   )
