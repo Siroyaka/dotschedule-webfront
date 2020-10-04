@@ -14,7 +14,7 @@
     "@types/react": "^16.9.49",
     "@types/redux": "^3.6.31",
     "clsx": "^1.1.1",
-    "firebase": "^7.21.1",
+    "firebase": "^7.22.0",
     "next": "9.5.3",
     "now": "^19.2.0",
     "npm-check-updates": "^9.0.2",
@@ -24,6 +24,8 @@
     "react-redux": "^7.2.1",
     "react-scripts": "^3.4.3",
     "redux": "^4.0.5",
+    "remark": "^12.0.1",
+    "remark-html": "^13.0.1",
     "tailwindcss": "^1.8.10",
     "ts-loader": "^8.0.4",
     "typescript": "^4.0.3"
