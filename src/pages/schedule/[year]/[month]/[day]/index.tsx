@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 
-import { fetchScheduleData } from 'modules/firebase';
-import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'modules/Converter';
+import { fetchScheduleData } from 'lib/firebase';
+import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
 import SchedulesField, { CardType } from 'component/field/Schedules';
 import LoadingField from 'component/field/Loading';
 

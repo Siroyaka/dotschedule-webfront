@@ -4,9 +4,9 @@ import clsx from 'clsx';
 
 import { GetStaticProps } from 'next';
 
-import { fetchScheduleData } from 'modules/firebase';
+import { fetchScheduleData } from 'lib/firebase';
 import SchedulesField, { CardType } from 'component/field/Schedules';
-import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'modules/Converter';
+import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
 
 
 interface OwnProps {

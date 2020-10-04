@@ -26,3 +26,25 @@ body {
 div#__next {
     height: 100%;
 }
+
+#notice-contents > h2 {
+    font-size: 1.5rem;
+    padding-bottom: 0.4rem;
+}
+
+#notice-contents > p {
+    font-size: 1rem;
+    padding-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+    #notice-contents > h2 {
+        font-size: 1.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+    #notice-contents > p {
+        font-size: 0.75rem;
+        padding-bottom: 0.5rem;
+    }
+}
