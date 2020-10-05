@@ -43,7 +43,7 @@ const Monthly: React.FC<Props> = (props) => {
   return(
     <ol className={clsx('grid grid-cols-7 h-full w-full')}>
       {monthCalendar.map((week, i) => (
-        <React.Fragment>
+        <React.Fragment key={`cal-${year}-${month}-week-${i + 1}`}>
           {week.map((day) => (
             <li key={`cal-${year}-${month}-week-${i + 1}-wd-${day.weekDay}` } className='w-full active:bg-gray-200 relative'>
               {check({...day}) ? (
