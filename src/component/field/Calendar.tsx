@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { MonthCalendar } from 'lib/DateFunctions';
-import MonthSwitch from 'component/standalone/MonthSwitch';
 import Calendar from 'component/template/Calendar';
 
 interface OwnProps {
