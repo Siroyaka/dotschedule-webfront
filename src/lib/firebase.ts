@@ -63,6 +63,22 @@ const fetchSchedule = (year: number, month: number, day: number) => {
     });
 }
 
+const fetchNewSchedule = (id: string, len: number, endDate: Date) => {
+  return firebase.firestore().collection('VideoSchedules').where("StreamerID", "==", id).orderBy('StartDate', 'desc').startAfter(endDate).limit(len).get()
+    .then(items => {
+      const videoSchedules: VideoSchedule[] = [];
+      items.forEach(item => {
+        const scheduleItem = item.data() as VideoSchedule;
+        if (scheduleItem.VideoStatus > 0 && scheduleItem.VideoStatus < 5) videoSchedules.push(scheduleItem);
+      })
+      return videoSchedules;
+    })
+    .catch((err: Error) => {
+      console.error(`Error fetch new schedule. ${id} msg:[${err.message}]`);
+      return err;
+    });
+}
+
 const fetchMonthScheduleData = (year: number, month: number) => {
   const monthKey = year * 13 + month;
   return firebase.firestore().collection('MonthData').orderBy('MonthKey').startAt(monthKey).endAt(monthKey).limit(1).get()
@@ -96,4 +112,13 @@ export const fetchScheduleData = async<T> (year: number, month: number, day: num
   }
   const dayStreamers = Array.from(new Set(fetchResult.map(getDayStreamers)));
   return {convertData: fetchResult.map(converter), dayStreamers};
+}
+
+export const getNewsScheduleData = <T>(converter: (d: VideoSchedule) => T) => async (id: string, date: Date, len: number) => {
+  const result = await fetchNewSchedule(id, len, date);
+  if(result instanceof Error){
+    console.error(result.message, new Date());
+    return [];
+  }
+  return result.map(converter);
 }

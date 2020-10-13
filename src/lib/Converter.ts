@@ -1,5 +1,6 @@
 import { VideoSchedule, MonthData } from './firebase';
 import { CardType } from 'component/field/Schedules';
+import { CardType as NewsCardType } from 'component/field/News';
 import { streamerDataMap } from './Constructions';
 
 // 1分未満の場合は秒表示、1分以上の場合は~時間~分表示(後者の場合でも1時間未満なら~時間を表示しない)
@@ -41,6 +42,19 @@ export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
     mediahref: s.VideoLink,
     title: s.VideoTitle,
     onLive: s.VideoStatus === 2,
+  })
+}
+
+export const VideoScheduleToNews = (s: VideoSchedule): NewsCardType => {
+  const d = s.StartDate.toDate();
+  d.setHours(d.getHours() + 9);
+  return({
+    year: d.getFullYear(),
+    month: d.getMonth() + 1,
+    day: d.getDate(),
+    mediaSrc: s.Thumbnail,
+    mediahref: s.VideoLink,
+    title: s.VideoTitle,
   })
 }
 
