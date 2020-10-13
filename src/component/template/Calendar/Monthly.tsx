@@ -41,21 +41,22 @@ const Monthly: React.FC<Props> = (props) => {
   }
 
   return(
-    <ol className={clsx('flex', 'flex-col', 'h-full')}>
+    <ol className={clsx('grid grid-cols-7 h-full w-full')}>
       {monthCalendar.map((week, i) => (
-        <ol key={`cal-${year}-${month}-week-${i + 1}`} className={clsx('flex', 'flex-row', 'w-full', 'h-full')}>
+        <React.Fragment key={`cal-${year}-${month}-week-${i + 1}`}>
           {week.map((day) => (
-            <li key={`cal-${year}-${month}-week-${i + 1}-wd-${day.weekDay}` } className={clsx('w-full')}>
+            <li key={`cal-${year}-${month}-week-${i + 1}-wd-${day.weekDay}` } className='w-full active:bg-gray-200 relative'>
               {check({...day}) ? (
-                <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
-                  <a>
-                    <div className={clsx('h-full', 'text-center', 'rounded-sm', 'border', 'active:bg-gray-200', 'hover:bg-opacity-25')} >
-                      <span className={clsx({['text-gray-400']: day.year !== year || day.month !== month}, 'text-sm')} style={{transition: 'all .15 ease'}}>
-                        {day.day}
-                      </span>
-                    </div>
-                  </a>
-                </Link>
+                <React.Fragment>
+                  <div className='h-full text-center rounded-sm border' >
+                    <span className={clsx({['text-gray-400']: day.year !== year || day.month !== month}, 'text-sm')} style={{transition: 'all .15 ease'}}>
+                      {day.day}
+                    </span>
+                  </div>
+                  <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
+                    <a className='absolute top-0 left-0 w-full h-full' />
+                  </Link>
+                </React.Fragment>
               ): (
                 <div className={clsx('h-full', 'text-center', 'rounded-sm', 'border', 'bg-gray-200')}>
                   <span className={clsx({['text-gray-400']:day.year !== year || day.month !== month}, 'text-sm')}>
@@ -65,7 +66,7 @@ const Monthly: React.FC<Props> = (props) => {
               )}
             </li>
           ))}
-        </ol>
+        </React.Fragment>
       ))}
     </ol>
   )

@@ -9,3 +9,5 @@ export { default as CardMedia} from './Media';
 export { default as CardContents } from './Contents';
 
 export { default as CardFullTemplate } from './Full';
+
+export { default as CardNews } from './News';

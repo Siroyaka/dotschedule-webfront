@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import Bottoms from 'component/template/Bottoms';
-import { TodaySvg, CalendarSvg, ListSvg } from 'component/parts/svgIcons';
+import { TodaySvg, CalendarSvg, ListSvg, NewsIconSvg } from 'component/parts/svgIcons';
 
 interface OwnProps {
 }
@@ -76,6 +76,12 @@ const BottomNavigations: React.FC<Props> = (props) => {
           <TabItems link={'/list/[year]/[month]'} as={listLink} value={routePath} isLink={routePath === 'list'}>
             <ListSvg />
             <span>List</span> 
+          </TabItems>
+        </li>
+        <li className='flex-1'>
+          <TabItems link='/newitems' value={routePath} isLink={routePath === 'newitems'}>
+            <NewsIconSvg />
+            <span>News</span>
           </TabItems>
         </li>
       </ul>
