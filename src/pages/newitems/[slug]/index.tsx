@@ -14,6 +14,9 @@ import {
 interface OwnProps {
   slug?: string,
   data?: CardType[],
+  year?: number,
+  month?: number,
+  day?: number,
 }
 
 type Props = OwnProps;
@@ -40,13 +43,23 @@ export const getStaticProps: GetStaticProps = async (context) => {
   next9H.setDate(next9H.getDate() + 1);
   next9H.setHours(0, 0, 0, 0);
   const s = Math.floor((next9H.getTime() - now.getTime()) / 1000);
+
+  const jtNow = new Date();
+  jtNow.setHours(jtNow.getHours() + 9);
+
+  const year = jtNow.getFullYear();
+  const month = jtNow.getMonth() + 1;
+  const day = jtNow.getDate();
   
   const revalidateTime = s;
 
   return {
     props: {
       slug,
-      data: data
+      data,
+      year,
+      month,
+      day,
     },
     revalidate: revalidateTime
   }
@@ -56,10 +69,16 @@ const NewItemsMemberPage: React.FC<Props> = (props) => {
   const {
     slug,
     data,
+    year,
+    month,
+    day,
   } = props;
   return(
     <article className='h-full'>
       <div className='h-full overflow-y-auto px-4'>
+        {year && month && day &&
+          <h1 className='text-xl mb-2'>{`${year}年${month}月${day}日 9:00の新着`}</h1>
+        }
         <MemberNamesArea slug={slug}/>
         {data && 
           <NewsCardsField cardData={data}/>
