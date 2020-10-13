@@ -30,15 +30,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const slug = params.slug as string;
 
   const match = getNewsStreamerList().find(x => x.slug === slug);
-  const now = new Date();
-  if(now.getHours() < 8) {
-    now.setDate(now.getDate() - 1);
-  }
-  now.setHours(8, 0, 0, 0);
+  const endDate = new Date();
+  endDate.setHours(0);
+  const data = await getNewsScheduleData(VideoScheduleToNews)(match.id, endDate, 10);
 
-  const data = await getNewsScheduleData(VideoScheduleToNews)(match.id, now, 10);
+  // revalidateは翌日の9:00まで
+  const now = new Date();
+  const next9H = new Date();
+  next9H.setDate(next9H.getDate() + 1);
+  next9H.setHours(0, 0, 0, 0);
+  const s = Math.floor((next9H.getTime() - now.getTime()) / 1000);
   
-  const revalidateTime = 1000000;
+  const revalidateTime = s;
 
   return {
     props: {
@@ -55,9 +58,13 @@ const NewItemsMemberPage: React.FC<Props> = (props) => {
     data,
   } = props;
   return(
-    <article className='px-4 pb-16'>
-      <MemberNamesArea slug={slug}/>
-      <NewsCardsField cardData={data}/>
+    <article className='h-full'>
+      <div className='h-full overflow-y-auto px-4'>
+        <MemberNamesArea slug={slug}/>
+        {data && 
+          <NewsCardsField cardData={data}/>
+        }
+      </div>
     </article>
   )
 }

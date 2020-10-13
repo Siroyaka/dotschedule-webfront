@@ -20,7 +20,7 @@ type Props = OwnProps;
 const NewsCardsField: React.FC<Props> = (props) => {
   const { cardData } = props;
   return (
-    <ul className={clsx("flex", "flex-wrap", "py-4", "px-2")}>
+    <ul className={clsx("flex", "flex-wrap", "pt-4", "px-2", 'pb-16')}>
       {cardData.map((cardInfo, i) => (
         <li
           key={`card-${i}`}
