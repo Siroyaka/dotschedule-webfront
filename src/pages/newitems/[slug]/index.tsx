@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   next9H.setDate(next9H.getDate() + 1);
   next9H.setHours(0, 0, 0, 0);
   const s = Math.floor((next9H.getTime() - now.getTime()) / 1000);
-  console.log(slug, now, next9H);
+  console.log(slug, now, next9H, s);
 
   const jtNow = new Date();
   jtNow.setHours(jtNow.getHours() + 9);
