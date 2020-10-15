@@ -25,7 +25,7 @@ const MemberNamesArea: React.FC<Props> = (props) => {
           className={`mx-2 my-1 py-2 px-4 rounded-full bg-blue-200`}
         >
           {(!slug || slug !== x.slug) ?
-            <Link href={'/newitems/[slug]'} as={`/newitems/${x.slug}`} prefetch={false}>
+            <Link href={'/newitems/[slug]'} as={`/newitems/${x.slug}`} >
               <a className='text-black'>
                 {x.name}
               </a>
