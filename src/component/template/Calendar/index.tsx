@@ -17,7 +17,7 @@ type Props = OwnProps;
 
 const Calendar: React.FC<Props> = (props) => {
   return(
-    <section className={clsx('w-full', 'h-full', 'flex', 'flex-col')} id='calendar'>
+    <section className='w-full h-full flex flex-col' id='calendar'>
       <WeekDay />
       <Monthly {...props}/>
     </section>
