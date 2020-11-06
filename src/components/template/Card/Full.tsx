@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import { Card, CardHeader, CardMedia, CardContents } from './index';
-import { RoundIconSvg } from 'component/parts/svgIcons';
+import { RoundIconSvg } from 'components/parts/svgIcons';
 
 interface OwnProps {
   headerAvater: string,

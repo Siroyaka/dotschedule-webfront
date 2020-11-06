@@ -6,8 +6,8 @@ import Head from 'next/head';
 
 import { fetchScheduleData } from 'lib/firebase';
 import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
-import SchedulesField, { CardType } from 'component/field/Schedules';
-import LoadingField from 'component/field/Loading';
+import SchedulesField, { CardType } from 'components/field/Schedules';
+import LoadingField from 'components/field/Loading';
 
 interface OwnProps {
   year?: number,
@@ -55,7 +55,7 @@ const SchedulePage: React.FC<Props> = (props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
-    fallback: true,
+    fallback: "blocking",
   }
 }
 

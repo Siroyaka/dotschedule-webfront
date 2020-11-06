@@ -5,12 +5,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 
 import { fromTo } from 'lib/Constructions';
-import MonthSwitch from 'component/standalone/MonthSwitch';
-import ListField from 'component/field/List';
+import MonthSwitch from 'components/standalone/MonthSwitch';
+import ListField from 'components/field/List';
 import { getMonthCalendar, MonthCalendar } from 'lib/DateFunctions';
 import { MonthDataToImgData } from 'lib/Converter';
 import { fetchMonthData } from 'lib/firebase';
-import LoadingField from 'component/field/Loading';
+import LoadingField from 'components/field/Loading';
 
 interface OwnProps {
   year: number,

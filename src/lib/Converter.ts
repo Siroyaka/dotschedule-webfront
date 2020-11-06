@@ -1,6 +1,6 @@
 import { VideoSchedule, MonthData } from './firebase';
-import { CardType } from 'component/field/Schedules';
-import { CardType as NewsCardType } from 'component/field/News';
+import { CardType } from 'components/field/Schedules';
+import { CardType as NewsCardType } from 'components/field/News';
 import { streamerDataMap } from './Constructions';
 
 // 1分未満の場合は秒表示、1分以上の場合は~時間~分表示(後者の場合でも1時間未満なら~時間を表示しない)

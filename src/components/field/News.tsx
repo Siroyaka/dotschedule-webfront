@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import clsx from 'clsx';
 
-import { CardNews } from 'component/template/Card';
+import { CardNews } from 'components/template/Card';
 
 export type CardType = ComponentProps<typeof CardNews> & {
   title: string,

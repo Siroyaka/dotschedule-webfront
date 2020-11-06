@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BottomNav from 'component/standalone/BottomNavigations';
+import BottomNav from 'components/standalone/BottomNavigations';
 
 const BottomNavContainer = () => {
   return(

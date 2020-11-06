@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import Link from 'component/parts/ExLink';
+import Link from 'components/parts/ExLink';
 
 import { MonthCalendar } from 'lib/DateFunctions';
 

@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import clsx from 'clsx';
 
-import { CardFullTemplate } from 'component/template/Card';
+import { CardFullTemplate } from 'components/template/Card';
 
 export type CardType = ComponentProps<typeof CardFullTemplate> & {title: string};
 

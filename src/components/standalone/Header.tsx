@@ -3,8 +3,8 @@ import clsx from 'clsx';
 
 import { useRouter } from 'next/router';
 
-import { MenuButton } from 'component/template/IconButton';
-import { ReloadIconSvg } from 'component/parts/svgIcons';
+import { MenuButton } from 'components/template/IconButton';
+import { ReloadIconSvg } from 'components/parts/svgIcons';
 
 interface OwnProps {
   title: string,

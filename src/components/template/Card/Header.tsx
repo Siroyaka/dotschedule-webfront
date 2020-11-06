@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { NoImageAvater } from 'component/parts/noimage';
+import { NoImageAvater } from 'components/parts/noimage';
 
 interface OwnProps {
   avaterSrc?: string,
