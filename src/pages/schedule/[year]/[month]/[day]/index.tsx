@@ -55,7 +55,7 @@ const SchedulePage: React.FC<Props> = (props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
-    fallback: true,
+    fallback: "blocking",
   }
 }
 
