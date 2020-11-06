@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { CloseSvg } from 'component/parts/svgIcons';
+import { CloseSvg } from 'components/parts/svgIcons';
 
 interface OwnProps {
   open: boolean,

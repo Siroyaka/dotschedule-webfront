@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Bottoms from 'component/template/Bottoms';
-import { TodaySvg, CalendarSvg, ListSvg, NewsIconSvg } from 'component/parts/svgIcons';
+import Bottoms from 'components/template/Bottoms';
+import { TodaySvg, CalendarSvg, ListSvg, NewsIconSvg } from 'components/parts/svgIcons';
 
 interface OwnProps {
 }

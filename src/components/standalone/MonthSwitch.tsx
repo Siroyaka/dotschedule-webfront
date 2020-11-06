@@ -3,9 +3,9 @@ import clsx from 'clsx';
 
 import Link from 'next/link';
 
-import { LeftArrowSvg, RightArrowSvg } from 'component/parts/svgIcons';
+import { LeftArrowSvg, RightArrowSvg } from 'components/parts/svgIcons';
 
-import MonthSelectMenuList from 'component/template/MonthSelectMenuList';
+import MonthSelectMenuList from 'components/template/MonthSelectMenuList';
 
 interface OwnProps {
   year: number,

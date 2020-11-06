@@ -5,10 +5,10 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 
 import { fromTo } from 'lib/Constructions';
-import MonthSwitch from 'component/standalone/MonthSwitch';
-import CalendarField from 'component/field/Calendar';
+import MonthSwitch from 'components/standalone/MonthSwitch';
+import CalendarField from 'components/field/Calendar';
 import { getMonthCalendar, MonthCalendar } from 'lib/DateFunctions';
-import LoadingField from 'component/field/Loading';
+import LoadingField from 'components/field/Loading';
 
 interface OwnProps {
   year: number,

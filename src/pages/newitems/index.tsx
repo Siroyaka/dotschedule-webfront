@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetStaticProps } from 'next';
 
-import MemberNamesArea from 'component/standalone/MemberNamesArea';
+import MemberNamesArea from 'components/standalone/MemberNamesArea';
 
 interface OwnProps {
   year?: number,

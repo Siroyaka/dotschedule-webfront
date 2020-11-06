@@ -8,10 +8,10 @@ import '../styles/tailwind.css';
 
 import Router from 'next/router';
 
-import Header from 'component/standalone/Header';
+import Header from 'components/standalone/Header';
 import BottomNavContainer from 'container/BottomNavContainer';
-import Drawer from 'component/template/Drawer';
-import DrawerItems from 'component/standalone/DrawerItems';
+import Drawer from 'components/template/Drawer';
+import DrawerItems from 'components/standalone/DrawerItems';
 import InitialMetaData from 'lib/InitialMetaData';
 import { pageview } from 'lib/gtag';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NewsCardsField, { CardType } from 'component/field/News';
-import MemberNamesArea from 'component/standalone/MemberNamesArea';
+import NewsCardsField, { CardType } from 'components/field/News';
+import MemberNamesArea from 'components/standalone/MemberNamesArea';
 import { getNewsStreamerList } from 'lib/Constructions';
 import { getNewsScheduleData } from 'lib/firebase';
 import { VideoScheduleToNews } from 'lib/Converter';

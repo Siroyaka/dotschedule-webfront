@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { MessageIconSvg, NoticeIconSvg } from 'component/parts/svgIcons';
+import { MessageIconSvg, NoticeIconSvg } from 'components/parts/svgIcons';
 import { MESSAGE_FORM_URL } from 'lib/Constructions';
 
 interface OwnProps {
