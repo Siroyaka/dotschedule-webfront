@@ -63,3 +63,34 @@ export const getMonthCalendar = (year: number, month: number): FCalDate[][] => {
     const monthData = new MonthData(year, month);
     return monthData.makeCalendar();
 }
+
+export const getJstTime = (date: Date) => {
+
+    // utc日時を取得
+    const utc = getUtc(date);
+
+    // utc日時をJstに変換
+    const jst = new Date(utc);
+    jst.setHours(jst.getHours() + 9);
+
+    return {
+        year: jst.getFullYear(),
+        month: jst.getMonth() + 1,
+        day: jst.getDate(),
+        hour: jst.getHours(),
+        min: jst.getMinutes(),
+        sec: jst.getSeconds()
+    }
+}
+
+export const getUtc = (date: Date) => {
+    // new dateで取得される日時がタイムゾーンはローカルなのに時間だけUTCになっているため、offsetを0にする。
+    // 正しいタイムゾーンと時間が設定されるようになったら上のoffsetを使用すること
+    //const offset = date.getTimezoneOffset();
+    const offset = 0;
+
+    const utc = new Date(date);
+    utc.setMinutes(date.getMinutes() + offset);
+
+    return utc;
+}
