@@ -3,8 +3,9 @@ import React from 'react';
 import NewsCardsField, { CardType } from 'components/field/News';
 import MemberNamesArea from 'components/standalone/MemberNamesArea';
 import { getNewsStreamerList } from 'lib/Constructions';
-import { getNewsScheduleData } from 'lib/firebase';
+import { getSchedulesBeforeData } from 'lib/firebase';
 import { VideoScheduleToNews } from 'lib/Converter';
+import { getJstTime, getUtc } from 'lib/DateFunctions';
 
 import {
   GetStaticPaths,
@@ -33,35 +34,29 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const slug = params.slug as string;
 
   const match = getNewsStreamerList().find(x => x.slug === slug);
-  const endDate = new Date();
-  endDate.setHours(0);
-  const data = await getNewsScheduleData(VideoScheduleToNews)(match.id, endDate, 10);
+  const quantity = 10; // 取得個数
+  const endDate = getUtc(new Date());
+  endDate.setHours(0, 0, 0, 0); // GMT 0:00 -> JST 9:00
+  const data = await getSchedulesBeforeData(VideoScheduleToNews)(match.id, endDate, quantity);
 
-  // revalidateは翌日の9:00まで
-  const now = new Date();
-  const next9H = new Date();
-  next9H.setDate(next9H.getDate() + 1);
-  next9H.setHours(0, 0, 0, 0);
-  const s = Math.floor((next9H.getTime() - now.getTime()) / 1000);
+  // revalidateは現在から翌日の9:00までの差分
+  const now = getUtc(new Date());
+  const revalidateTime = new Date(endDate);
+  revalidateTime.setDate(revalidateTime.getDate() + 1);
+  const revalidateSec = Math.floor((revalidateTime.getTime() - now.getTime()) / 1000)
 
-  const jtNow = new Date();
-  jtNow.setHours(jtNow.getHours() + 9);
-
-  const year = jtNow.getFullYear();
-  const month = jtNow.getMonth() + 1;
-  const day = jtNow.getDate();
-  
-  const revalidateTime = s;
+  // いつの更新分であるかを示す(endDateを日本時間にする)
+  const jstEndDate = getJstTime(endDate);
 
   return {
     props: {
       slug,
       data,
-      year,
-      month,
-      day,
+      year: jstEndDate.year,
+      month: jstEndDate.month,
+      day: jstEndDate.day,
     },
-    revalidate: revalidateTime
+    revalidate: revalidateSec
   }
 }
 

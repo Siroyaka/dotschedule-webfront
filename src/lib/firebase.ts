@@ -63,8 +63,9 @@ const fetchSchedule = (year: number, month: number, day: number) => {
     });
 }
 
-const fetchNewSchedule = (id: string, len: number, endDate: Date) => {
-  return firebase.firestore().collection('VideoSchedules').where("StreamerID", "==", id).orderBy('StartDate', 'desc').startAfter(endDate).limit(len).get()
+// 指定されたStreamerIDのdateの日時以前のスケジュール情報を引き出す。quantityでいくつ引き出すかを指定する。
+const fetchSchedulesBeforeDate = (streamerId: string, date: Date, quantity: number = 10) => {
+  return firebase.firestore().collection('VideoSchedules').where("StreamerID", "==", streamerId).orderBy('StartDate', 'desc').startAfter(date).limit(quantity).get()
     .then(items => {
       const videoSchedules: VideoSchedule[] = [];
       items.forEach(item => {
@@ -74,7 +75,7 @@ const fetchNewSchedule = (id: string, len: number, endDate: Date) => {
       return videoSchedules;
     })
     .catch((err: Error) => {
-      console.error(`Error fetch new schedule. ${id} msg:[${err.message}]`);
+      console.error(`Error fetch new schedule. ${streamerId} msg:[${err.message}]`);
       return err;
     });
 }
@@ -114,8 +115,8 @@ export const fetchScheduleData = async<T> (year: number, month: number, day: num
   return {convertData: fetchResult.map(converter), dayStreamers};
 }
 
-export const getNewsScheduleData = <T>(converter: (d: VideoSchedule) => T) => async (id: string, date: Date, len: number) => {
-  const result = await fetchNewSchedule(id, len, date);
+export const getSchedulesBeforeData = <T>(converter: (d: VideoSchedule) => T) => async (id: string, date: Date, quantity: number = 10) => {
+  const result = await fetchSchedulesBeforeDate(id, date, quantity);
   if(result instanceof Error){
     console.error(result.message, new Date());
     return [];
