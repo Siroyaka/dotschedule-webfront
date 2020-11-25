@@ -55,7 +55,7 @@ const ListCalendar: React.FC<Props> = (props) => {
         {monthCalendar.map((week) => (
           week.filter((day) => day.year === year && day.month === month).map((day) => (
             check(day) ? (
-              <li key={`list-calendar-${day.year}-${day.month}-${day.day}`} className='relative border-b-2 px-2 active:bg-gray-200 ease-in-out transform transition-colors duration-150' style={{minHeight: '5rem'}}>
+              <li key={`list-calendar-${day.year}-${day.month}-${day.day}`} className='relative border-b-2 px-2 active:bg-blue-100 ease-in-out transform transition-colors duration-150' style={{minHeight: '5rem'}}>
                 <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
                   <a className={clsx('w-full h-full absolute top-0 left-0')} />
                 </Link>

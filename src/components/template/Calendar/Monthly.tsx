@@ -46,7 +46,7 @@ const Monthly: React.FC<Props> = (props) => {
         {monthCalendar.map((week, i) => (
           <React.Fragment key={`cal-${year}-${month}-week-${i + 1}`}>
             {week.map((day) => (
-              <li key={`cal-${year}-${month}-week-${i + 1}-wd-${day.weekDay}` } className='w-full active:bg-gray-200 relative'>
+              <li key={`cal-${year}-${month}-week-${i + 1}-wd-${day.weekDay}` } className='w-full active:bg-blue-100 relative'>
                 {check({...day}) ? (
                   <React.Fragment>
                     <div className='h-full text-center rounded-sm border' >
