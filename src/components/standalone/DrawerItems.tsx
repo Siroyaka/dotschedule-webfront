@@ -18,7 +18,7 @@ const DrawerItems: React.FC<Props> = (props) => {
       <ul onClick={closeDrawer}>
         <li className={'w-full'}>
           <Link href='/notice'>
-            <a className={'block px-4 py-2 text-left hover:bg-red-200 flex active:bg-red-100'} style={{transition: 'all .15s ease'}}>
+            <a className={'block px-4 py-2 text-left hover:bg-blue-100 flex'} style={{transition: 'all .15s ease'}}>
               <div className={'mr-4'}>
                 <NoticeIconSvg />
               </div>
@@ -30,7 +30,7 @@ const DrawerItems: React.FC<Props> = (props) => {
         </li>
         <li className={'w-full'}>
           <Link href='/privacypolicy'>
-            <a className={'block px-4 py-2 text-left hover:bg-red-200 flex active:bg-red-100'} style={{transition: 'all .15s ease'}}>
+            <a className='block px-4 py-2 text-left hover:bg-blue-100 flex' style={{transition: 'all .15s ease'}}>
               <div className={'mr-4'}>
                 <NoticeIconSvg />
               </div>
@@ -41,7 +41,7 @@ const DrawerItems: React.FC<Props> = (props) => {
           </Link>
         </li>
         <li className={'w-full'}>
-          <a className={'block px-4 py-2 text-left hover:bg-red-200 flex active:bg-red-100'} href={MESSAGE_FORM_URL} style={{transition: 'all .15s ease'}}>
+          <a className={'block px-4 py-2 text-left hover:bg-blue-100 flex'} href={MESSAGE_FORM_URL} style={{transition: 'all .15s ease'}}>
             <div className={'mr-4'}>
               <MessageIconSvg />
             </div>

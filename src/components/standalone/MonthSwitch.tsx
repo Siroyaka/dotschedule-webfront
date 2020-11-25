@@ -36,7 +36,7 @@ interface LinkComponentProps {
 
 const LinkComponent: React.FC<LinkComponentProps> = (props) => {
   const { disabled, href, as, children } = props;
-  const linkOption = disabled ? 'text-gray-300' : 'text-black active:bg-gray-300 hover:bg-gray-200 duration-200 ease-in transition';
+  const linkOption = disabled ? 'text-gray-300' : 'text-black active:bg-blue-200 hover:bg-blue-100 duration-200 ease-in transition';
   return(
     <div className={`relative py-2 px-2 rounded-full ${linkOption}`}>
       {!disabled && 

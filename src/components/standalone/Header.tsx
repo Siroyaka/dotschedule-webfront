@@ -21,12 +21,12 @@ const Header: React.FC<Props> = (props) => {
   }, [router])
 
   return(
-    <header className={clsx('w-screen', 'flex', 'fixed', 'top-0', 'h-12', 'bg-yellow-300', 'border', 'border-orange-300', 'px-4', 'py-1', 'flex', 'flex-row', 'items-center', 'z-50', 'justify-between')}>
+    <header className='w-screen flex fixed top-0 h-12 bg-white border-b px-4 py-1 flex flex-row items-center z-50 justify-between'>
       <div className={'flex flex-row items-center'}>
-        <MenuButton classes={{button: 'bg-yellow-300 hover:bg-yellow-200 active:bg-yellow-100'}} onClick={onMenuClick} />
-        <h6 className={'font-sans font-semibold text-xl text-yellow-600'}>{title}</h6>
+        <MenuButton classes={{button: 'hover:bg-blue-100 active:bg-blue-200'}} onClick={onMenuClick} />
+        <h6 className='font-sans text-2xl text-black ml-2'>{title}</h6>
       </div>
-      <button className={'px-2 py-2 focus:outline-none hover:bg-yellow-200 active:bg-yellow-100 rounded-full'} style={{ transition: "all .15s ease" }} aria-label='reload-button' onClick={reload}><ReloadIconSvg /></button>
+      <button className={'px-2 py-2 focus:outline-none hover:bg-blue-100 active:bg-blue-200 rounded-full'} style={{ transition: "all .15s ease" }} aria-label='reload-button' onClick={reload}><ReloadIconSvg /></button>
     </header>
   )
 }

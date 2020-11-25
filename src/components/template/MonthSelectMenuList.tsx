@@ -33,7 +33,7 @@ const MonthSelectMenuList: React.FC<Props> = (props) => {
       {monthListStartToEnd(start, end).map(({year, month}) => (
         <li key={`select-month-value-${year}-${month}`} className={'w-full'}>
           <Link href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${year}/${month}`} prefetch={false}>
-            <a className={clsx('text-xl', 'block', 'w-full', 'py-1', 'hover:bg-blue-200', 'active:bg-blue-200')}>
+            <a className='text-xl block w-full py-1 hover:bg-blue-100 active:bg-blue-200'>
               <span>{year}年{month}月</span>
             </a>
           </Link>
