@@ -69,11 +69,7 @@ const MonthSwitch: React.FC<Props> = (props) => {
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${before.year}/${before.month}`} disabled={oldest}>
           <NavigationBeforeSvg size={40}/>
         </LinkComponent>
-        <div className='w-32 text-center'>
-          <div className={clsx('cursor-pointer')} onClick={openMenu}>
-            <span className={clsx('text-lg')}>{year}年{month}月</span>
-          </div>
-        </div>
+        <h2 className='text-xl cursor-pointer' onClick={openMenu}>{year}年{month}月</h2>
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${after.year}/${after.month}`} disabled={newest}>
           <NavigationNextSvg size={40}/>
         </LinkComponent>
