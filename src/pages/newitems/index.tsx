@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 
 import NewsPage from 'components/page/NewsPage';
 import LoadingField from 'components/field/Loading';
@@ -16,6 +17,15 @@ interface OwnProps {
 
 type Props = OwnProps;
 
+const HeadItems: React.FC = (props) => {
+  return(
+    <Head>
+      <title>NewSchedules</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+  )
+}
+
 export const getStaticProps: GetStaticProps = async () => {
   const item = await fetchData();
 
@@ -28,13 +38,15 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const NewItemsPage: React.FC<Props> = (props) => {
-  if(!props.year) {
-    return (
-      <LoadingField />
-    )
-  }
   return(
-    <NewsPage {...props}/>
+    <React.Fragment>
+      <HeadItems />
+      {props.year ?
+        <NewsPage {...props}/>
+      :
+        <LoadingField />
+      }
+    </React.Fragment>
   )
 }
 
