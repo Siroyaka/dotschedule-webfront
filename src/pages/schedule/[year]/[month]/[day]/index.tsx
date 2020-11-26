@@ -38,13 +38,11 @@ const SchedulePage: React.FC<Props> = (props) => {
     <React.Fragment>
       <HeadItems {...props}/>
       <main className={clsx('h-full', 'flex', 'flex-col')}>
-        <section className={'mx-2'}>
-          <h1 className={clsx('text-xl')}>{year}年{month}月{day}日</h1>
-        </section>
         <section
           id={`y-${year}-m-${month}-d-${day}-schedules`}
-          className={clsx('h-full', 'overflow-y-auto')}
+          className='h-full overflow-y-auto py-4'
         >
+          <h1 className='text-xl px-4 text-center'>{year}年{month}月{day}日</h1>
           <SchedulesField cardData={cardData} />
         </section>
       </main>

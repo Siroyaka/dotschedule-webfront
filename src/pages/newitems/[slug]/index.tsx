@@ -1,16 +1,16 @@
 import React from 'react';
 
-import NewsCardsField, { CardType } from 'components/field/News';
-import MemberNamesArea from 'components/standalone/MemberNamesArea';
-import { getNewsStreamerList } from 'lib/Constructions';
-import { getSchedulesBeforeData } from 'lib/firebase';
-import { VideoScheduleToNews } from 'lib/Converter';
-import { getJstTime, getUtc } from 'lib/DateFunctions';
-
 import {
   GetStaticPaths,
   GetStaticProps,
 } from 'next';
+import Head from 'next/head';
+
+import { CardType } from 'components/field/News';
+import LoadingField from 'components/field/Loading';
+import NewsPage from 'components/page/NewsPage';
+
+import { fetchData } from 'lib/NewsPages';
 
 interface OwnProps {
   slug?: string,
@@ -18,9 +18,19 @@ interface OwnProps {
   year?: number,
   month?: number,
   day?: number,
+  hour?: number,
 }
 
 type Props = OwnProps;
+
+const HeadItems: React.FC = (props) => {
+  return(
+    <Head>
+      <title>NewSchedules</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+  )
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -33,53 +43,27 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
   const slug = params.slug as string;
 
-  const match = getNewsStreamerList().find(x => x.slug === slug);
-  const quantity = 10; // 取得個数
-  const endDate = getUtc(new Date());
-  endDate.setHours(0, 0, 0, 0); // GMT 0:00 -> JST 9:00
-  const data = await getSchedulesBeforeData(VideoScheduleToNews)(match.id, endDate, quantity);
-
-  // revalidateは現在から翌日の9:00までの差分
-  const now = getUtc(new Date());
-  const revalidateTime = new Date(endDate);
-  revalidateTime.setDate(revalidateTime.getDate() + 1);
-  const revalidateSec = Math.floor((revalidateTime.getTime() - now.getTime()) / 1000)
-
-  // いつの更新分であるかを示す(endDateを日本時間にする)
-  const jstEndDate = getJstTime(endDate);
+  const item = await fetchData(slug);
 
   return {
     props: {
+      ...item,
       slug,
-      data,
-      year: jstEndDate.year,
-      month: jstEndDate.month,
-      day: jstEndDate.day,
     },
-    revalidate: revalidateSec
+    revalidate: item.secForNextUpdate
   }
 }
 
 const NewItemsMemberPage: React.FC<Props> = (props) => {
-  const {
-    slug,
-    data,
-    year,
-    month,
-    day,
-  } = props;
   return(
-    <article className='h-full'>
-      <div className='h-full overflow-y-auto px-4'>
-        {year && month && day &&
-          <h1 className='text-xl mb-2'>{`${year}年${month}月${day}日 9:00の新着`}</h1>
-        }
-        <MemberNamesArea slug={slug}/>
-        {data && 
-          <NewsCardsField cardData={data}/>
-        }
-      </div>
-    </article>
+    <React.Fragment>
+      <HeadItems />
+      {props.slug ?
+        <NewsPage {...props}/>
+      :
+        <LoadingField />
+      }
+    </React.Fragment>
   )
 }
 

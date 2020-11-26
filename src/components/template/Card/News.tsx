@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, CardMedia, CardContents } from './index';
+import { CardOutLine, CardMedia, CardContents } from './index';
 
 interface OwnProps {
   mediaSrc: string,
@@ -16,7 +16,7 @@ const News: React.FC<Props> = (props) => {
     children,
   } = props;
   return (
-    <Card>
+    <CardOutLine>
       <CardMedia
         src={mediaSrc}
         href={mediahref}
@@ -24,7 +24,7 @@ const News: React.FC<Props> = (props) => {
       <CardContents>
         {children}
       </CardContents>
-    </Card>
+    </CardOutLine>
   );
 }
 

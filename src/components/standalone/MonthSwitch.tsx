@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import Link from 'next/link';
 
-import { LeftArrowSvg, RightArrowSvg } from 'components/parts/svgIcons';
+import { NavigationBeforeSvg, NavigationNextSvg } from 'components/parts/svgIcons';
 
 import MonthSelectMenuList from 'components/template/MonthSelectMenuList';
 
@@ -38,7 +38,7 @@ const LinkComponent: React.FC<LinkComponentProps> = (props) => {
   const { disabled, href, as, children } = props;
   const linkOption = disabled ? 'text-gray-300' : 'text-black active:bg-blue-200 hover:bg-blue-100 duration-200 ease-in transition';
   return(
-    <div className={`relative py-2 px-2 rounded-full ${linkOption}`}>
+    <div className={`relative rounded-full ${linkOption}`}>
       {!disabled && 
         <Link href={href} as={as}>
           <a className='absolute h-full w-full top-0 left-0' />
@@ -65,17 +65,13 @@ const MonthSwitch: React.FC<Props> = (props) => {
 
   return(
     <React.Fragment>
-      <section id='monthSwitch' className={clsx('flex', 'items-center', 'justify-between', 'py-2', 'px-2')}>
+      <section id='monthSwitch' className='flex items-center justify-between py-2 px-2'>
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${before.year}/${before.month}`} disabled={oldest}>
-          <LeftArrowSvg />
+          <NavigationBeforeSvg size={40}/>
         </LinkComponent>
-        <div className={clsx('w-32', 'text-center')}>
-          <div className={clsx('cursor-pointer')} onClick={openMenu}>
-            <span className={clsx('text-lg')}>{year}年{month}月</span>
-          </div>
-        </div>
+        <h2 className='text-xl cursor-pointer' onClick={openMenu}>{year}年{month}月</h2>
         <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${after.year}/${after.month}`} disabled={newest}>
-          <RightArrowSvg />
+          <NavigationNextSvg size={40}/>
         </LinkComponent>
       </section>
       {menuVisible ? (
