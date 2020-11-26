@@ -2,12 +2,14 @@ import React from 'react';
 
 import { GetStaticProps } from 'next';
 
+import NewsPage from 'components/page/NewsPage';
 import MemberNamesArea from 'components/standalone/MemberNamesArea';
 
 interface OwnProps {
   year?: number,
   month?: number,
   day?: number,
+  hour?: number,
 }
 
 type Props = OwnProps;
@@ -36,6 +38,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       year,
       month,
       day,
+      hour: 9
     },
     revalidate: revalidateTime
   }
@@ -48,12 +51,7 @@ const NewItemsPage: React.FC<Props> = (props) => {
     day,
   } = props;
   return(
-    <article className='h-full px-4'>
-      {year && month && day &&
-        <h1 className='text-xl mb-2'>{`${year}年${month}月${day}日 9:00の新着`}</h1>
-      }
-      <MemberNamesArea />
-    </article>
+    <NewsPage {...props}/>
   )
 }
 
