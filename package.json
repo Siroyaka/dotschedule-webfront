@@ -1,6 +1,6 @@
 {
   "name": "dot-schedule",
-  "version": "2.11.0",
+  "version": "2.15.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
