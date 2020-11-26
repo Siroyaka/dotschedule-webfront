@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { Card, CardHeader, CardMedia, CardContents } from './index';
+import { CardOutLine, CardHeader, CardMedia, CardContents } from './index';
 import { RoundIconSvg } from 'components/parts/svgIcons';
 
 interface OwnProps {
@@ -28,7 +28,7 @@ const Full: React.FC<Props> = (props) => {
     onLive
   } = props;
   return (
-    <Card>
+    <CardOutLine>
       {onLive ? (
         <div className={clsx('absolute', 'top-0', 'right-0')} style={{color:'red'}}>
           <RoundIconSvg />
@@ -49,7 +49,7 @@ const Full: React.FC<Props> = (props) => {
       <CardContents>
         {children}
       </CardContents>
-    </Card>
+    </CardOutLine>
   );
 }
 

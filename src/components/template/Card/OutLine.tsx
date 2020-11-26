@@ -11,7 +11,7 @@ const OutLine: React.FC<Props> = (props) => {
   const { children, className } = props;
 
   return(
-    <div className={clsx('w-full', 'relative', "max-w-md", "rounded", "overflow-hidden", "shadow-lg", className)}>
+    <div className={clsx('w-full relative max-w-md border rounded overflow-hidden shadow-lg', className)}>
       {children}
     </div>
   )

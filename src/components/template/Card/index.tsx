@@ -1,6 +1,6 @@
 export { default as SimpleCard } from './SimpleCard';
 
-export { default as Card } from './OutLine';
+export { default as CardOutLine } from './OutLine';
 
 export { default as CardHeader } from './Header';
 
