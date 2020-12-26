@@ -159,6 +159,30 @@ const streamerDataList = ([
       slug: 'dotlive',
       newsOn: true,
     },
+    {
+      name: 'リクム',
+      youtubeId: "UCtM5G3bS7zM8bv6p-OwoNTw",
+      youtubeIcon: "https://yt3.ggpht.com/ytc/AAUvwng-OjoeMh5P7QUT68KKMJRTQNB_th2OuFVa0BI4=s176-c-k-c0x00ffffff-no-rj",
+      textIcon: 'リ',
+      slug: 'rikumu',
+      newsOn: true,
+    },
+    {
+      name: 'ルルン・ルルリカ',
+      youtubeId: 'UCcd4MSYH7bPIBEUqmBgSZQw',
+      youtubeIcon: 'https://yt3.ggpht.com/ytc/AAUvwnhXHiUDc14_AVxCvtr85UcJ2ZuwndAOW26MvegO=s176-c-k-c0x00ffffff-no-rj',
+      textIcon: 'ル',
+      slug: 'rurunrururica',
+      newsOn: true,
+    },
+    {
+      name: '七星みりり',
+      youtubeId: 'UCSlcMof1GIPvH6H_VcknCbQ',
+      youtubeIcon: 'https://yt3.ggpht.com/ytc/AAUvwnhZEMCfyNQiEDAso-BTTRQagWM2r4vNTbpwcpVm=s176-c-k-c0x00ffffff-no-rj',
+      textIcon: 'ミ',
+      slug: 'nanahoshimilily',
+      newsOn: true,
+    }
   ]);
 
 const getStreamerDataMap = () => {
