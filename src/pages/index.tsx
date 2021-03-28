@@ -4,10 +4,11 @@ import clsx from 'clsx';
 
 import { GetStaticProps } from 'next';
 
-import { fetchScheduleData } from 'lib/firebase';
 import SchedulesField, { CardType } from 'components/field/Schedules';
+import TodaysPrevNavigation from 'components/standalone/TodaysPrevNavigation';
+import { fetchScheduleData } from 'lib/firebase';
 import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
-
+import { getNow } from 'lib/DateFunctions';
 
 interface OwnProps {
   year: number,
@@ -19,7 +20,10 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Home: React.FC<Props> = (props) => {
-  const { cardData } = props;
+  const {
+    cardData,
+  } = props;
+
   return (
     <React.Fragment>
       <Head>
@@ -27,6 +31,7 @@ const Home: React.FC<Props> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={clsx('h-full', 'overflow-y-auto')}>
+        <TodaysPrevNavigation {...props}/>
         <SchedulesField cardData={cardData} />
       </main>
     </React.Fragment>
@@ -34,8 +39,7 @@ const Home: React.FC<Props> = (props) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const d = new Date();
-  d.setHours(d.getHours() + 6);
+  const d = getNow();
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();

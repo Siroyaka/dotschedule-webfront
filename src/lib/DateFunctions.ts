@@ -64,6 +64,19 @@ export const getMonthCalendar = (year: number, month: number): FCalDate[][] => {
     return monthData.makeCalendar();
 }
 
+export const getUtcNow = () => {
+    const n = new Date((new Date()).toUTCString());
+
+    console.log(n.toString());
+
+    return n;
+}
+
+export const getNow = () => {
+    const n = new Date();
+    return new Date(n.getTime() + (n.getTimezoneOffset() + (9 * 60)) * 60 * 1000);
+}
+
 export const getJstTime = (date: Date) => {
 
     // utc日時を取得

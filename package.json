@@ -1,6 +1,6 @@
 {
   "name": "dot-schedule",
-  "version": "2.20.0",
+  "version": "2.20.1",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
@@ -8,27 +8,27 @@
     "start": "next start -p 3001"
   },
   "dependencies": {
-    "@babel/core": "^7.12.8",
-    "@fullhuman/postcss-purgecss": "^3.0.0",
-    "@types/node": "^14.14.9",
-    "@types/react": "^17.0.0",
+    "@babel/core": "^7.13.13",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@types/node": "^14.14.37",
+    "@types/react": "^17.0.3",
     "@types/redux": "^3.6.31",
-    "autoprefixer": "^10.0.2",
+    "autoprefixer": "^10.2.5",
     "clsx": "^1.1.1",
-    "firebase": "^8.1.1",
-    "next": "10.0.2",
+    "firebase": "^8.3.1",
+    "next": "10.0.9",
     "now": "^19.2.0",
-    "postcss": "^8.1.10",
+    "postcss": "^8.2.8",
     "postcss-preset-env": "^6.7.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-redux": "^7.2.2",
-    "react-scripts": "^4.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.3",
+    "react-scripts": "^4.0.3",
     "redux": "^4.0.5",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
-    "tailwindcss": "^2.0.1",
-    "ts-loader": "^8.0.11",
-    "typescript": "^4.1.2"
+    "tailwindcss": "^2.0.4",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3"
   }
 }
