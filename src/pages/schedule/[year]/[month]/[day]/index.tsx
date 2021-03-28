@@ -8,6 +8,7 @@ import { fetchScheduleData } from 'lib/firebase';
 import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
 import SchedulesField, { CardType } from 'components/field/Schedules';
 import LoadingField from 'components/field/Loading';
+import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
 
 interface OwnProps {
   year?: number,
@@ -40,9 +41,11 @@ const SchedulePage: React.FC<Props> = (props) => {
       <main className={clsx('h-full', 'flex', 'flex-col')}>
         <section
           id={`y-${year}-m-${month}-d-${day}-schedules`}
-          className='h-full overflow-y-auto py-4'
+          className='h-full overflow-y-auto'
         >
-          <h1 className='text-xl px-4 text-center'>{year}年{month}月{day}日</h1>
+          <SchedulesNavigation year={year} month={month} day={day}>
+            <h1 className='text-xl px-4 text-center'>{year}年{month}月{day}日</h1>
+          </SchedulesNavigation>
           <SchedulesField cardData={cardData} />
         </section>
       </main>
