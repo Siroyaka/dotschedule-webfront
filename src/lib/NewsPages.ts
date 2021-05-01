@@ -1,5 +1,5 @@
 import { getNewsStreamerList } from 'lib/Constructions';
-import { getSchedulesBeforeData } from 'lib/firebase';
+import { getSchedulesBeforeData } from 'lib/DataInterface';
 import { VideoScheduleToNews } from 'lib/Converter';
 import { getJstTime, getUtc } from 'lib/DateFunctions';
 

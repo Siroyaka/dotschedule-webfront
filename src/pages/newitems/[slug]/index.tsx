@@ -11,6 +11,7 @@ import LoadingField from 'components/field/Loading';
 import NewsPage from 'components/page/NewsPage';
 
 import { fetchData } from 'lib/NewsPages';
+import { newSchedulesTitle } from 'lib/InitialMetaData';
 
 interface OwnProps {
   slug?: string,
@@ -26,7 +27,7 @@ type Props = OwnProps;
 const HeadItems: React.FC = (props) => {
   return(
     <Head>
-      <title>NewSchedules</title>
+      <title>{newSchedulesTitle}</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
   )

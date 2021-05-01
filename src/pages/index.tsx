@@ -6,9 +6,11 @@ import { GetStaticProps } from 'next';
 
 import SchedulesField, { CardType } from 'components/field/Schedules';
 import TodaysPrevNavigation from 'components/standalone/TodaysPrevNavigation';
-import { fetchScheduleData } from 'lib/firebase';
+
+import { fetchScheduleData } from 'lib/DataInterface';
 import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
 import { getNow } from 'lib/DateFunctions';
+import { todayTitle } from 'lib/InitialMetaData';
 
 interface OwnProps {
   year: number,
@@ -27,7 +29,7 @@ const Home: React.FC<Props> = (props) => {
   return (
     <React.Fragment>
       <Head>
-        <title>どっとスケジュール</title>
+        <title>{todayTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={clsx('h-full', 'overflow-y-auto')}>
@@ -45,7 +47,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const day = d.getDate();
   const {convertData, dayStreamers} = await fetchScheduleData(year, month, day, VideoScheduleToCardType, PickupStreamerFromVideoSchedule);
 
-  const revalidateTime = 60 * 15;
+  const revalidateTime = 1; // 60 * 15;
 
   return {
     props: {
