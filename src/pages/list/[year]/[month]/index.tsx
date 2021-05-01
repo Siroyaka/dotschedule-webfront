@@ -9,7 +9,7 @@ import MonthSwitch from 'components/standalone/MonthSwitch';
 import ListField from 'components/field/List';
 import { getMonthCalendar, MonthCalendar } from 'lib/DateFunctions';
 import { MonthDataToImgData } from 'lib/Converter';
-import { fetchMonthData } from 'lib/firebase';
+import { fetchMonthData } from 'lib/DataInterface';
 import LoadingField from 'components/field/Loading';
 
 interface OwnProps {

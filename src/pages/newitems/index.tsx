@@ -7,6 +7,7 @@ import NewsPage from 'components/page/NewsPage';
 import LoadingField from 'components/field/Loading';
 
 import { fetchData } from 'lib/NewsPages';
+import { newSchedulesTitle } from 'lib/InitialMetaData';
 
 interface OwnProps {
   year?: number,
@@ -20,7 +21,7 @@ type Props = OwnProps;
 const HeadItems: React.FC = (props) => {
   return(
     <Head>
-      <title>NewSchedules</title>
+      <title>{newSchedulesTitle}</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
   )
