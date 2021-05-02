@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 interface OwnProps {
   title: string,
@@ -11,11 +10,11 @@ const SimpleCard: React.FC<Props> = (props) => {
   const { title, children } = props;
   return (
     <div
-      className={clsx("max-w-sm", "rounded", "overflow-hidden", "shadow-lg")}
+      className='max-w-sm rounded overflow-hidden shadow-lg'
     >
-      <div className={clsx("px-6", "py-4")}>
+      <div className='px-6 py-4'>
         <div>{title}</div>
-        <p className={clsx('text-gray-700', 'text-base')}>{children}</p>
+        <p className='text-gray-700 text-base'>{children}</p>
       </div>
     </div>
   );

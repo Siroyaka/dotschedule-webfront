@@ -10,7 +10,12 @@ module.exports = {
     extend: {},
   },
   variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'active']
+
+    extend: {
+      backgroundOpacity: ['active', 'hover'],
+      backgroundColor: ['responsive', 'hover', 'focus', 'active']
+    }
+
   },
   plugins: [],
 }

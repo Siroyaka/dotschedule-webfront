@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import { CardOutLine, CardHeader, CardMedia, CardContents } from './index';
 import { RoundIconSvg } from 'components/parts/svgIcons';
@@ -30,7 +29,7 @@ const Full: React.FC<Props> = (props) => {
   return (
     <CardOutLine>
       {onLive ? (
-        <div className={clsx('absolute', 'top-0', 'right-0')} style={{color:'red'}}>
+        <div className='absolute top-0 right-0' style={{color:'red'}}>
           <RoundIconSvg />
         </div>
       ): (
