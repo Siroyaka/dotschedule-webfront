@@ -59,7 +59,7 @@ const Monthly: React.FC<Props> = (props) => {
                     </Link>
                   </React.Fragment>
                 ): (
-                  <div className={clsx('h-full', 'text-center', 'rounded-sm', 'border', 'bg-gray-200')}>
+                  <div className='h-full text-center rounded-sm border bg-gray-200'>
                     <span className={clsx({['text-gray-400']:day.year !== year || day.month !== month}, 'text-sm')}>
                       {day.day}
                     </span>

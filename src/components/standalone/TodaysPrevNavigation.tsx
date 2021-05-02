@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import PrevAndNextNavigations from 'components/template/PrevAndNextNavigations';
 
 interface OwnProps {

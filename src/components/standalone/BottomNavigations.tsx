@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -59,7 +58,7 @@ const BottomNavigations: React.FC<Props> = (props) => {
 
   return (
     <Bottoms>
-      <ul className={clsx('flex', 'h-full')}>
+      <ul className='flex h-full'>
         <li className="flex-1">
           <TabItems link="/" value={routePath} isLink={routePath === ''}>
             <TodaySvg />

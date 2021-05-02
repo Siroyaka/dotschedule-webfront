@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import Link from 'next/link';
 
@@ -75,9 +74,9 @@ const MonthSwitch: React.FC<Props> = (props) => {
         </LinkComponent>
       </section>
       {menuVisible ? (
-        <section className={clsx('fixed', 'top-0', 'h-full', 'w-full', 'z-50', 'flex', 'justify-center')}>
-          <article id={'closeMonthSelectMenuField'} className={clsx('h-full', 'w-full', 'fixed')} onClick={closeMenu} />
-          <article className={clsx('mt-24', 'h-64', 'z-50')}>
+        <section className='fixed top-0 h-full w-full z-50 flex justify-center'>
+          <article id={'closeMonthSelectMenuField'} className='h-full w-full fixed' onClick={closeMenu} />
+          <article className='mt-24 h-64 z-50'>
             <MonthSelectMenuList start={start} end={end} componentName={componentName} closeMenu={closeMenu} />
           </article>
         </section>

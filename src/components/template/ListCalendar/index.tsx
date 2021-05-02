@@ -60,7 +60,7 @@ const ListCalendar: React.FC<Props> = (props) => {
                   <a className={clsx('w-full h-full absolute top-0 left-0')} />
                 </Link>
                 <div className='flex flex-row'>
-                  <div className={clsx('w-8')}>
+                  <div className='w-8'>
                     <span>{day.day}</span>
                   </div>
                   <div className='w-full grid mx-1 my-1 justify-start gap-1' style={{gridTemplateColumns: 'repeat(auto-fit, 2rem)'}}>
@@ -69,7 +69,7 @@ const ListCalendar: React.FC<Props> = (props) => {
                       <img
                         key={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         alt={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
-                        className={clsx('w-8', 'h-8', 'rounded-full', 'mr-1', 'mb-1')}
+                        className='w-8 h-8 rounded-full mr-1 mb-1'
                         src={avater}
                       />
                     ))}

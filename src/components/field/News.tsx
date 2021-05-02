@@ -1,5 +1,4 @@
 import React, { ComponentProps } from 'react';
-import clsx from 'clsx';
 
 import { CardNews } from 'components/template/Card';
 
@@ -20,12 +19,11 @@ type Props = OwnProps;
 const NewsCardsField: React.FC<Props> = (props) => {
   const { cardData } = props;
   return (
-    <ul className={clsx("flex", "flex-wrap", "pt-4", "px-2", 'pb-16')}>
+    <ul className='flex flex-wrap pt-4 px-2 pb-16'>
       {cardData.map((cardInfo, i) => (
         <li
           key={`card-${i}`}
-          className={clsx( "w-full", "sm:w-full", "md:w-1/2", "lg:w-1/3",
-            "xl:w-1/4", "px-2", "py-2", "flex", "justify-center")}
+          className='w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2 py-2 flex justify-center'
         >
           <CardNews {...cardInfo}>
             {cardInfo.title}

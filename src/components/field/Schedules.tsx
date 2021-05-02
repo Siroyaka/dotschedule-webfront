@@ -1,5 +1,4 @@
 import React, { ComponentProps } from 'react';
-import clsx from 'clsx';
 
 import { CardFullTemplate } from 'components/template/Card';
 
@@ -15,12 +14,11 @@ type Props = OwnProps;
 const SchedulesField: React.FC<Props> = (props) => {
   const { cardData } = props;
   return (
-    <ul className={clsx("flex", "flex-wrap", "py-4", "px-2")}>
+    <ul className='flex flex-wrap py-4 px-2'>
       {cardData.map((cardInfo, i) => (
         <li
           key={`card-${cardInfo.start}-${i}`}
-          className={clsx( "w-full", "sm:w-full", "md:w-1/2", "lg:w-1/3",
-            "xl:w-1/4", "px-2", "py-2", "flex", "justify-center")}
+          className='w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2 py-2 flex justify-center'
         >
           <CardFullTemplate {...cardInfo}>
             {cardInfo.title}
