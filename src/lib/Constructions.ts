@@ -45,7 +45,7 @@ const streamerDataList = ([
       youtubeIcon: "https://yt3.ggpht.com/a/AATXAJwvY8-LY8X49Rm3SrqFyX55bbTKk57g7SghRQ=s100-c-k-c0xffffffff-no-rj-mo",
       textIcon: '🐄',
       slug: 'ushimakiriko',
-      newsOn: true,
+      newsOn: false,
     },
     {
       name: '花京院ちえり',
@@ -77,7 +77,7 @@ const streamerDataList = ([
       youtubeIcon: "https://yt3.ggpht.com/a/AATXAJzWdE8WTqtLbsQegkXXvJIp7Py2F7uLjA6-vA=s100-c-k-c0xffffffff-no-rj-mo",
       textIcon: '💻',
       slug: 'kisoazuki',
-      newsOn: true,
+      newsOn: false,
     },
     {
       name: '北上双葉',
@@ -85,7 +85,7 @@ const streamerDataList = ([
       youtubeIcon: "https://yt3.ggpht.com/a/AATXAJxdpfXn8BSvolKD0tLq1o5yCeeHbWM0BO3Kyg=s100-c-k-c0xffffffff-no-rj-mo",
       textIcon: '🌱',
       slug: 'kitakamifutaba',
-      newsOn: true,
+      newsOn: false,
     },
     {
       name: '金剛いろは',
@@ -93,7 +93,7 @@ const streamerDataList = ([
       youtubeIcon: "https://yt3.ggpht.com/a/AATXAJxXKh_yR0FapZ2zf46leNVlZvbZ65iMdH_QMw=s100-c-k-c0xffffffff-no-rj-mo",
       textIcon: '💎',
       slug: 'kongoiroha',
-      newsOn: true,
+      newsOn: false,
     },
     {
       name: '猫乃木もち',
@@ -117,7 +117,7 @@ const streamerDataList = ([
       youtubeIcon: "https://yt3.ggpht.com/a/AATXAJxbuuaJ0hPNZtD2iAEtX5cd-bWfInpC5WQwXQ=s100-c-k-c0xffffffff-no-rj-mo",
       textIcon: '🌾',
       slug: 'yaezawanatori',
-      newsOn: true,
+      newsOn: false,
     },
     {
       name: 'ヤマトイオリ',

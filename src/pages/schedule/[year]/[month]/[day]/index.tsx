@@ -38,7 +38,7 @@ const SchedulePage: React.FC<Props> = (props) => {
   return(
     <React.Fragment>
       <HeadItems {...props}/>
-      <main className={clsx('h-full', 'flex', 'flex-col')}>
+      <main className='h-full flex flex-col'>
         <section
           id={`y-${year}-m-${month}-d-${day}-schedules`}
           className='h-full overflow-y-auto'
