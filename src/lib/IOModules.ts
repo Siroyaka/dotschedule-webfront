@@ -1,11 +1,21 @@
 import fs from 'fs';
-import remark from 'remark';
-import html from 'remark-html';
+import marked      from 'marked';
+import highlightjs from 'highlight.js';
+
+marked.setOptions({
+  highlight: function(code, lang) {
+    return highlightjs.highlightAuto(code, [lang]).value;
+  },
+  pedantic: false,
+  gfm: true,
+  breaks: true,
+  sanitize: true,
+  silent: false
+});
 
 export const getHtmlFromMarkdown = async (dataSource: string) => {
   const fileContents = fs.readFileSync(dataSource, 'utf8');
 
-  const contents = await remark().use(html).process(fileContents);
-  const htmlContents = contents.toString();
+  const htmlContents = marked(fileContents);
   return htmlContents;
 }
