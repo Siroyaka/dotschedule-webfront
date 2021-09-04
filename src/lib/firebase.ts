@@ -1,4 +1,5 @@
-import firebase from 'firebase';
+import * as Firebase from 'firebase/app';
+import * as FireStore from 'firebase/firestore';
 
 interface FireStoreTimeStamp {
   nanoseconds: number,
@@ -19,12 +20,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-if (!firebase.apps.length) {
-  try {
-    firebase.initializeApp(firebaseConfig);
-  } catch (err) {
-    console.error("Firebase initialization error", err.stack);
-  }
+try {
+  Firebase.initializeApp(firebaseConfig);
+} catch (err) {
+  console.error("Firebase initialization error", err.stack);
 }
 
 export interface VideoSchedule {
@@ -43,57 +42,76 @@ export interface MonthData {
     Data: {[key: number]:string[]},
 }
 
-const fetchSchedule = (year: number, month: number, day: number) => {
+const fetchSchedule = async (year: number, month: number, day: number) => {
   const d = new Date(year, month - 1, day, -6);
   const nextDate = new Date(year, month - 1, day + 1, -6);
-  return firebase.firestore().collection('VideoSchedules').orderBy('StartDate').startAt(d).endBefore(nextDate).get()
-    .then(items => {
-      const videoSchedules: VideoSchedule[] = [];
-      let readNum = 0;
-      items.forEach(item => {
-        const scheduleItem = item.data() as VideoSchedule;
-        readNum += 1;
-        if (scheduleItem.VideoStatus > 0 && scheduleItem.VideoStatus < 5) videoSchedules.push(scheduleItem);
-      })
-      return videoSchedules;
+
+  const db = FireStore.getFirestore();
+  const query = FireStore.query(
+    FireStore.collection(db, 'VideoSchedules'),
+    FireStore.orderBy('StartDate'),
+    FireStore.startAt(d),
+    FireStore.endBefore(nextDate)
+  );
+  return FireStore.getDocs(query).then(items => {
+    const videoSchedules: VideoSchedule[] = [];
+    let readNum = 0;
+    items.forEach(item => {
+      const scheduleItem = item.data() as VideoSchedule;
+      readNum += 1;
+      if (scheduleItem.VideoStatus > 0 && scheduleItem.VideoStatus < 5) videoSchedules.push(scheduleItem);
     })
-    .catch((err: Error) => {
-      console.error(`Error fetch day schedule. ${year}-${month}-${day} msg:[${err.message}]`);
-      return err;
-    });
+    return videoSchedules;
+  })
+  .catch((err: Error) => {
+    console.error(`Error fetch day schedule. ${year}-${month}-${day} msg:[${err.message}]`);
+    return err;
+  });
 }
 
 // 指定されたStreamerIDのdateの日時以前のスケジュール情報を引き出す。quantityでいくつ引き出すかを指定する。
-const fetchSchedulesBeforeDate = (streamerId: string, date: Date, quantity: number = 10) => {
-  return firebase.firestore().collection('VideoSchedules').where("StreamerID", "==", streamerId).orderBy('StartDate', 'desc').startAfter(date).limit(quantity).get()
-    .then(items => {
-      const videoSchedules: VideoSchedule[] = [];
-      items.forEach(item => {
-        const scheduleItem = item.data() as VideoSchedule;
-        if (scheduleItem.VideoStatus > 0 && scheduleItem.VideoStatus < 5) videoSchedules.push(scheduleItem);
-      })
-      return videoSchedules;
+const fetchSchedulesBeforeDate = async (streamerId: string, date: Date, quantity: number = 10) => {
+  const db = FireStore.getFirestore();
+  const query = FireStore.query(
+    FireStore.collection(db, 'VideoSchedules'),
+    FireStore.where('StreamerID', '==', streamerId),
+    FireStore.orderBy('StartDate')
+  );
+  return FireStore.getDocs(query).then(items => {
+    const videoSchedules: VideoSchedule[] = [];
+    items.forEach(item => {
+      const scheduleItem = item.data() as VideoSchedule;
+      if (scheduleItem.VideoStatus > 0 && scheduleItem.VideoStatus < 5) videoSchedules.push(scheduleItem);
     })
-    .catch((err: Error) => {
-      console.error(`Error fetch new schedule. ${streamerId} msg:[${err.message}]`);
-      return err;
-    });
+    return videoSchedules;
+  })
+  .catch((err: Error) => {
+    console.error(`Error fetch new schedule. ${streamerId} msg:[${err.message}]`);
+    return err;
+  });
 }
 
 const fetchMonthScheduleData = (year: number, month: number) => {
   const monthKey = year * 13 + month;
-  return firebase.firestore().collection('MonthData').orderBy('MonthKey').startAt(monthKey).endAt(monthKey).limit(1).get()
-    .then(items => {
-      let monthData: MonthData | null = null;
-      items.forEach(item => {
-        monthData = item.data() as MonthData;
-      })
-      return monthData;
+  const db = FireStore.getFirestore();
+  const query = FireStore.query(
+    FireStore.collection(db, 'MonthData'),
+    FireStore.orderBy('MonthKey'),
+    FireStore.startAt(monthKey),
+    FireStore.endAt(monthKey),
+    FireStore.limit(1)
+  );
+  return FireStore.getDocs(query).then(items => {
+    let monthData: MonthData | null = null;
+    items.forEach(item => {
+      monthData = item.data() as MonthData;
     })
-    .catch((err: Error) => {
-      console.error(`Error fetch month schedule. ${year}-${month} msg:[${err.message}]`);
-      return err;
-    });
+    return monthData;
+  })
+  .catch((err: Error) => {
+    console.error(`Error fetch month schedule. ${year}-${month} msg:[${err.message}]`);
+    return err;
+  });
 }
 
 export const fetchMonthData = async<T> (year: number, month: number, converter: (d: MonthData | null) => T) => {

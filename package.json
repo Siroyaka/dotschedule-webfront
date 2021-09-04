@@ -1,6 +1,6 @@
 {
   "name": "dot-schedule",
-  "version": "2.20.3",
+  "version": "2.20.5",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
@@ -9,16 +9,16 @@
     "start": "next start -p 3001"
   },
   "dependencies": {
-    "@babel/core": "^7.15.0",
+    "@babel/core": "^7.15.4",
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@types/highlight.js": "^10.1.0",
     "@types/marked": "^3.0.0",
-    "@types/node": "^16.7.1",
+    "@types/node": "^16.7.10",
     "@types/react": "^17.0.19",
     "@types/redux": "^3.6.31",
-    "autoprefixer": "^10.3.2",
+    "autoprefixer": "^10.3.4",
     "clsx": "^1.1.1",
-    "firebase": "^8.10.0",
+    "firebase": "^9.0.1",
     "highlight.js": "^11.2.0",
     "marked": "^3.0.2",
     "next": "11.1.2",
@@ -30,8 +30,8 @@
     "react-redux": "^7.2.4",
     "react-scripts": "^4.0.3",
     "redux": "^4.1.1",
-    "tailwindcss": "^2.2.7",
+    "tailwindcss": "^2.2.9",
     "ts-loader": "^9.2.5",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.2"
   }
 }
