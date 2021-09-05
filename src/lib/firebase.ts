@@ -42,7 +42,7 @@ export interface MonthData {
     Data: {[key: number]:string[]},
 }
 
-const fetchSchedule = async (year: number, month: number, day: number) => {
+const fetchSchedule = (year: number, month: number, day: number) => {
   const d = new Date(year, month - 1, day, -6);
   const nextDate = new Date(year, month - 1, day + 1, -6);
 
@@ -70,12 +70,14 @@ const fetchSchedule = async (year: number, month: number, day: number) => {
 }
 
 // 指定されたStreamerIDのdateの日時以前のスケジュール情報を引き出す。quantityでいくつ引き出すかを指定する。
-const fetchSchedulesBeforeDate = async (streamerId: string, date: Date, quantity: number = 10) => {
+const fetchSchedulesBeforeDate = (streamerId: string, date: Date, quantity: number = 10) => {
   const db = FireStore.getFirestore();
   const query = FireStore.query(
     FireStore.collection(db, 'VideoSchedules'),
     FireStore.where('StreamerID', '==', streamerId),
-    FireStore.orderBy('StartDate')
+    FireStore.orderBy('StartDate', 'desc'),
+    FireStore.startAfter(date),
+    FireStore.limit(quantity)
   );
   return FireStore.getDocs(query).then(items => {
     const videoSchedules: VideoSchedule[] = [];

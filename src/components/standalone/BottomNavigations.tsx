@@ -74,19 +74,20 @@ const BottomNavigations: React.FC<Props> = (props) => {
         <li className="flex-1">
           <TabItems link={'/list/[year]/[month]'} as={listLink} value={routePath} isLink={routePath === 'list'}>
             <ListSvg />
-            <span>List</span> 
+            <span>List</span>
+          </TabItems>
+        </li>
+
+        <li className='flex-1'>
+          <TabItems link='/newitems' value={routePath} isLink={routePath === 'newitems'}>
+            <NewsIconSvg />
+            <span>News</span>
           </TabItems>
         </li>
       </ul>
+
     </Bottoms>
   );
 }
 
-// newitems delete
-//<li className='flex-1'>
-//  <TabItems link='/newitems' value={routePath} isLink={routePath === 'newitems'}>
-//    <NewsIconSvg />
-//    <span>News</span>
-//  </TabItems>
-//</li>
 export default BottomNavigations;
