@@ -72,7 +72,7 @@ export const getUtcNow = () => {
     return n;
 }
 
-export const getNow = () => {
+export const getNow = (): Date => {
     const n = new Date();
     return new Date(n.getTime() + (n.getTimezoneOffset() + (9 * 60)) * 60 * 1000);
 }
