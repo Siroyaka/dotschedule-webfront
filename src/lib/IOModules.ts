@@ -1,8 +1,8 @@
 import fs from 'fs';
-import marked      from 'marked';
+import { marked } from 'marked';
 import highlightjs from 'highlight.js';
 
-marked.setOptions({
+const markedOption: marked.MarkedOptions = ({
   highlight: function(code, lang) {
     return highlightjs.highlightAuto(code, [lang]).value;
   },
@@ -15,6 +15,6 @@ marked.setOptions({
 export const getHtmlFromMarkdown = async (dataSource: string) => {
   const fileContents = fs.readFileSync(dataSource, 'utf8');
 
-  const htmlContents = marked(fileContents);
+  const htmlContents = marked(fileContents, markedOption);
   return htmlContents;
 }
