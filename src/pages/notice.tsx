@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { getHtmlFromMarkdown } from 'lib/IOModules';
 import path from 'path';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticProps } from 'next';
 
 interface OwnProps {
   contents: string
