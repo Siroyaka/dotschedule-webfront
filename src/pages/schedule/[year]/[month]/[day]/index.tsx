@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';

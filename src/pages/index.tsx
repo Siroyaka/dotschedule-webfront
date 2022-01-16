@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import clsx from 'clsx';
 
 import { GetStaticProps } from 'next';
 
@@ -32,7 +31,7 @@ const Home: React.FC<Props> = (props) => {
         <title>{todayTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={clsx('h-full', 'overflow-y-auto')}>
+      <main className='h-full overflow-y-auto'>
         <TodaysPrevNavigation {...props}/>
         <SchedulesField cardData={cardData} />
       </main>
@@ -45,7 +44,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();
-  const {convertData, dayStreamers} = await fetchScheduleData(year, month, day, VideoScheduleToCardType, PickupStreamerFromVideoSchedule);
+  const {convertData} = await fetchScheduleData(year, month, day, VideoScheduleToCardType, PickupStreamerFromVideoSchedule);
 
   const revalidateTime = 1; // 60 * 15;
 

@@ -29,18 +29,6 @@ const DrawerItems: React.FC<Props> = (props) => {
           </Link>
         </li>
         <li className={'w-full'}>
-          <Link href='/privacypolicy'>
-            <a className='block py-2 px-2 text-left hover:bg-blue-100 flex' style={{transition: 'all .15s ease'}}>
-              <div className={'mr-4'}>
-                <NoticeIconSvg />
-              </div>
-              <div>
-                <span className={'text-lg'}>プライバシーポリシー</span>
-              </div>
-            </a>
-          </Link>
-        </li>
-        <li className={'w-full'}>
           <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} href={MESSAGE_FORM_URL} style={{transition: 'all .15s ease'}}>
             <div className={'mr-4'}>
               <MessageIconSvg />

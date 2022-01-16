@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import Link from 'next/link';
 
@@ -29,7 +28,7 @@ const MonthSelectMenuList: React.FC<Props> = (props) => {
   const { start, end, componentName, closeMenu } = props;
 
   return(
-    <ol className={clsx('bg-blue-100', 'h-full', 'overflow-y-auto', 'w-32', 'pb-4')} onClick={closeMenu}>
+    <ol className='bg-blue-100 h-full overflow-y-auto w-32 pb-4' onClick={closeMenu}>
       {monthListStartToEnd(start, end).map(({year, month}) => (
         <li key={`select-month-value-${year}-${month}`} className={'w-full'}>
           <Link href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${year}/${month}`} prefetch={false}>

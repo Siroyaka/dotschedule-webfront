@@ -15,7 +15,7 @@ type Props = OwnProps;
 
 const markdownPath = 'server_data/markdown/notice.md';
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const mdPath = path.join(process.cwd(), markdownPath);
   const contents = await getHtmlFromMarkdown(mdPath);
   return {
