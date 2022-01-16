@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
@@ -30,7 +29,7 @@ const CalendarPage: React.FC<Props> = (props) => {
         <title>{`${props.year}年${props.month}月カレンダー`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={clsx('h-full', 'flex', 'flex-col')}>
+      <main className='h-full flex flex-col'>
         <MonthSwitch {...props} componentName='calendar' />
         <CalendarField {...props}/>
       </main>

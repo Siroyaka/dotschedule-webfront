@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import { MonthCalendar } from 'lib/DateFunctions';
 import WeekDay from './WeekDay';
