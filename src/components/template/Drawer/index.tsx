@@ -7,6 +7,7 @@ interface OwnProps {
   open: boolean,
   className?: string,
   onClose?: () => void,
+  children?: React.ReactNode
 }
 
 type Props = OwnProps;

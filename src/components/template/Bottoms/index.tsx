@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface OwnProps {
+  children?: React.ReactNode,
 }
 
 type Props = OwnProps;

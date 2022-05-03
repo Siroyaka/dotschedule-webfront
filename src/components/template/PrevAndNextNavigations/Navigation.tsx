@@ -6,6 +6,7 @@ interface OwnProps {
   href: string,
   as?: string,
   disabled?: boolean,
+  children?: React.ReactNode,
 }
 
 type Props = OwnProps;

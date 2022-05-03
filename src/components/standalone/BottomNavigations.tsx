@@ -11,7 +11,7 @@ interface OwnProps {
 
 export type Props = OwnProps;
 
-const TabItems: React.FC<{value: string, link: string, as?: string, isLink: boolean}> = (props) => {
+const TabItems: React.FC<{value: string, link: string, as?: string, isLink: boolean, children?: React.ReactNode}> = (props) => {
   const {
     link,
     children,

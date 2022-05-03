@@ -2,6 +2,7 @@ import React from 'react';
 
 interface OwnProps {
   title: string,
+  children?: React.ReactNode
 }
 
 type Props = OwnProps;

@@ -5,6 +5,7 @@ import { CardOutLine, CardMedia, CardContents } from './index';
 interface OwnProps {
   mediaSrc: string,
   mediahref: string,
+  children?: React.ReactNode
 }
 
 type Props = OwnProps;
