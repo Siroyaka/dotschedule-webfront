@@ -6,7 +6,8 @@ import PrevAndNextNavigations from 'components/template/PrevAndNextNavigations';
 interface OwnProps {
   year: number,
   month: number,
-  day: number
+  day: number,
+  children?: React.ReactNode,
 }
 
 type Props = OwnProps;

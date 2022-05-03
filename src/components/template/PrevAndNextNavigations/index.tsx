@@ -10,7 +10,8 @@ import Navigation from "./Navigation";
 interface OwnProps {
   prevNavigation: Omit<React.ComponentProps<typeof Navigation>, "children">,
   nextNavigation: Omit<React.ComponentProps<typeof Navigation>, "children">,
-  size?: number
+  size?: number,
+  children?: React.ReactNode
 }
 
 type Props = OwnProps;

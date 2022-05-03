@@ -11,6 +11,7 @@ interface OwnProps {
   mediaSrc: string,
   mediahref: string,
   onLive?: boolean,
+  children?: React.ReactNode
 }
 
 type Props = OwnProps;

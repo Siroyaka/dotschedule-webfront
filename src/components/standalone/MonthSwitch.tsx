@@ -10,8 +10,9 @@ interface OwnProps {
   year: number,
   month: number,
   componentName: string,
-  start?: {year: number, month: number}
-  end?: {year: number, month: number}
+  start?: {year: number, month: number},
+  end?: {year: number, month: number},
+  children?: React.ReactNode,
 }
 
 type Props = OwnProps;
@@ -31,6 +32,7 @@ interface LinkComponentProps {
   disabled: boolean,
   href: string,
   as?: string,
+  children?: React.ReactNode,
 }
 
 const LinkComponent: React.FC<LinkComponentProps> = (props) => {

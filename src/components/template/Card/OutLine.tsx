@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 interface OwnProps {
   className?: string,
+  children?: React.ReactNode
 }
 
 type Props = OwnProps;
