@@ -10,9 +10,9 @@ type Props = OwnProps;
 const Charactors: React.FC<Props> = (props) => {
   const { charactorIconSources } = props;
   return(
-    <ul className='w-full flex flex-wrap'>
+    <ul className='w-full flex flex-wrap items-start'>
       {charactorIconSources.map((iconSource, i) => 
-        <li key={`charactor-icon-${i}`} className='' style={{width: '10%', WebkitAppearance: 'none'}}>
+        <li key={`charactor-icon-${i}`} className='' style={{width: '10%'}}>
           <img className='rounded-full h-full px-1 py-1 flex-shrink-0' alt={`charactor-${i}`} src={iconSource}/>
         </li>
 
