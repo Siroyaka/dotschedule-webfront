@@ -35,6 +35,7 @@ export interface VideoSchedule {
     Thumbnail: string,
     StartDate: FireStoreTimeStamp,
     Duration?: number,
+    Charactors: string[],
 }
 
 export interface MonthData {

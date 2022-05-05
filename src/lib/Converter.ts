@@ -42,6 +42,7 @@ export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
     mediahref: s.VideoLink,
     title: s.VideoTitle,
     onLive: s.VideoStatus === 2,
+    charactorIconSources: s.Charactors?.map(x => x in streamerDataMap ? (streamerDataMap[x]).youtubeIcon : '').filter(x => x !== '') ?? []
   })
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardOutLine, CardHeader, CardMedia, CardContents } from './index';
+import { CardOutLine, CardHeader, CardMedia, CardContents, CharactorIcons } from './index';
 import { RoundIconSvg } from 'components/parts/svgIcons';
 
 interface OwnProps {
@@ -11,7 +11,8 @@ interface OwnProps {
   mediaSrc: string,
   mediahref: string,
   onLive?: boolean,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  charactorIconSources: string[],
 }
 
 type Props = OwnProps;
@@ -25,7 +26,8 @@ const Full: React.FC<Props> = (props) => {
     mediaSrc,
     mediahref,
     children,
-    onLive
+    onLive,
+    charactorIconSources,
   } = props;
   return (
     <CardOutLine>
@@ -45,6 +47,9 @@ const Full: React.FC<Props> = (props) => {
       <CardMedia
         src={mediaSrc}
         href={mediahref}
+      />
+      <CharactorIcons
+        charactorIconSources={charactorIconSources}
       />
       <CardContents>
         {children}
