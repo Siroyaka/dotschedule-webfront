@@ -12,7 +12,7 @@ const Charactors: React.FC<Props> = (props) => {
   return(
     <ul className='w-full flex flex-wrap'>
       {charactorIconSources.map((iconSource, i) => 
-        <li key={`charactor-icon-${i}`} className='' style={{width: '10%'}}>
+        <li key={`charactor-icon-${i}`} className='' style={{width: '10%', WebkitAppearance: 'none'}}>
           <img className='rounded-full h-full px-1 py-1 flex-shrink-0' alt={`charactor-${i}`} src={iconSource}/>
         </li>
 
