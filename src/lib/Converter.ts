@@ -51,6 +51,7 @@ export const VideoScheduleToNews = (videoSchedule: VideoSchedule): NewsCardType 
   const d = videoSchedule.StartDate.toDate();
   d.setHours(d.getHours() + 9);
   const title = formatDate(d, 'yyyy/MM/dd HH:mm:ss');
+  const participantKeys = Object.keys(videoSchedule.Participants ?? {});
   return({
     year: d.getFullYear(),
     month: d.getMonth() + 1,
@@ -60,7 +61,7 @@ export const VideoScheduleToNews = (videoSchedule: VideoSchedule): NewsCardType 
     mediaSrc: videoSchedule.Thumbnail,
     mediahref: videoSchedule.VideoLink,
     content: videoSchedule.VideoTitle,
-    charactorIconSources: videoSchedule.Charactors?.map(x => x in streamerDataMap ? (streamerDataMap[x]).youtubeIcon : '').filter(x => x !== '') ?? [],
+    charactorIconSources: participantKeys.map(x => x in streamerDataMap ? (streamerDataMap[x]).youtubeIcon : '').filter(x => x !== '') ?? [],
   })
 }
 
