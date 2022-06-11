@@ -33,6 +33,7 @@ export const formatDate = (date: Date, format: string) => {
 export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
   const d = s.StartDate.toDate();
   d.setHours(d.getHours() + 9);
+  const participantKeys = Object.keys(s.Participants ?? {});
   return({
     headerAvater: s.StreamerID in streamerDataMap ? streamerDataMap[s.StreamerID].youtubeIcon : '',
     name: s.StreamerName,
@@ -42,20 +43,24 @@ export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
     mediahref: s.VideoLink,
     title: s.VideoTitle,
     onLive: s.VideoStatus === 2,
-    charactorIconSources: s.Charactors?.map(x => x in streamerDataMap ? (streamerDataMap[x]).youtubeIcon : '').filter(x => x !== '') ?? []
+    charactorIconSources: participantKeys?.map(x => x in streamerDataMap ? (streamerDataMap[x]).youtubeIcon : '').filter(x => x !== '') ?? []
   })
 }
 
-export const VideoScheduleToNews = (s: VideoSchedule): NewsCardType => {
-  const d = s.StartDate.toDate();
+export const VideoScheduleToNews = (videoSchedule: VideoSchedule): NewsCardType => {
+  const d = videoSchedule.StartDate.toDate();
   d.setHours(d.getHours() + 9);
+  const title = formatDate(d, 'yyyy/MM/dd HH:mm:ss');
   return({
     year: d.getFullYear(),
     month: d.getMonth() + 1,
     day: d.getDate(),
-    mediaSrc: s.Thumbnail,
-    mediahref: s.VideoLink,
-    title: s.VideoTitle,
+    title: title,
+    duration: parseDurationNum(videoSchedule.Duration),
+    mediaSrc: videoSchedule.Thumbnail,
+    mediahref: videoSchedule.VideoLink,
+    content: videoSchedule.VideoTitle,
+    charactorIconSources: videoSchedule.Charactors?.map(x => x in streamerDataMap ? (streamerDataMap[x]).youtubeIcon : '').filter(x => x !== '') ?? [],
   })
 }
 

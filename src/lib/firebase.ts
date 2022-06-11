@@ -35,7 +35,7 @@ export interface VideoSchedule {
     Thumbnail: string,
     StartDate: FireStoreTimeStamp,
     Duration?: number,
-    Charactors: string[],
+    Participants: {[key:string]: boolean},
 }
 
 export interface MonthData {
@@ -94,6 +94,29 @@ const fetchSchedulesBeforeDate = (streamerId: string, date: Date, quantity: numb
   });
 }
 
+const fetchStreamerSchedules = (streamerIds: string[], date: Date, quantity: number = 10) => {
+  const db = FireStore.getFirestore();
+  const query = FireStore.query(
+    FireStore.collection(db, 'VideoSchedules'),
+    FireStore.where('Charactors', 'array-contains-any', streamerIds),
+    FireStore.orderBy('StartDate', 'desc'),
+    FireStore.startAfter(date),
+    FireStore.limit(quantity)
+  );
+  return FireStore.getDocs(query).then(items => {
+    const videoSchedules: VideoSchedule[] = [];
+    items.forEach(item => {
+      const scheduleItem = item.data() as VideoSchedule;
+      if (scheduleItem.VideoStatus > 0 && scheduleItem.VideoStatus < 5) videoSchedules.push(scheduleItem);
+    })
+    return videoSchedules;
+  })
+  .catch((err: Error) => {
+    console.error(`Error fetch new schedule. ${streamerIds.join(',')} msg:[${err.message}]`);
+    return err;
+  });
+}
+
 const fetchMonthScheduleData = (year: number, month: number) => {
   const monthKey = year * 13 + month;
   const db = FireStore.getFirestore();
@@ -137,7 +160,7 @@ export const fetchScheduleData = async<T> (year: number, month: number, day: num
 }
 
 export const getSchedulesBeforeData = <T>(converter: (d: VideoSchedule) => T) => async (id: string, date: Date, quantity: number = 10) => {
-  const result = await fetchSchedulesBeforeDate(id, date, quantity);
+  const result = await fetchStreamerSchedules([id], date, quantity);
   if(result instanceof Error){
     console.error(result.message, new Date());
     return [];

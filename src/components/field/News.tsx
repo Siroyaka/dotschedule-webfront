@@ -3,7 +3,7 @@ import React, { ComponentProps } from 'react';
 import { CardNews } from 'components/template/Card';
 
 export type CardType = ComponentProps<typeof CardNews> & {
-  title: string,
+  content: string,
   year: number,
   month: number,
   day: number
@@ -26,7 +26,7 @@ const NewsCardsField: React.FC<Props> = (props) => {
           className='w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2 py-2 flex justify-center'
         >
           <CardNews {...cardInfo}>
-            {cardInfo.title}
+            {cardInfo.content}
           </CardNews>
         </li>
       ))}

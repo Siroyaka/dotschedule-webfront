@@ -28,7 +28,7 @@ const NewsPage: React.FC<Props> = (props) => {
     <article className='h-full overflow-y-scroll px-4 py-2'>
       {year && month && day && hour &&
         <h1 className='text-xl mb-2'>
-          {year}年{month}月{day}日 {hour}:00の新着
+          Search
         </h1>
       }
       <MemberNamesArea slug={slug} />
