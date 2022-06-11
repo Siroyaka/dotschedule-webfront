@@ -4,6 +4,8 @@ export { default as CardOutLine } from './OutLine';
 
 export { default as CardHeader } from './Header';
 
+export { default as CardSimpleHeader } from './SimpleHeader';
+
 export { default as CardMedia} from './Media';
 
 export { default as CardContents } from './Contents';

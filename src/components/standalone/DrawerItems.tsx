@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { MessageIconSvg, NoticeIconSvg } from 'components/parts/svgIcons';
+import { MessageIconSvg, NoticeIconSvg, SearchIconSvg } from 'components/parts/svgIcons';
 import { MESSAGE_FORM_URL } from 'lib/Constructions';
 
 interface OwnProps {
@@ -37,6 +37,18 @@ const DrawerItems: React.FC<Props> = (props) => {
               <span className={'text-lg'}>お問い合わせ</span>
             </div>
           </a>
+        </li>
+        <li className='w-full'>
+          <Link href='/search'>
+            <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} style={{transition: 'all .15s ease'}}>
+              <div className={'mr-4'}>
+                <SearchIconSvg />
+              </div>
+              <div>
+                <span className={'text-lg'}>Search</span>
+              </div>
+            </a>
+          </Link>
         </li>
       </ul>
     </React.Fragment>
