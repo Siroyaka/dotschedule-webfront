@@ -34,7 +34,7 @@ const MemberNamesArea: React.FC<Props> = (props) => {
                 {x.name}
               </p>
             :
-              <Link href={'/search/[slug]'} as={`/search/${x.slug}`} >
+              <Link legacyBehavior href={'/search/[slug]'} as={`/search/${x.slug}`} >
                 <a className='text-black'>
                   {x.name}
                 </a>
@@ -62,7 +62,7 @@ const MemberNamesArea: React.FC<Props> = (props) => {
                     {x.name}
                   </p>
                   {!isSelected(x.slug) && 
-                    <Link href={'/search/[slug]'} as={`/search/${x.slug}`} >
+                    <Link legacyBehavior href={'/search/[slug]'} as={`/search/${x.slug}`} >
                       <a className='absolute w-full h-full inset-0'>
                       </a>
                     </Link>

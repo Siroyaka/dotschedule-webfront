@@ -54,7 +54,7 @@ const Monthly: React.FC<Props> = (props) => {
                         {day.day}
                       </span>
                     </div>
-                    <Link href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
+                    <Link legacyBehavior href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
                       <a className='absolute top-0 left-0 w-full h-full' />
                     </Link>
                   </React.Fragment>

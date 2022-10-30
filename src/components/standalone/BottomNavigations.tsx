@@ -24,7 +24,7 @@ const TabItems: React.FC<{value: string, link: string, as?: string, isLink: bool
     <React.Fragment>
       <div className={`relative w-full h-full rounded text-xs text-center px-1 py-1 ${linkOption}`}>
         {!isLink && 
-          <Link href={link} as={as} >
+          <Link legacyBehavior href={link} as={as} >
             <a className='absolute top-0 left-0 h-full w-full'/>
           </Link>
         }

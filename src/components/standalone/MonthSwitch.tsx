@@ -41,7 +41,7 @@ const LinkComponent: React.FC<LinkComponentProps> = (props) => {
   return(
     <div className={`relative rounded-full ${linkOption}`}>
       {!disabled && 
-        <Link href={href} as={as}>
+        <Link legacyBehavior href={href} as={as}>
           <a className='absolute h-full w-full top-0 left-0' />
         </Link>
       }
