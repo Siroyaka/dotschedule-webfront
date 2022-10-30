@@ -17,7 +17,7 @@ const DrawerItems: React.FC<Props> = (props) => {
     <React.Fragment>
       <ul onClick={closeDrawer}>
         <li className={'w-full'}>
-          <Link href='/notice'>
+          <Link legacyBehavior href='/notice'>
             <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} style={{transition: 'all .15s ease'}}>
               <div className={'mr-4'}>
                 <NoticeIconSvg />
@@ -39,7 +39,7 @@ const DrawerItems: React.FC<Props> = (props) => {
           </a>
         </li>
         <li className='w-full'>
-          <Link href='/search'>
+          <Link legacyBehavior href='/search'>
             <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} style={{transition: 'all .15s ease'}}>
               <div className={'mr-4'}>
                 <SearchIconSvg />

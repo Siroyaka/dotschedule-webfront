@@ -12,13 +12,13 @@ const ExLink: React.FC<Props> = (props) => {
   const {href, as, linkPrefetch, children} = props;
   if(linkPrefetch) {
     return(
-      <Link href={href} as={as}>
+      <Link legacyBehavior href={href} as={as}>
         {children}
       </Link>
     )
   }
   return(
-    <Link href={href} as={as} prefetch={false}>
+    <Link legacyBehavior href={href} as={as} prefetch={false}>
       {children}
     </Link>
   )
