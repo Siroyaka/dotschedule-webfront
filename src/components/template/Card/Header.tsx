@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'
 
 import { NoImageAvater } from 'components/parts/noimage';
 
@@ -15,9 +16,15 @@ const Header: React.FC<Props> = (props) => {
   const { avaterSrc, name, startTime, duration } = props;
 
   return (
-    <section className='flex flex-row mx-2 my-1'>
-      {avaterSrc.length > 0 ? 
-        <img className='rounded-full h-12 w-12 px-1 py-1 flex-shrink-0' alt={`${name}-avater`} src={avaterSrc}/>
+    <section className='flex flex-row mx-1 my-1'>
+      {avaterSrc && avaterSrc.length > 0 ? 
+        <Image
+          width={50}
+          height={50}
+          className='rounded-full h-12 w-12 px-1 py-1 flex-shrink-0'
+          alt={`${name}-avater`}
+          src={avaterSrc}
+          />
       : 
         <NoImageAvater />
       }

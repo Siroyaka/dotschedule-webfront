@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'
 
 interface OwnProps {
     charactorIconSources: string[],
@@ -13,7 +14,13 @@ const Charactors: React.FC<Props> = (props) => {
     <ul className='w-full flex flex-wrap items-start'>
       {charactorIconSources.map((iconSource, i) => 
         <li key={`charactor-icon-${i}`} className='flex-shrink-0' style={{width: '10%'}}>
-          <img className='rounded-full w-full px-1 py-1' alt={`charactor-${i}`} src={iconSource}/>
+          <Image
+            className='rounded-full w-full px-1 py-1'
+            height={50}
+            width={50}
+            alt={`charactor-${i}`}
+            src={iconSource}
+            />
         </li>
 
       )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 import Link from 'components/parts/ExLink';
 
@@ -64,8 +65,10 @@ const ListCalendar: React.FC<Props> = (props) => {
                   </div>
                   <div className='w-full grid mx-1 my-1 justify-start gap-1' style={{gridTemplateColumns: 'repeat(auto-fit, 2rem)'}}>
                     {getAvaters(day.day).map((avater, i) => (
-                      avater.length > 0 &&
-                      <img
+                      (avater && avater.length > 0) &&
+                      <Image
+                        height={50}
+                        width={50}
                         key={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         alt={`list-calendar-${day.year}-${day.month}-${day.day}-avater-${i}`}
                         className='w-8 h-8 rounded-full mr-1 mb-1'
