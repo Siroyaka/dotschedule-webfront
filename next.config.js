@@ -1,7 +1,12 @@
-module.exports = (phase, { defaultConfig }) => {
-  /* config options here */
-  return {
-    ...defaultConfig,
-    webpack5: true,
+module.exports = async (phase, { defaultConfig }) => {
+  /**
+   * @type {import('next').NextConfig}
+   */
+  const nextConfig = {
+    /* config options here */
+    images: {
+      domains: ['i.ytimg.com', 'yt3.ggpht.com'],
+    },
   }
+  return nextConfig
 }
