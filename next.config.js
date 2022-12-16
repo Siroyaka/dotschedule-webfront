@@ -6,6 +6,7 @@ module.exports = async (phase, { defaultConfig }) => {
     /* config options here */
     images: {
       domains: ['i.ytimg.com', 'yt3.ggpht.com'],
+      unoptimized: true,
     },
   }
   return nextConfig
