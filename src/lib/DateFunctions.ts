@@ -64,6 +64,24 @@ export const getMonthCalendar = (year: number, month: number): FCalDate[][] => {
     return monthData.makeCalendar();
 }
 
+export const toDateStringYMD = (d: Date) => {
+    const yStr = "0000" + d.getFullYear()
+    const mStr = "00" + d.getMonth() + 1
+    const dStr = "00" + d.getDate()
+    return `${yStr.slice(-4)}-${mStr.slice(-2)}-${dStr.slice(-2)}`
+}
+
+export const addDate = (d: Date, year: number = 0, month: number = 0, day: number = 0, hour: number = 0, minute: number = 0, second: number = 0) => {
+    const newD = new Date(d);
+    newD.setFullYear(newD.getFullYear() + year);
+    newD.setMonth(newD.getMonth() + month);
+    newD.setDate(newD.getDate() + day);
+    newD.setHours(newD.getHours() + hour);
+    newD.setMinutes(newD.getMinutes() + minute);
+    newD.setSeconds(newD.getSeconds() + second);
+    return newD;
+}
+
 export const getUtcNow = () => {
     const n = new Date((new Date()).toUTCString());
 

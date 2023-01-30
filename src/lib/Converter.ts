@@ -1,4 +1,5 @@
 import { VideoSchedule, MonthData } from './firebase';
+import { DaySchedule } from './api/DotscheduleApi'
 import { CardType } from 'components/field/Schedules';
 import { CardType as NewsCardType } from 'components/field/News';
 import { streamerDataMap } from './Constructions';
@@ -19,14 +20,14 @@ const parseDurationNum = (duration: number | undefined) => {
   return hString + mString + sString;
 }
 
-export const formatDate = (date: Date, format: string) => {
-  format = format.replace(/yyyy/g, date.getFullYear().toString());
-  format = format.replace(/MM/g, ('0' + (date.getMonth() + 1).toString()).slice(-2));
-  format = format.replace(/dd/g, ('0' + (date.getDate()).toString()).slice(-2));
-  format = format.replace(/HH/g, ('0' + (date.getHours()).toString()).slice(-2));
-  format = format.replace(/mm/g, ('0' + (date.getMinutes()).toString()).slice(-2));
-  format = format.replace(/ss/g, (date.getSeconds()).toString());
-  format = format.replace(/SS/g, (date.getMilliseconds()).toString());
+export const formatDateUTC = (date: Date, format: string) => {
+  format = format.replace(/yyyy/g, date.getUTCFullYear().toString());
+  format = format.replace(/MM/g, ('0' + (date.getUTCMonth() + 1).toString()).slice(-2));
+  format = format.replace(/dd/g, ('0' + (date.getUTCDate()).toString()).slice(-2));
+  format = format.replace(/HH/g, ('0' + (date.getUTCHours()).toString()).slice(-2));
+  format = format.replace(/mm/g, ('0' + (date.getUTCMinutes()).toString()).slice(-2));
+  format = format.replace(/ss/g, (date.getUTCSeconds()).toString());
+  format = format.replace(/SS/g, (date.getUTCMilliseconds()).toString());
   return format;
 };
 
@@ -37,7 +38,7 @@ export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
   return({
     headerAvater: s.StreamerID in streamerDataMap ? streamerDataMap[s.StreamerID].youtubeIcon : '',
     name: s.StreamerName,
-    start: formatDate(d, 'HH:mm'),
+    start: formatDateUTC(d, 'HH:mm'),
     durationValue: parseDurationNum(s.Duration),
     mediaSrc: s.Thumbnail,
     mediahref: s.VideoLink,
@@ -50,7 +51,7 @@ export const VideoScheduleToCardType = (s: VideoSchedule): CardType => {
 export const VideoScheduleToNews = (videoSchedule: VideoSchedule): NewsCardType => {
   const d = videoSchedule.StartDate.toDate();
   d.setHours(d.getHours() + 9);
-  const title = formatDate(d, 'yyyy/MM/dd HH:mm:ss');
+  const title = formatDateUTC(d, 'yyyy/MM/dd HH:mm:ss');
   const participantKeys = Object.keys(videoSchedule.Participants ?? {});
   return({
     year: d.getFullYear(),
@@ -74,4 +75,24 @@ export const MonthDataToImgData = (d: MonthData | null): { [key: number]: string
     if(i in d.Data) res[i] = d.Data[i].map(x => x in streamerDataMap ? streamerDataMap[x].youtubeIcon : '');
   }
   return res;
+}
+
+export const DayScheduleToCardType = (s: DaySchedule): CardType => {
+  const d = new Date(s.StartDate)
+
+  // format date is always utc. to jst = add 9 hours
+  d.setHours(d.getHours() + 9)
+
+  return({
+    headerAvater: s.StreamerIcon ?? '',
+    name: s.StreamerName,
+    start: formatDateUTC(d, 'HH:mm'),
+    durationValue: parseDurationNum(s.Duration),
+    mediaSrc: s.Thumbnail,
+    mediahref: s.VideoLink,
+    title: s.VideoTitle,
+    onLive: s.VideoStatus === 2,
+    charactorIconSources: s.Participants?.map(x => x.Icon) ?? []
+  })
+
 }

@@ -3,11 +3,12 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 
-import { fetchScheduleData } from 'lib/DataInterface';
-import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
 import SchedulesField, { CardType } from 'components/field/Schedules';
 import LoadingField from 'components/field/Loading';
 import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
+
+import { DayScheduleToCardType } from 'lib/Converter';
+import { DayScheduleRequest } from 'lib/api/DotscheduleApi'
 
 interface OwnProps {
   year?: number,
@@ -88,8 +89,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const year = parseInt(sYear);
   const month = parseInt(sMonth);
   const day = parseInt(sDay);
-  const {convertData, dayStreamers} = await fetchScheduleData(year, month, day, VideoScheduleToCardType, PickupStreamerFromVideoSchedule);
   
+  const req = new DayScheduleRequest();
+  const { isError, errorMessage, data } = await req.Get(year, month, day);
+  if (isError) {
+    console.log(errorMessage);
+    return {
+      notFound: true
+    }
+  }
+
+  const cardData = data.response_data.map(x => DayScheduleToCardType(x));
+
   const revalidateTime = calcRevalidateTime(year, month, day);
 
   return {
@@ -97,8 +108,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       year,
       month,
       day,
-      cardData: convertData,
-      dayStreamers,
+      cardData: cardData,
     },
     revalidate: revalidateTime
   }
