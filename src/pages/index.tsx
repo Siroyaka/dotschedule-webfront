@@ -6,10 +6,11 @@ import { GetStaticProps } from 'next';
 import SchedulesField, { CardType } from 'components/field/Schedules';
 import TodaysPrevNavigation from 'components/standalone/TodaysPrevNavigation';
 
-import { fetchScheduleData } from 'lib/DataInterface';
-import { VideoScheduleToCardType, PickupStreamerFromVideoSchedule } from 'lib/Converter';
+import { DayScheduleToCardType } from 'lib/Converter';
 import { getNow } from 'lib/DateFunctions';
 import { todayTitle } from 'lib/InitialMetaData';
+
+import { DayScheduleRequest } from 'lib/api/DotscheduleApi'
 
 interface OwnProps {
   year: number,
@@ -44,16 +45,27 @@ export const getStaticProps: GetStaticProps = async () => {
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();
-  const {convertData} = await fetchScheduleData(year, month, day, VideoScheduleToCardType, PickupStreamerFromVideoSchedule);
+  //const {convertData} = await fetchScheduleData(year, month, day, VideoScheduleToCardType, PickupStreamerFromVideoSchedule);
 
-  const revalidateTime = 1; // 60 * 15;
+  const req = new DayScheduleRequest();
+  const { isError, errorMessage, data } = await req.Get(year, month, day);
+  if (isError) {
+    console.log(errorMessage);
+    return {
+      notFound: true
+    }
+  }
+
+  const cardData = data.response_data.map(x => DayScheduleToCardType(x));
+
+  const revalidateTime = 1;
 
   return {
     props: {
       year,
       month,
       day,
-      cardData: convertData
+      cardData
     },
     revalidate: revalidateTime
   }

@@ -1,4 +1,5 @@
 import { VideoSchedule, MonthData } from './firebase';
+import { DaySchedule } from './api/DotscheduleApi'
 import { CardType } from 'components/field/Schedules';
 import { CardType as NewsCardType } from 'components/field/News';
 import { streamerDataMap } from './Constructions';
@@ -74,4 +75,21 @@ export const MonthDataToImgData = (d: MonthData | null): { [key: number]: string
     if(i in d.Data) res[i] = d.Data[i].map(x => x in streamerDataMap ? streamerDataMap[x].youtubeIcon : '');
   }
   return res;
+}
+
+export const DayScheduleToCardType = (s: DaySchedule): CardType => {
+  const d = new Date(s.StartDate)
+  // d.setHours(d.getHOurs() + 9)
+  return({
+    headerAvater: s.StreamerIcon ?? '',
+    name: s.StreamerName,
+    start: formatDate(d, 'HH:mm'),
+    durationValue: parseDurationNum(s.Duration),
+    mediaSrc: s.Thumbnail,
+    mediahref: s.VideoLink,
+    title: s.VideoTitle,
+    onLive: s.VideoStatus === 2,
+    charactorIconSources: s.Participants?.map(x => x.Icon) ?? []
+  })
+
 }
