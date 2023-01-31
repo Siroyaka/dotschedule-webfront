@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   }
 
-  const cardData = data.response_data.map(x => DayScheduleToCardType(x));
+  const cardData = data.response_data?.map(x => DayScheduleToCardType(x)) ?? [];
 
   const revalidateTime = 1;
 
