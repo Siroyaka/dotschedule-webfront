@@ -7,9 +7,10 @@ import { fromTo } from 'lib/Constructions';
 import MonthSwitch from 'components/standalone/MonthSwitch';
 import ListField from 'components/field/List';
 import { getMonthCalendar, MonthCalendar } from 'lib/DateFunctions';
-import { MonthDataToImgData } from 'lib/Converter';
-import { fetchMonthData } from 'lib/DataInterface';
 import LoadingField from 'components/field/Loading';
+
+import { DayStreamerDataListToDayIcons } from 'lib/Converter';
+import { MonthDataRequest } from 'lib/api/DotscheduleApi'
 
 interface OwnProps {
   year: number,
@@ -69,7 +70,18 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   const month = parseInt(sMonth);
   const monthCalendar = getMonthCalendar(year, month);
 
-  const avaters = await fetchMonthData(year, month, MonthDataToImgData);
+  //const avaters = await fetchMonthData(year, month, MonthDataToImgData);
+
+  const request = new MonthDataRequest()
+  const {isError, errorMessage, data, status, statusText} = await request.Get(year, month)
+  if (isError) {
+    console.log(errorMessage);
+    return ({
+      notFound: true
+    })
+  }
+
+  const avaters = DayStreamerDataListToDayIcons(data.response_data);
 
   const now = new Date();
   now.setHours(now.getHours() + 6);
