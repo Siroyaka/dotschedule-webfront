@@ -38,18 +38,6 @@ const DrawerItems: React.FC<Props> = (props) => {
             </div>
           </a>
         </li>
-        <li className='w-full'>
-          <Link legacyBehavior href='/search'>
-            <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} style={{transition: 'all .15s ease'}}>
-              <div className={'mr-4'}>
-                <SearchIconSvg />
-              </div>
-              <div>
-                <span className={'text-lg'}>Search</span>
-              </div>
-            </a>
-          </Link>
-        </li>
       </ul>
     </React.Fragment>
   )

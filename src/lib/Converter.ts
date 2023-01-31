@@ -1,5 +1,5 @@
 import { VideoSchedule, MonthData } from './firebase';
-import { DaySchedule } from './api/DotscheduleApi'
+import { DaySchedule, DayStreamerData } from './api/DotscheduleApi'
 import { CardType } from 'components/field/Schedules';
 import { CardType as NewsCardType } from 'components/field/News';
 import { streamerDataMap } from './Constructions';
@@ -95,4 +95,21 @@ export const DayScheduleToCardType = (s: DaySchedule): CardType => {
     charactorIconSources: s.Participants?.map(x => x.Icon) ?? []
   })
 
+}
+
+export const DayStreamerDataListToDayIcons = (list: DayStreamerData[]): { [key: number]: string[] } => {
+  if (list === null) return {};
+
+  let res: { [key: number]: string[] } = {};
+  for (const data of list) {
+    const d = data.Date.split("-")[2]
+    const dnum = parseInt(d)
+    if (isNaN(dnum)) {
+      console.log(`Date of DayStreamerData parse Error. Date: ${data.Date}`);
+      continue;
+    }
+    res[dnum] = data.Icons;
+  }
+
+  return res;
 }
