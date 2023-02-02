@@ -4,7 +4,8 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next';
 
 import SchedulesField, { CardType } from 'components/field/Schedules';
-import TodaysPrevNavigation from 'components/standalone/TodaysPrevNavigation';
+
+import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
 
 import { DayScheduleToCardType } from 'lib/Converter';
 import { getNow } from 'lib/DateFunctions';
@@ -23,6 +24,9 @@ type Props = OwnProps;
 
 const Home: React.FC<Props> = (props) => {
   const {
+    year,
+    month,
+    day,
     cardData,
   } = props;
 
@@ -33,7 +37,9 @@ const Home: React.FC<Props> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='h-full overflow-y-auto'>
-        <TodaysPrevNavigation {...props}/>
+        <SchedulesNavigation year={year} month={month} day={day}>
+          <h1 className='text-xl px-4 text-center'>{year}年{month}月{day}日</h1>
+        </SchedulesNavigation>
         <SchedulesField cardData={cardData} />
       </main>
     </React.Fragment>
