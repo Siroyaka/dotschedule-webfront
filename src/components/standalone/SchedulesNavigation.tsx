@@ -26,13 +26,8 @@ const SchedulesNavigation: React.FC<Props> = (props) => {
 
   const nextDate = new Date(year, month - 1, day);
   nextDate.setDate(nextDate.getDate() + 1);
-  const today = getNow();
-  const nextIsToday = today.getFullYear() === nextDate.getFullYear()
-    && today.getMonth() === nextDate.getMonth()
-    && today.getDate() === nextDate.getDate();
   
-  const nextNavigation = nextIsToday ? {href: '/'} :
-    {href: '/schedule/[year]/[month]/[day]', as: `/schedule/${nextDate.getFullYear()}/${nextDate.getMonth() + 1}/${nextDate.getDate()}`};
+  const nextNavigation = {href: '/schedule/[year]/[month]/[day]', as: `/schedule/${nextDate.getFullYear()}/${nextDate.getMonth() + 1}/${nextDate.getDate()}`};
 
   return (
     <PrevAndNextNavigations 
