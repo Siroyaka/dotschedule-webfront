@@ -95,7 +95,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (isError) {
     console.log(errorMessage);
     return {
-      notFound: true
+      notFound: true,
+      revalidate: 1
     }
   }
 
