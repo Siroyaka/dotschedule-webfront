@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image'
 
-import { NoImageAvater } from 'components/parts/noimage';
+import { NoImageAvater } from 'src/components/parts/noimage';
 
 interface OwnProps {
   avaterSrc?: string,

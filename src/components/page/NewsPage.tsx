@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NewsCardsField, { CardType } from 'components/field/News';
-import MemberNamesArea from 'components/standalone/MemberNamesArea';
+import NewsCardsField, { CardType } from 'src/components/field/News';
+import MemberNamesArea from 'src/components/standalone/MemberNamesArea';
 
 interface OwnProps {
   slug?: string,

@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-import IosMeta from 'components/standalone/IosMeta';
+import IosMeta from 'src/components/standalone/IosMeta';
 
 export default class MyDocument extends Document {
   render() {

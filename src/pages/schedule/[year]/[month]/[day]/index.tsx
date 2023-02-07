@@ -3,12 +3,12 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 
-import SchedulesField, { CardType } from 'components/field/Schedules';
-import LoadingField from 'components/field/Loading';
-import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
+import SchedulesField, { CardType } from 'src/components/field/Schedules';
+import LoadingField from 'src/components/field/Loading';
+import SchedulesNavigation from 'src/components/standalone/SchedulesNavigation';
 
-import { DayScheduleToCardType } from 'lib/Converter';
-import { DayScheduleRequest } from 'lib/api/DotscheduleApi'
+import { DayScheduleToCardType } from 'src/lib/Converter';
+import { DayScheduleRequest } from 'src/lib/api/DotscheduleApi'
 
 interface OwnProps {
   year?: number,

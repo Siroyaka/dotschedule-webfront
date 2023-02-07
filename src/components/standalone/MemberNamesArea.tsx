@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { getNewsStreamerList } from 'lib/Constructions';
+import { getNewsStreamerList } from 'src/lib/Constructions';
 
 interface OwnProps {
   slug?: string

@@ -1,7 +1,7 @@
-import { getNewsStreamerList } from 'lib/Constructions';
-import { getSchedulesBeforeData } from 'lib/DataInterface';
-import { VideoScheduleToNews } from 'lib/Converter';
-import { getJstTime, getUtc } from 'lib/DateFunctions';
+import { getNewsStreamerList } from 'src/lib/Constructions';
+import { getSchedulesBeforeData } from 'src/lib/DataInterface';
+import { VideoScheduleToNews } from 'src/lib/Converter';
+import { getJstTime, getUtc } from 'src/lib/DateFunctions';
 
 export const fetchData = async (slug?: string) => {
   const updateTime = getUtc(new Date());

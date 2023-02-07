@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 
-import Link from 'components/parts/ExLink';
+import Link from 'src/components/parts/ExLink';
 
-import { MonthCalendar } from 'lib/DateFunctions';
+import { MonthCalendar } from 'src/lib/DateFunctions';
 
 interface OwnProps {
   monthCalendar: MonthCalendar,

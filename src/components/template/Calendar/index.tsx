@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MonthCalendar } from 'lib/DateFunctions';
+import { MonthCalendar } from 'src/lib/DateFunctions';
 import WeekDay from './WeekDay';
 import Monthly from './Monthly';
 
