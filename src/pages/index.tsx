@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
+
+import { useRouter } from 'next/router'
 
 import { GetStaticProps } from 'next';
 
@@ -29,6 +31,18 @@ const Home: React.FC<Props> = (props) => {
     day,
     cardData,
   } = props;
+
+
+  const router = useRouter();
+
+  const d = getJTCNow();
+  const yyear = d.getFullYear();
+  const mmonth = d.getMonth() + 1;
+  const dday = d.getDate();
+
+  useEffect(() => {
+    router.replace(`/schedule/${yyear}/${mmonth}/${dday}`);
+  }, [router])
 
   return (
     <React.Fragment>
