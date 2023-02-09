@@ -85,12 +85,10 @@ export const addDate = (d: Date, year: number = 0, month: number = 0, day: numbe
 export const getUtcNow = () => {
     const n = new Date((new Date()).toUTCString());
 
-    console.log(n.toString());
-
     return n;
 }
 
-export const getNow = (): Date => {
+export const getJTCNow = (): Date => {
     const n = new Date();
     return new Date(n.getTime() + (n.getTimezoneOffset() + (9 * 60)) * 60 * 1000);
 }
