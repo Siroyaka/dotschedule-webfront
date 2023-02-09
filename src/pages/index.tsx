@@ -35,12 +35,11 @@ const Home: React.FC<Props> = (props) => {
 
   const router = useRouter();
 
-  const d = getJTCNow();
-  const yyear = d.getFullYear();
-  const mmonth = d.getMonth() + 1;
-  const dday = d.getDate();
-
   useEffect(() => {
+    const d = getJTCNow();
+    const yyear = d.getFullYear();
+    const mmonth = d.getMonth() + 1;
+    const dday = d.getDate();
     router.replace(`/schedule/${yyear}/${mmonth}/${dday}`);
   }, [router])
 
