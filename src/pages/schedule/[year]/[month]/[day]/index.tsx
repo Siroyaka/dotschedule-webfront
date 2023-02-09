@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const cardData = data.response_data?.map(x => DayScheduleToCardType(x)) ?? [];
 
-  const revalidateTime = calcRevalidateTime(year, month, day);
+  const revalidateTime = 5;
 
   return {
     props: {
