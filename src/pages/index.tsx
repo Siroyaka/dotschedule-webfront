@@ -8,7 +8,7 @@ import SchedulesField, { CardType } from 'src/components/field/Schedules';
 import SchedulesNavigation from 'src/components/standalone/SchedulesNavigation';
 
 import { DayScheduleToCardType } from 'src/lib/Converter';
-import { getNow } from 'src/lib/DateFunctions';
+import { getJTCNow } from 'src/lib/DateFunctions';
 import { todayTitle } from 'src/lib/InitialMetaData';
 
 import { DayScheduleRequest } from 'src/lib/api/DotscheduleApi'
@@ -47,7 +47,7 @@ const Home: React.FC<Props> = (props) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const d = getNow();
+  const d = getJTCNow();
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const cardData = data.response_data?.map(x => DayScheduleToCardType(x)) ?? [];
 
-  const revalidateTime = 1;
+  const revalidateTime = 5;
 
   return {
     props: {
