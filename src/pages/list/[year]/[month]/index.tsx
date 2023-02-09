@@ -3,14 +3,14 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 
-import { fromTo } from 'lib/Constructions';
-import MonthSwitch from 'components/standalone/MonthSwitch';
-import ListField from 'components/field/List';
-import { getMonthCalendar, MonthCalendar } from 'lib/DateFunctions';
-import LoadingField from 'components/field/Loading';
+import { fromTo } from 'src/lib/Constructions';
+import MonthSwitch from 'src/components/standalone/MonthSwitch';
+import ListField from 'src/components/field/List';
+import { getMonthCalendar, MonthCalendar } from 'src/lib/DateFunctions';
+import LoadingField from 'src/components/field/Loading';
 
-import { DayStreamerDataListToDayIcons } from 'lib/Converter';
-import { MonthDataRequest } from 'lib/api/DotscheduleApi'
+import { DayStreamerDataListToDayIcons } from 'src/lib/Converter';
+import { MonthDataRequest } from 'src/lib/api/DotscheduleApi'
 
 interface OwnProps {
   year: number,

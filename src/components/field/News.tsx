@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
 
-import { CardNews } from 'components/template/Card';
+import { CardNews } from 'src/components/template/Card';
 
 export type CardType = ComponentProps<typeof CardNews> & {
   content: string,

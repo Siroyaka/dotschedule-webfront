@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { MonthCalendar } from 'lib/DateFunctions';
-import Calendar from 'components/template/Calendar';
+import { MonthCalendar } from 'src/lib/DateFunctions';
+import Calendar from 'src/components/template/Calendar';
 
 interface OwnProps {
   year: number,

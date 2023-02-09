@@ -2,8 +2,8 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { MessageIconSvg, NoticeIconSvg, SearchIconSvg } from 'components/parts/svgIcons';
-import { MESSAGE_FORM_URL } from 'lib/Constructions';
+import { MessageIconSvg, NoticeIconSvg } from 'src/components/parts/svgIcons';
+import { MESSAGE_FORM_URL } from 'src/lib/Constructions';
 
 interface OwnProps {
   closeDrawer: () => void

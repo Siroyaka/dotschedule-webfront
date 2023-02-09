@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
 
-import { CardFullTemplate } from 'components/template/Card';
+import { CardFullTemplate } from 'src/components/template/Card';
 
 export type CardType = ComponentProps<typeof CardFullTemplate> & {title: string};
 

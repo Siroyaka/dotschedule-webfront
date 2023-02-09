@@ -2,9 +2,9 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { NavigationBeforeSvg, NavigationNextSvg } from 'components/parts/svgIcons';
+import { NavigationBeforeSvg, NavigationNextSvg } from 'src/components/parts/svgIcons';
 
-import MonthSelectMenuList from 'components/template/MonthSelectMenuList';
+import MonthSelectMenuList from 'src/components/template/MonthSelectMenuList';
 
 interface OwnProps {
   year: number,
@@ -17,14 +17,14 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const f = (year: number, month: number) => {
-  const beforeMonth = month === 1 ? 12 : month - 1;
-  const beforeYear = year - (beforeMonth === 12 ? 1 : 0);
-  const afterMonth = (month % 12) + 1;
-  const afterYear = year + (afterMonth === 1 ? 1 : 0);
+const makePrevAndNextMonth = (year: number, month: number) => {
+  const prevMonth = month === 1 ? 12 : month - 1;
+  const prevYear = year - (prevMonth === 12 ? 1 : 0);
+  const nextMonth = (month % 12) + 1;
+  const nextYear = year + (nextMonth === 1 ? 1 : 0);
   return({
-    before: {year: beforeYear, month: beforeMonth},
-    after: {year: afterYear, month: afterMonth},
+    prevMonth: {year: prevYear, month: prevMonth},
+    nextMonth: {year: nextYear, month: nextMonth},
   })
 }
 
@@ -53,9 +53,10 @@ const LinkComponent: React.FC<LinkComponentProps> = (props) => {
 const MonthSwitch: React.FC<Props> = (props) => {
   const { year, month, componentName, start, end } = props;
 
-  const { before, after } = f(year, month);
+  const { prevMonth, nextMonth } = makePrevAndNextMonth(year, month);
   const oldest = start ? year < start.year || (year === start.year && month <= start.month) : false;
   const newest = end ? year > end.year || (year === end.year && month >= end.month) : false;
+
   const [menuVisible, setMenuVisible] = React.useState(false);
   const closeMenu = React.useCallback(() => {
     setMenuVisible(false);
@@ -67,11 +68,11 @@ const MonthSwitch: React.FC<Props> = (props) => {
   return(
     <React.Fragment>
       <section id='monthSwitch' className='flex items-center justify-between py-2 px-2'>
-        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${before.year}/${before.month}`} disabled={oldest}>
+        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${prevMonth.year}/${prevMonth.month}`} disabled={oldest}>
           <NavigationBeforeSvg size={40}/>
         </LinkComponent>
         <h2 className='text-xl cursor-pointer' onClick={openMenu}>{year}年{month}月</h2>
-        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${after.year}/${after.month}`} disabled={newest}>
+        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${nextMonth.year}/${nextMonth.month}`} disabled={newest}>
           <NavigationNextSvg size={40}/>
         </LinkComponent>
       </section>

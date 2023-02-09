@@ -3,11 +3,11 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 
-import { fromTo } from 'lib/Constructions';
-import MonthSwitch from 'components/standalone/MonthSwitch';
-import CalendarField from 'components/field/Calendar';
-import { getMonthCalendar, MonthCalendar } from 'lib/DateFunctions';
-import LoadingField from 'components/field/Loading';
+import { fromTo } from 'src/lib/Constructions';
+import MonthSwitch from 'src/components/standalone/MonthSwitch';
+import CalendarField from 'src/components/field/Calendar';
+import { getMonthCalendar, MonthCalendar } from 'src/lib/DateFunctions';
+import LoadingField from 'src/components/field/Loading';
 
 interface OwnProps {
   year: number,

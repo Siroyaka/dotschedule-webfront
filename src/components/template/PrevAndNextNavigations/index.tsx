@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 import {
   NavigationBeforeSvg,
   NavigationNextSvg,
-} from "components/parts/svgIcons";
+} from 'src/components/parts/svgIcons';
 
 import Navigation from "./Navigation";
 

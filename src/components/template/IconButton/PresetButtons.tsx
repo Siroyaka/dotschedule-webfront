@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuSvg } from 'components/parts/svgIcons';
+import { MenuSvg } from 'src/components/parts/svgIcons';
 
 import Vanila, { Props as VanilaProps } from './Vanila';
 

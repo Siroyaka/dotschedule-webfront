@@ -2,7 +2,7 @@ import React from 'react';
 
 import Head from 'next/head';
 
-import { getHtmlFromMarkdown } from 'lib/IOModules';
+import { getHtmlFromMarkdown } from 'src/lib/IOModules';
 import path from 'path';
 
 import { GetStaticProps } from 'next';

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 
-import { MenuButton } from 'components/template/IconButton';
-import { ReloadIconSvg } from 'components/parts/svgIcons';
+import { MenuButton } from 'src/components/template/IconButton';
+import { ReloadIconSvg } from 'src/components/parts/svgIcons';
 
 interface OwnProps {
   title: string,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CardOutLine, CardHeader, CardMedia, CardContents, CharactorIcons } from './index';
-import { RoundIconSvg } from 'components/parts/svgIcons';
+import { RoundIconSvg } from 'src/components/parts/svgIcons';
 
 interface OwnProps {
   headerAvater: string,

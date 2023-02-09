@@ -5,11 +5,11 @@ import Head from 'next/head';
 
 import '../styles/tailwind.css';
 
-import Header from 'components/standalone/Header';
-import BottomNavContainer from 'container/BottomNavContainer';
-import Drawer from 'components/template/Drawer';
-import DrawerItems from 'components/standalone/DrawerItems';
-import InitialMetaData from 'lib/InitialMetaData';
+import Header from 'src/components/standalone/Header';
+import BottomNavContainer from 'src/container/BottomNavContainer';
+import Drawer from 'src/components/template/Drawer';
+import DrawerItems from 'src/components/standalone/DrawerItems';
+import InitialMetaData from 'src/lib/InitialMetaData';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);

@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
+
+import { useRouter } from 'next/router'
 
 import { GetStaticProps } from 'next';
 
-import SchedulesField, { CardType } from 'components/field/Schedules';
+import SchedulesField, { CardType } from 'src/components/field/Schedules';
 
-import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
+import SchedulesNavigation from 'src/components/standalone/SchedulesNavigation';
 
-import { DayScheduleToCardType } from 'lib/Converter';
-import { getNow } from 'lib/DateFunctions';
-import { todayTitle } from 'lib/InitialMetaData';
+import { DayScheduleToCardType } from 'src/lib/Converter';
+import { getJTCNow } from 'src/lib/DateFunctions';
+import { todayTitle } from 'src/lib/InitialMetaData';
 
-import { DayScheduleRequest } from 'lib/api/DotscheduleApi'
+import { DayScheduleRequest } from 'src/lib/api/DotscheduleApi'
 
 interface OwnProps {
   year: number,
@@ -30,6 +32,18 @@ const Home: React.FC<Props> = (props) => {
     cardData,
   } = props;
 
+
+  const router = useRouter();
+
+  const d = getJTCNow();
+  const yyear = d.getFullYear();
+  const mmonth = d.getMonth() + 1;
+  const dday = d.getDate();
+
+  useEffect(() => {
+    router.replace(`/schedule/${yyear}/${mmonth}/${dday}`);
+  }, [router])
+
   return (
     <React.Fragment>
       <Head>
@@ -47,7 +61,7 @@ const Home: React.FC<Props> = (props) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const d = getNow();
+  const d = getJTCNow();
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();
@@ -65,7 +79,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const cardData = data.response_data?.map(x => DayScheduleToCardType(x)) ?? [];
 
-  const revalidateTime = 1;
+  const revalidateTime = 5;
 
   return {
     props: {

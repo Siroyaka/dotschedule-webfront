@@ -3,8 +3,8 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Bottoms from 'components/template/Bottoms';
-import { TodaySvg, CalendarSvg, ListSvg, NewsIconSvg } from 'components/parts/svgIcons';
+import Bottoms from 'src/components/template/Bottoms';
+import { TodaySvg, CalendarSvg, ListSvg, NewsIconSvg } from 'src/components/parts/svgIcons';
 
 interface OwnProps {
 }
