@@ -78,20 +78,20 @@ export const MonthDataToImgData = (d: MonthData | null): { [key: number]: string
 }
 
 export const DayScheduleToCardType = (s: DaySchedule): CardType => {
-  const d = new Date(s.StartDate)
+  const d = new Date(s.StreamingData.StartDate)
 
   // format date is always utc. to jst = add 9 hours
   d.setHours(d.getHours() + 9)
 
   return({
-    headerAvater: s.StreamerIcon ?? '',
-    name: s.StreamerName,
+    headerAvater: s.StreamerData.Icon ?? '',
+    name: s.StreamerData.Name,
     start: formatDateUTC(d, 'HH:mm'),
-    durationValue: parseDurationNum(s.Duration),
-    mediaSrc: s.Thumbnail,
-    mediahref: s.VideoLink,
-    title: s.VideoTitle,
-    onLive: s.VideoStatus === 2,
+    durationValue: parseDurationNum(s.StreamingData.Duration),
+    mediaSrc: s.StreamingData.Thumbnail,
+    mediahref: s.StreamingData.URL,
+    title: s.StreamingData.Title,
+    onLive: s.StreamingData.Status === 2,
     charactorIconSources: s.Participants?.map(x => x.Icon) ?? []
   })
 
@@ -108,7 +108,7 @@ export const DayStreamerDataListToDayIcons = (list: DayStreamerData[]): { [key: 
       console.log(`Date of DayStreamerData parse Error. Date: ${data.Date}`);
       continue;
     }
-    res[dnum] = data.Icons;
+    res[dnum] = data.Participants.map(x => x.Icon);
   }
 
   return res;

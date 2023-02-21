@@ -39,17 +39,30 @@ export class DotscheduleAPIResponse<T> {
     response_data: T
 }
 
-export class DaySchedule {
-    VideoLink: string
-    VideoStatus: number
-    VideoTitle: string
-    Thumbnail: string
-    StreamerName: string
-    StreamerID: string
+export class StreamerData {
+    Name: string
+    ID: string
+    Icon: string
+    Link: string
+    Platform: string
+}
+
+export class StreamingData {
+    ID: string
+    URL: string
+    Platform: string
+    Status: number
     StartDate: string
     Duration: number
-    StreamerIcon: string
-    Participants: {Id: string, Name: string, Icon: string}[]
+    Thumbnail: string
+    Title: string
+    Description: string
+}
+
+export class DaySchedule {
+    StreamingData: StreamingData
+    StreamerData: StreamerData
+    Participants: StreamerData[]
 }
 
 export class MonthDataRequest {
@@ -86,6 +99,5 @@ export class MonthDataRequest {
 
 export class DayStreamerData {
     Date: string
-    MemberData: {Id: string, Name: string}[]
-    Icons: string[]
+    Participants: StreamerData[]
 }
