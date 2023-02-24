@@ -55,7 +55,6 @@ const MonthSwitch: React.FC<Props> = (props) => {
 
   const { prevMonth, nextMonth } = makePrevAndNextMonth(year, month);
   const oldest = start ? year < start.year || (year === start.year && month <= start.month) : false;
-  const newest = end ? year > end.year || (year === end.year && month >= end.month) : false;
 
   const [menuVisible, setMenuVisible] = React.useState(false);
   const closeMenu = React.useCallback(() => {
@@ -72,7 +71,7 @@ const MonthSwitch: React.FC<Props> = (props) => {
           <NavigationBeforeSvg size={40}/>
         </LinkComponent>
         <h2 className='text-xl cursor-pointer' onClick={openMenu}>{year}年{month}月</h2>
-        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${nextMonth.year}/${nextMonth.month}`} disabled={newest}>
+        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${nextMonth.year}/${nextMonth.month}`} disabled={false}>
           <NavigationNextSvg size={40}/>
         </LinkComponent>
       </section>
