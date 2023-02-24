@@ -48,7 +48,7 @@ const MemberNamesArea: React.FC<Props> = (props) => {
           className='focus:outline-none bg-blue-200 py-2 px-4 text-xl rounded-lg w-full'
           onClick={() => setDlOpen(true)}
         >
-          {slug ? newStreamerList.find(x => x.slug === slug).name : '表示するメンバーを選択'}
+          {slug ? newStreamerList.find(x => x.slug === slug)?.name : '表示するメンバーを選択'}
         </button>
         {dlOpen &&
           <React.Fragment>

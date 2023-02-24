@@ -8,7 +8,7 @@ export const fetchData = async (slug?: string) => {
   updateTime.setHours(0, 0, 0, 0); // GMT 0:00 -> JST 9:00
 
   const getData = async (slug) => {
-    const match = getNewsStreamerList().find(x => x.slug === slug);
+    const match = getNewsStreamerList().find(x => x.slug === slug) ?? {id: '', slug: '', name: ''};
     const quantity = 10; // 取得個数
     return await getSchedulesBeforeData(VideoScheduleToNews)(match.id, updateTime, quantity);
   }

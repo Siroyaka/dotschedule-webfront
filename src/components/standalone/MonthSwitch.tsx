@@ -10,8 +10,8 @@ interface OwnProps {
   year: number,
   month: number,
   componentName: string,
-  start?: {year: number, month: number},
-  end?: {year: number, month: number},
+  start: {year: number, month: number},
+  end: {year: number, month: number},
   children?: React.ReactNode,
 }
 

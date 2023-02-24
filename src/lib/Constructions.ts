@@ -9,7 +9,7 @@ const dateFromTo = (): {year: number, month: number}[] => {
   const endN = new Date(n);
   endN.setMonth(endN.getMonth() - 2);
   const end = endN.getFullYear() * 12 + endN.getMonth() + 1;
-  const res = [];
+  const res: {year: number, month: number}[] = [];
   for(let i = start; i > end; i--) {
     const p = i % 12;
     const month = p === 0 ? 12 : p;

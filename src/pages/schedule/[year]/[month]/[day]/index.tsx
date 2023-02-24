@@ -83,12 +83,12 @@ const calcRevalidateTime = (year: number, month: number, day: number) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
-  const sYear = Array.isArray(params?.year) ? params?.year[0] : params.year;
-  const sMonth = Array.isArray(params?.month) ? params?.month[0] : params.month;
-  const sDay = Array.isArray(params?.day) ? params?.day[0] : params.day;
-  const year = parseInt(sYear);
-  const month = parseInt(sMonth);
-  const day = parseInt(sDay);
+  const sYear = Array.isArray(params?.year) ? params?.year[0] : params?.year;
+  const sMonth = Array.isArray(params?.month) ? params?.month[0] : params?.month;
+  const sDay = Array.isArray(params?.day) ? params?.day[0] : params?.day;
+  const year = parseInt(sYear ?? '2000');
+  const month = parseInt(sMonth ?? '01');
+  const day = parseInt(sDay ?? '01');
   
   const req = new DayScheduleRequest();
   const { isError, errorMessage, data } = await req.Get(year, month, day);
