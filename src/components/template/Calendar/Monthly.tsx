@@ -36,10 +36,6 @@ const Monthly: React.FC<Props> = (props) => {
   // 3か月以内はprefetchする。それ以前はしない。
   const prefetch = ((end.year - year) * 12 + end.month - month) <= 3;
 
-  const isToday = (d: {year: number, month: number, day: number}) => {
-    return d.year === end.year && d.month === end.month && d.day === end.day;
-  }
-
   return(
     <div className='w-full h-full'>
       <ol className='grid grid-cols-7 h-full w-full'>
@@ -54,7 +50,7 @@ const Monthly: React.FC<Props> = (props) => {
                         {day.day}
                       </span>
                     </div>
-                    <Link legacyBehavior href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
+                    <Link legacyBehavior href={'/schedule/[year]/[month]/[day]'} as={`/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
                       <a className='absolute top-0 left-0 w-full h-full' />
                     </Link>
                   </React.Fragment>

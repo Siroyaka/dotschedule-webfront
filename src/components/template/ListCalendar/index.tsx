@@ -45,10 +45,6 @@ const ListCalendar: React.FC<Props> = (props) => {
   // 3か月以内はprefetchする。それ以前はしない。
   const prefetch = ((end.year - year) * 12 + end.month - month) <= 3;
 
-  const isToday = (d: {year: number, month: number, day: number}) => {
-    return d.year === end.year && d.month === end.month && d.day === end.day;
-  }
-
   return(
     <section className='w-full h-full overflow-y-auto' id='list'>
       <ol className='w-full mt-1 mb-8 border-t-2'>
@@ -56,7 +52,7 @@ const ListCalendar: React.FC<Props> = (props) => {
           week.filter((day) => day.year === year && day.month === month).map((day) => (
             check(day) ? (
               <li key={`list-calendar-${day.year}-${day.month}-${day.day}`} className='relative border-b-2 px-2 active:bg-blue-100 ease-in-out transform transition-colors duration-150' style={{minHeight: '5rem'}}>
-                <Link legacyBehavior href={isToday(day) ? '/' : '/schedule/[year]/[month]/[day]'} as={isToday(day) ? '/' : `/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
+                <Link legacyBehavior href={'/schedule/[year]/[month]/[day]'} as={`/schedule/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
                   <a className='w-full h-full absolute top-0 left-0' />
                 </Link>
                 <div className='flex flex-row'>

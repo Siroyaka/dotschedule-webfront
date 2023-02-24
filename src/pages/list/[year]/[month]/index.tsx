@@ -64,10 +64,10 @@ const calcRevalidateTime = (year: number, month: number) => {
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-  const sYear = Array.isArray(params?.year) ? params?.year[0] : params.year;
-  const sMonth = Array.isArray(params?.month) ? params?.month[0] : params.month;
-  const year = parseInt(sYear);
-  const month = parseInt(sMonth);
+  const sYear = Array.isArray(params?.year) ? params?.year[0] : params?.year;
+  const sMonth = Array.isArray(params?.month) ? params?.month[0] : params?.month;
+  const year = parseInt(sYear ?? '2000');
+  const month = parseInt(sMonth ?? '01');
   const monthCalendar = getMonthCalendar(year, month);
 
   //const avaters = await fetchMonthData(year, month, MonthDataToImgData);

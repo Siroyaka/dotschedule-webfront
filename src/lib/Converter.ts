@@ -92,7 +92,7 @@ export const DayScheduleToCardType = (s: DaySchedule): CardType => {
     mediahref: s.StreamingData.URL,
     title: s.StreamingData.Title,
     onLive: s.StreamingData.Status === 2,
-    charactorIconSources: s.Participants?.map(x => x.Icon) ?? []
+    charactorIconSources: s.Participants?.filter(x => x.ID != 'dotlive_official').map(x => x.Icon) ?? []
   })
 
 }
