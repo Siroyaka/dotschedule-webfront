@@ -109,11 +109,13 @@ const Page = async ({searchParams}: Props) => {
 
     const apiRequestParams = searchParamsConvert({searchParams});
 
-    const {isError, data} = await fetchData(apiRequestParams);
+    const {isError, data, errorMessage} = await fetchData(apiRequestParams);
+
+    console.log(errorMessage)
 
     if (isError) {
         return (
-        <DataFetchError />
+            <DataFetchError />
         )
     }
 

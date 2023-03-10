@@ -63,8 +63,6 @@ export class RequestClient {
             header[k] = v;
         }
 
-        console.log("test")
-
         return fetch(url, {
             headers: header,
             next: {
