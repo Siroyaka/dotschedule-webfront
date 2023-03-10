@@ -101,6 +101,8 @@ const fetchData = async(params: StreamingSearchRequestParams) => {
 }
 
 const Page = async ({searchParams}: Props) => {
+    console.log(searchParams.page, searchParams.from, searchParams.to, searchParams.members);
+
     if (isSearchParamBlank({searchParams})) {
         return (
             <div></div>
