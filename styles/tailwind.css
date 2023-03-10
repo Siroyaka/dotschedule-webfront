@@ -1,0 +1,69 @@
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.thumbnail {
+    width: 100%;
+    padding-bottom: 56.25%;
+}
+
+.bg-hover-opacity-10:hover {
+    --bg-opacity: 0.1;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+div#__next {
+    height: 100%;
+}
+
+#notice-contents > h2 {
+    font-size: 1.5rem;
+    padding-bottom: 0.4rem;
+}
+
+#notice-contents > p {
+    font-size: 1rem;
+    padding-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+    #notice-contents > h2 {
+        font-size: 1.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+    #notice-contents > p {
+        font-size: 0.75rem;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@layer components {
+    .searchmenu-button {
+        @apply py-2 px-4 focus:outline-none rounded-full truncate text-xs bg-opacity-100 hover:bg-opacity-80;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .searchmenu-button-on {
+        @apply bg-green-400 shadow shadow-green-600 mt-1 mb-0 text-gray-700;
+    }
+    .searchmenu-button-off {
+        @apply bg-green-300 shadow-md shadow-green-600/100 mt-0 mb-1 text-opacity-70 text-gray-500;
+    }
+    .hidden-item {
+        @apply max-h-0 overflow-hidden;
+    }
+    .click-action-item {
+        @apply shadow-sm mt-0 mb-0.5 active:shadow active:mt-0.5 active:mb-0;
+    }
+}
