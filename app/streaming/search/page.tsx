@@ -16,6 +16,8 @@ interface Props {
     }
 }
 
+export const dynamic = 'force-dynamic';
+
 const ids: Set<string> = new Set([
     'baatual',
     'carropino',
