@@ -31,10 +31,13 @@ const MonthSelectMenuList: React.FC<Props> = (props) => {
     <ol className='bg-blue-100 h-full overflow-y-auto w-32 pb-4' onClick={closeMenu}>
       {monthListStartToEnd(start, end).map(({year, month}) => (
         <li key={`select-month-value-${year}-${month}`} className={'w-full'}>
-          <Link legacyBehavior href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${year}/${month}`} prefetch={false} draggable={false}>
-            <a className='text-xl block w-full py-1 hover:bg-blue-100 active:bg-blue-200'>
-              <span>{year}年{month}月</span>
-            </a>
+          <Link
+           href={{pathname: `/${componentName}/${year}/${month}`}}
+           prefetch={false}
+           draggable={false}
+           className='text-xl block w-full py-1 hover:bg-blue-100 active:bg-blue-200'
+          >
+            <span>{year}年{month}月</span>
           </Link>
         </li>
       ))}

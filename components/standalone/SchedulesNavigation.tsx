@@ -29,8 +29,8 @@ const SchedulesNavigation: React.FC<Props> = (props) => {
 
   return (
     <PrevAndNextNavigations 
-      prevNavigation={{href: '/streaming/day/[year]/[month]/[day]', as: prevLink}}
-      nextNavigation={{href: '/streaming/day/[year]/[month]/[day]', as: nextLink}}
+      prevNavigation={{href: prevLink}}
+      nextNavigation={{href: nextLink}}
     >
       {children}
     </PrevAndNextNavigations>

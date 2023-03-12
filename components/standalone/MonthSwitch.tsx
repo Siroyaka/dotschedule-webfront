@@ -32,18 +32,22 @@ const makePrevAndNextMonth = (year: number, month: number) => {
 interface LinkComponentProps {
   disabled: boolean,
   href: string,
-  as?: string,
   children?: React.ReactNode,
 }
 
 const LinkComponent: React.FC<LinkComponentProps> = (props) => {
-  const { disabled, href, as, children } = props;
+  const { disabled, href, children } = props;
   const linkOption = disabled ? 'text-gray-300' : 'text-black active:bg-blue-200 hover:bg-blue-100 duration-200 ease-in transition';
   return(
     <div className={`relative rounded-full ${linkOption}`}>
       {!disabled && 
-        <Link legacyBehavior href={href} as={as} draggable={false}>
-          <a className='absolute h-full w-full top-0 left-0' />
+        <Link
+          href={{
+            pathname: href
+          }}
+          draggable={false}
+          className='absolute h-full w-full top-0 left-0'
+        >
         </Link>
       }
       {children}
@@ -68,11 +72,11 @@ const MonthSwitch: React.FC<Props> = (props) => {
   return(
     <React.Fragment>
       <section id='monthSwitch' className='flex items-center justify-between py-2 px-2'>
-        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${prevMonth.year}/${prevMonth.month}`} disabled={oldest}>
+        <LinkComponent href={`/${componentName}/${prevMonth.year}/${prevMonth.month}`} disabled={oldest}>
           <NavigationBeforeSvg size={40}/>
         </LinkComponent>
         <h2 className='text-xl cursor-pointer' onClick={openMenu}>{year}年{month}月</h2>
-        <LinkComponent href={`/${componentName}/[year]/[month]`} as={`/${componentName}/${nextMonth.year}/${nextMonth.month}`} disabled={false}>
+        <LinkComponent href={`/${componentName}/${nextMonth.year}/${nextMonth.month}`} disabled={false}>
           <NavigationNextSvg size={40}/>
         </LinkComponent>
       </section>
