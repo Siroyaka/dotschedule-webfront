@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation'
 import { getJTCNow } from 'library/DateFunctions';
 
+export const revalidate = 1;
+
 async function Page() {
     const d = getJTCNow();
     const year = d.getFullYear();
