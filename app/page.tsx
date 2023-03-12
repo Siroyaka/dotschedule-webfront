@@ -9,7 +9,8 @@ async function Page() {
     const month = d.getMonth() + 1;
     const day = d.getDate();
     const url = `/streaming/day/${year}/${month}/${day}`;
-    redirect(url)
+    console.log(`root redirect path to ${url}. date object data: [${d.getHours()}, ${d.getMinutes()}, ${d.getSeconds()}]`);
+    redirect(url);
 }
 
 export default Page;
