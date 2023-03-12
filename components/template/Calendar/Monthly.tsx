@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import Link from 'components/parts/ExLink';
+import Link from 'next/link';
 
 import { MonthCalendar } from 'library/DateFunctions';
 
@@ -30,8 +30,13 @@ const Monthly: React.FC<Props> = (props) => {
                       {day.day}
                     </span>
                   </div>
-                  <Link legacyBehavior href={'/streaming/day/[year]/[month]/[day]'} as={`/streaming/day/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
-                    <a className='absolute top-0 left-0 w-full h-full' />
+                  <Link
+                    className='absolute top-0 left-0 w-full h-full'
+                    href={{
+                      pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                    }}
+                    prefetch={prefetch}
+                  >
                   </Link>
                 </React.Fragment>
               </li>
