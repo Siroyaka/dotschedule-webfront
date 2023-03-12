@@ -52,12 +52,13 @@ const BottomNavigations = () => {
   const year = splitPath.length < 4 ? now.getFullYear() : parseInt(splitPath[3]);
   const month = splitPath.length < 5 ? now.getMonth() + 1 : parseInt(splitPath[4]);
   const linkChild = `/${year}/${month}`;
+  const todayPath = `/streaming/day/${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
 
   return (
     <Bottoms>
       <ul className='flex h-full'>
         <li className="flex-1">
-          <TabItems href="/">
+          <TabItems href={todayPath}>
             <TodaySvg />
             <span>Today</span> 
           </TabItems>
