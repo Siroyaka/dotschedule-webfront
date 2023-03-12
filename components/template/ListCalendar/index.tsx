@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import Link from 'components/parts/ExLink';
+import Link from 'next/link';
 
 import { MonthCalendar } from 'library/DateFunctions';
 
@@ -31,8 +31,13 @@ const ListCalendar: React.FC<Props> = (props) => {
         {monthCalendar.map((week) => (
           week.filter((day) => day.year === year && day.month === month).map((day) => (
               <li key={`list-calendar-${day.year}-${day.month}-${day.day}`} className='relative border-b-2 px-2 active:bg-blue-100 ease-in-out transform transition-colors duration-150' style={{minHeight: '5rem'}}>
-                <Link legacyBehavior href={'/streaming/day/[year]/[month]/[day]'} as={`/streaming/day/${day.year}/${day.month}/${day.day}`} linkPrefetch={prefetch}>
-                  <a className='w-full h-full absolute top-0 left-0' />
+                <Link
+                  href={{
+                    pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                  }}
+                  className='w-full h-full absolute top-0 left-0'
+                  prefetch={prefetch}
+                >
                 </Link>
                 <div className='flex flex-row'>
                   <div className='w-8'>
