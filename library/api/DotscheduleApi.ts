@@ -53,7 +53,7 @@ export class StreamingSearchRequest {
         this.client.AddHeader(header2Key, header2Value)
     }
 
-    async Get({members, from, to, page}: StreamingSearchRequestParams, revalidate: number | false = false) {
+    async Get({members, from, to, page, title}: StreamingSearchRequestParams, revalidate: number | false = false) {
         if (members !== undefined && members.length > 0) {
             this.client.AddRequestValue("member", members?.join(','));
         }
@@ -62,6 +62,9 @@ export class StreamingSearchRequest {
         }
         if (to !== undefined) {
             this.client.AddRequestValue("to", iDateToString(to, '-', true));
+        }
+        if (title !== undefined) {
+            this.client.AddRequestValue("title", title);
         }
         this.client.AddRequestValue("page", page?.toString() ?? '1');
 
@@ -79,6 +82,7 @@ export interface StreamingSearchRequestParams {
     members?: string[],
     from?: IDate,
     to?: IDate,
+    title?: string,
     page: number,
 }
 

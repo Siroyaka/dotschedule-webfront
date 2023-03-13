@@ -13,6 +13,7 @@ interface Props {
         members?: string
         from?: string
         to?: string
+        title?: string
     }
 }
 
@@ -43,8 +44,6 @@ const ids: Set<string> = new Set([
 export const metadata = {
     title: "配信スケジュール検索"
 }
-
-export const revalidate = 10;
 
 const isSearchParamBlank = ({searchParams}: Props) => {
     const membersBlank = searchParams.members === undefined || searchParams.members.trim() === "";
@@ -83,17 +82,22 @@ const dateRequestParamToIDate = (v?: string): IDate | undefined => {
 }
 
 const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParams => {
-    const {page, members, from, to} = searchParams;
+    const {page, members, from, to, title} = searchParams;
 
-    const memberList = members ? members.split(',').filter(x => ids.has(x)) : [];
+    const memberList = members ? members.replaceAll(';', '').split(',').filter(x => ids.has(x)) : [];
 
     const ipage = parseInt(page ?? '1');
+
+    const titleQuery = (title ?? '').replaceAll(';', '');
+
+    console.log(titleQuery)
 
     return {
         page: ipage,
         members: memberList,
         from: dateRequestParamToIDate(from),
         to: dateRequestParamToIDate(to),
+        title: titleQuery,
     };
 }
 
