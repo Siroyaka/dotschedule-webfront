@@ -27,8 +27,10 @@ interface PageState {
 
 interface PageValue {
     members: string[]
-    from?: IDate
-    to?: IDate
+    from: IDate
+    to: IDate
+    title: string
+    tags: string[]
 }
 
 const IconsSelector: React.FC<{list: SearchMember[], setMemberState: (id: string, isSelect: boolean) => void}> = ({list, setMemberState}) => {
@@ -171,12 +173,14 @@ const MiniCalendar: React.FC<{
     )
 }
 
-const pageValueToLinkQuery = ({members, from, to}: PageValue) => {
+const pageValueToLinkQuery = ({members, from, to, title, tags}: PageValue) => {
     return {
         'members': members.join(','),
-        'from': from ? iDateToString(from, '-', true) : '',
-        'to': to ? iDateToString(to, '-', true): '',
+        'from': iDateToString(from, '-', true),
+        'to': iDateToString(to, '-', true),
+        'title': title.replaceAll(';', ''),
         'page': 1,
+        'tags': tags.join(','),
     }
 }
 
@@ -187,11 +191,14 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             members: [],
             from: rangeStart,
             to: rangeEnd,
+            title: '',
+            tags: []
         },
         calendarState: 'none',
         modalMode: 'none'
     })
 
+    const [openTitleInput, setOpenTitleInput] = React.useState(true);
     const [openEnrollment, setOpenEnrollment] = React.useState(true);
     const [openUnEnrollment, setOpenUnEnrollment] = React.useState(false);
     const [openDateSelector, setOpenDateSelector] = React.useState(false);
@@ -217,6 +224,19 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
         })
     }, []);
 
+    const setTitle = React.useCallback((title: string) => {
+        setPageState(x => {
+            const newPageValue = {
+                ...x.pageValue,
+                title: title,
+            }
+            return {
+                ...x,
+                pageValue: newPageValue
+            }
+        })
+    }, []);
+
     const changeFromDateState = React.useCallback((from: IDate) => {
         setPageState(x => {
             const newPageValue = {
@@ -230,7 +250,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                 calendarState: 'none'
             }
         })
-    }, [])
+    }, []);
 
     const changeToDateState = React.useCallback((to: IDate) => {
         setPageState(x => {
@@ -276,7 +296,15 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
     return (
         <React.Fragment>
             <div
+            id='search-title-input'
+            >
+                <ListCabinet openCloseFunction={setOpenTitleInput} isOpen={openTitleInput} title='タイトル'>
+                    <input className='border-2 mx-4' name='streaming-title' onChange={(e) => setTitle(e.target.value)}/>
+                </ListCabinet>
+            </div>
+            <div
             id='search-member-selector-enrollment'
+            className='mt-2'
             >
                 <ListCabinet openCloseFunction={setOpenEnrollment} isOpen={openEnrollment} title='所属メンバー'>
                     <IconsSelector list={pageState.memberList.filter(x => x.Enrollment === 1)} setMemberState={changeMemberState}/>
@@ -292,7 +320,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             </div>
             <div id='search-calendar-area' className='mt-2'>
                 <ListCabinet openCloseFunction={setOpenDateSelector} isOpen={openDateSelector} title='日付入力'>
-                    <div className='relative flex mx-4 my-2 item-right'>
+                    <div className='relative flex mx-4 item-right'>
                         <div className='relative px-1 border-b-2'>
                             <button className='absolute inset-y-0 w-full' onClick={() => setCalendarVisible('from')} />
                             <h1 className='text-left'>
