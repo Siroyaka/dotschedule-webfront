@@ -4,13 +4,14 @@ import React from 'react';
 import Link from 'next/link';
 
 import {
-  NavigationBeforeSvg,
-  NavigationNextSvg,
+    NavigationBeforeSvg,
+    NavigationNextSvg,
+    CloseSvg
 } from 'components/parts/svgIcons';
 import { AccordionArrowSvg } from 'components/parts/svgIcons';
 
 import { getMonthCalendar } from 'library/DateFunctions';
-import { IDate, iDateToString } from 'library/DateFunctions';
+import { IDate, iDateToString, getJTCNow } from 'library/DateFunctions';
 
 interface Props {
     memberList: SearchMember[]
@@ -26,11 +27,11 @@ interface PageState {
 }
 
 interface PageValue {
-    members: string[]
-    from: IDate
-    to: IDate
-    title: string
-    tags: string[]
+    members?: string[]
+    from?: IDate
+    to?: IDate
+    title?: string
+    tags?: string[]
 }
 
 const IconsSelector: React.FC<{list: SearchMember[], setMemberState: (id: string, isSelect: boolean) => void}> = ({list, setMemberState}) => {
@@ -76,23 +77,74 @@ const ListCabinet: React.FC<{openCloseFunction: (boolean) => void, isOpen: boole
 interface MiniCalendarState {
     calendar: Readonly<Required<IDate>>[][],
     year: number,
-    month: number
+    month: number,
+    enableCalendarShift: {
+        nextMonth: boolean,
+        prevMonth: boolean,
+    }
+}
+
+const MiniCalendarNavigation: React.FC<{
+    children?: React.ReactNode,
+    onClick: (number) => void,
+    value: number,
+    disable: boolean
+}> = ({
+    children,
+    onClick,
+    value,
+    disable
+}) => {
+    if (disable) {
+        return (
+            <div className='h-8 w-8 rounded-full flex items-center justify-center text-gray-200'>
+                {children}
+            </div>
+        )
+    }
+    return (
+    <button className='h-8 w-8 rounded-full flex items-center justify-center' onClick={() => onClick(value)}>
+        {children}
+    </button>
+    )
+}
+
+const createEnableCalendarShift = (year: number, month: number, allowDateRange?: {from: IDate, to: IDate}) => {
+    if (allowDateRange === undefined) {
+        return {
+            nextMonth: true,
+            prevMonth: true,
+        }
+    }
+    return {
+        nextMonth: allowDateRange.to.year > year || (allowDateRange.to.year === year && allowDateRange.to.month > month),
+        prevMonth: allowDateRange.from.year < year || (allowDateRange.from.year === year && allowDateRange.from.month < month),
+    }
+
 }
 
 const MiniCalendar: React.FC<{
     defaultDate?: IDate
-    setDate?: (IDate) => void, title?: string
+    setDate?: (IDate) => void, title?: string,
+    allowDateRange?: {
+        from: IDate,
+        to: IDate
+    }
 }> = ({
     defaultDate,
-    setDate, title
+    setDate, title,
+    allowDateRange,
 }) => {
     const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
-    const defaultYear = defaultDate?.year ?? 2024;
-    const defaultMonth = defaultDate?.month ?? 1;
+    const now = getJTCNow();
+    const year = defaultDate?.year ?? now.getFullYear();
+    const month = defaultDate?.month ?? now.getMonth() + 1;
+    const enableCalendarShift = createEnableCalendarShift(year, month, allowDateRange);
     const [calendarState, setCalendarState] = React.useState<MiniCalendarState>({
-        calendar: getMonthCalendar(defaultYear, defaultMonth),
-        year: defaultYear,
-        month: defaultMonth
+        calendar: getMonthCalendar(year, month),
+        year,
+        month,
+        enableCalendarShift
     });
     const moveCalendarView = React.useCallback((addMonth: number) => {
         setCalendarState((state) => {
@@ -106,10 +158,27 @@ const MiniCalendar: React.FC<{
                 nextMonth -= 12;
                 nextYear += 1;
             }
+
+            if (allowDateRange !== undefined) {
+                if (allowDateRange.from.year > nextYear || (allowDateRange.from.year === nextYear && allowDateRange.from.month > nextMonth)) {
+                    nextYear = allowDateRange.from.year;
+                    nextMonth = allowDateRange.from.month;
+                }
+
+                if (allowDateRange.to.year < nextYear || (allowDateRange.to.year === nextYear && allowDateRange.to.month < nextMonth)) {
+                    nextYear = allowDateRange.to.year;
+                    nextMonth = allowDateRange.to.month;
+                }
+            }
+
+            const enableCalendarShift = createEnableCalendarShift(nextYear, nextMonth, allowDateRange);
+
             return {
+                ...state,
                 calendar: getMonthCalendar(nextYear, nextMonth),
                 year: nextYear,
-                month: nextMonth
+                month: nextMonth,
+                enableCalendarShift
             }
         })
     }, [])
@@ -120,22 +189,22 @@ const MiniCalendar: React.FC<{
                     <h1>{title}</h1>
                 </div>
                 <div className='flex items-center justify-between mx-4 border-b-2'>
-                    <button className='h-8 w-8 rounded-full flex items-center justify-center' onClick={() => moveCalendarView(-12)}>
+                    <MiniCalendarNavigation onClick={moveCalendarView} value={-12} disable={!calendarState.enableCalendarShift.prevMonth}>
                         <NavigationBeforeSvg />
-                    </button>
+                    </MiniCalendarNavigation>
                     {calendarState.year}年
-                    <button className='h-8 w-8 rounded-full flex items-center justify-center' onClick={() => moveCalendarView(12)}>
+                    <MiniCalendarNavigation onClick={moveCalendarView} value={12} disable={!calendarState.enableCalendarShift.nextMonth}>
                         <NavigationNextSvg />
-                    </button>
+                    </MiniCalendarNavigation>
                 </div>
                 <div className='flex items-center justify-between mt-2 mx-4'>
-                    <button className='h-8 w-8 rounded-full flex items-center justify-center' onClick={() => moveCalendarView(-1)}>
+                    <MiniCalendarNavigation onClick={moveCalendarView} value={-1} disable={!calendarState.enableCalendarShift.prevMonth}>
                         <NavigationBeforeSvg />
-                    </button>
+                    </MiniCalendarNavigation>
                     {calendarState.month}月
-                    <button className='h-8 w-8 rounded-full flex items-center justify-center' onClick={() => moveCalendarView(1)}>
+                    <MiniCalendarNavigation onClick={moveCalendarView} value={1} disable={!calendarState.enableCalendarShift.nextMonth}>
                         <NavigationNextSvg />
-                    </button>
+                    </MiniCalendarNavigation>
                 </div>
             </header>
             <ol className='grid grid-cols-7 m-2'>
@@ -175,12 +244,12 @@ const MiniCalendar: React.FC<{
 
 const pageValueToLinkQuery = ({members, from, to, title, tags}: PageValue) => {
     return {
-        'members': members.join(','),
-        'from': iDateToString(from, '-', true),
-        'to': iDateToString(to, '-', true),
-        'title': title.replaceAll(';', ''),
+        'members': members?.join(',') ?? '',
+        'from': from !== undefined ? iDateToString(from, '-', true) : '',
+        'to': to !== undefined ? iDateToString(to, '-', true) : '',
+        'title': title?.replaceAll(';', '') ?? '',
         'page': 1,
-        'tags': tags.join(','),
+        'tags': tags?.join(',') ?? '',
     }
 }
 
@@ -189,8 +258,6 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
         memberList,
         pageValue: {
             members: [],
-            from: rangeStart,
-            to: rangeEnd,
             title: '',
             tags: []
         },
@@ -291,7 +358,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                 modalMode: 'none'
             }
         })
-    }, [])
+    }, []);
 
     return (
         <React.Fragment>
@@ -321,7 +388,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             <div id='search-calendar-area' className='mt-2'>
                 <ListCabinet openCloseFunction={setOpenDateSelector} isOpen={openDateSelector} title='日付入力'>
                     <div className='relative flex mx-4 item-right'>
-                        <div className='relative px-1 border-b-2'>
+                        <div className='relative px-1 border-b-2 min-w-[130px]'>
                             <button className='absolute inset-y-0 w-full' onClick={() => setCalendarVisible('from')} />
                             <h1 className='text-left'>
                                 from:
@@ -331,8 +398,8 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                         <div className='mx-4 text-center'>
                             <span className='text-xl'>〜</span>
                         </div>
-                        <div className='relative px-1 border-b-2'>
-                            <button className='absolute inset-y-0 w-full' onClick={() => setCalendarVisible('to')}/>
+                        <div className='relative px-1 border-b-2 min-w-[120px]'>
+                            <button className='absolute inset-y-0 w-full ' onClick={() => setCalendarVisible('to')}/>
                             <h1 className='text-left'>
                                 to:
                                 <span className='text-lg ml-1'>{pageState.pageValue.to ? iDateToString(pageState.pageValue.to, '/') : ''}</span>
@@ -353,6 +420,10 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                                         defaultDate={pageState.calendarState === 'from' ? pageState.pageValue.from : pageState.pageValue.to}
                                         setDate={pageState.calendarState === 'from' ? changeFromDateState : changeToDateState}
                                         title={pageState.calendarState}
+                                        allowDateRange={{
+                                            from: rangeStart,
+                                            to: rangeEnd
+                                        }}
                                     />
                                 </aside>
                             ) : (
@@ -383,7 +454,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             </div>
             {
                 pageState.modalMode !== 'none' ? (
-                    <aside className='absolute h-full w-full z-10 bg-black bg-opacity-30 top-0 left-0' onClick={() => setModalOff()}>
+                    <aside className='absolute h-full w-full z-[45] bg-black bg-opacity-30 top-0 left-0' onClick={() => setModalOff()}>
 
                     </aside>
                 ) : (
