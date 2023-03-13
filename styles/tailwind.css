@@ -66,4 +66,7 @@ div#__next {
     .click-action-item {
         @apply shadow-sm mt-0 mb-0.5 active:shadow active:mt-0.5 active:mb-0;
     }
+    .click-nonaction-item {
+        @apply shadow-sm mt-0 mb-0.5;
+    }
 }

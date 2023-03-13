@@ -4,7 +4,7 @@ import SchedulesField from 'components/field/Schedules';
 import DataFetchError from 'components/standalone/DataFetchError'
 import PageSelector from 'components/standalone/PageSelector';
 import { DayScheduleToCardType } from 'library/Converter';
-import { IDate } from 'library/DateFunctions';
+import { IDate, iDateToDate } from 'library/DateFunctions';
 import { StreamingSearchRequest, StreamingSearchRequestParams } from 'library/api/DotscheduleApi';
 
 interface Props {
@@ -49,7 +49,8 @@ const isSearchParamBlank = ({searchParams}: Props) => {
     const membersBlank = searchParams.members === undefined || searchParams.members.trim() === "";
     const fromBlank = searchParams.from === undefined || searchParams.from.trim() === "";
     const toBlank = searchParams.to === undefined || searchParams.to.trim() === "";
-    return membersBlank && fromBlank && toBlank;
+    const titleBlank = searchParams.title === undefined || searchParams.title.trim() === "";
+    return membersBlank && fromBlank && toBlank && titleBlank;
 }
 
 const dateRequestParamToIDate = (v?: string): IDate | undefined => {
@@ -90,13 +91,23 @@ const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParam
 
     const titleQuery = (title ?? '').replaceAll(';', '');
 
-    console.log(titleQuery)
+    let fromDate = dateRequestParamToIDate(from);
+
+    let toDate = dateRequestParamToIDate(to);
+
+    if (fromDate !== undefined && toDate !== undefined) {
+        if (iDateToDate(fromDate) > iDateToDate(toDate)) {
+            const hold = fromDate;
+            fromDate = toDate;
+            toDate = hold;
+        }
+    }
 
     return {
         page: ipage,
         members: memberList,
-        from: dateRequestParamToIDate(from),
-        to: dateRequestParamToIDate(to),
+        from: fromDate,
+        to: toDate,
         title: titleQuery,
     };
 }

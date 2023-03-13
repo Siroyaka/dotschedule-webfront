@@ -131,7 +131,7 @@ const json = {
 const FetchStreamingSearchMenuValues = async () => {
     const rangeStart = dateToIDate(new Date("2017-01-01T00:00:00Z"));
     const rangeEndDate = getJTCNow();
-    rangeEndDate.setDate(rangeEndDate.getDate() + 7);
+    rangeEndDate.setMonth(rangeEndDate.getMonth() + 1);
     const rangeEnd = dateToIDate(rangeEndDate);
 
     const apiResponse = json;
