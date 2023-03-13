@@ -242,6 +242,15 @@ const MiniCalendar: React.FC<{
     )
 }
 
+const pageValueIsBlank = ({members, title, tags, from, to}: PageValue) => {
+    const membersBlank = (members?.length ?? 0) === 0;
+    const titleBlank = (title?.length ?? 0) === 0;
+    const tagsBlank = (tags?.length ?? 0) === 0;
+    const fromBlank = from === undefined;
+    const toBlank = to === undefined;
+    return membersBlank && titleBlank && tagsBlank && fromBlank && toBlank;
+}
+
 const pageValueToLinkQuery = ({members, from, to, title, tags}: PageValue) => {
     return {
         'members': members?.join(',') ?? '',
@@ -434,23 +443,41 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                 </ListCabinet>
             </div>
             <div id='search-button' className='text-right mt-4'>
-                <Link
-                    href={{
-                        pathname: '/streaming/search',
-                        query: pageValueToLinkQuery(pageState.pageValue)
-                    }}
-                    className={`
-                    inline-block bg-gray-200 rounded
-                    px-4 py-2 mx-4
-                    shadow-gray-600/100
-                    click-action-item
-                    text-xl
-                    `}
-                    draggable={false}
-                    prefetch={false}
-                >
-                    検索
-                </ Link>
+                {
+                    !pageValueIsBlank(pageState.pageValue) ? (
+                        <Link
+                            href={{
+                                pathname: '/streaming/search',
+                                query: pageValueToLinkQuery(pageState.pageValue)
+                            }}
+                            className={`
+                            inline-block bg-gray-200 rounded
+                            px-4 py-2 mx-4
+                            shadow-gray-600/100
+                            click-action-item
+                            text-xl
+                            `}
+                            draggable={false}
+                            prefetch={false}
+                        >
+                            検索
+                        </ Link>
+                    ) : (
+                        <a
+                            className={`
+                            inline-block bg-gray-200 rounded
+                            px-4 py-2 mx-4
+                            shadow-gray-600/100
+                            text-gray-400
+                            click-nonaction-item
+                            text-xl
+                            `}
+                            draggable={false}
+                        >
+                            検索
+                        </a>
+                    )
+                }
             </div>
             {
                 pageState.modalMode !== 'none' ? (
