@@ -375,7 +375,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             id='search-title-input'
             >
                 <ListCabinet openCloseFunction={setOpenTitleInput} isOpen={openTitleInput} title='タイトル'>
-                    <input className='border-2 mx-4' name='streaming-title' style={{fontSize: '16px'}} onChange={(e) => setTitle(e.target.value)}/>
+                    <input className='border-2 mx-4' name='streaming-title' onChange={(e) => setTitle(e.target.value)}/>
                 </ListCabinet>
             </div>
             <div
