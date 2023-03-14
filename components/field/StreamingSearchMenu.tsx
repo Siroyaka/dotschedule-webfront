@@ -421,7 +421,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                                     className={`
                                         fixed z-50 top-20
                                         min-w-[300px] max-w-[350px]
-                                        max-h-[450px]
+                                        max-h-[550px] 
                                         bg-white
                                         border shadow
                                     `}
