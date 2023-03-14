@@ -31,6 +31,7 @@ const SchedulesNavigation: React.FC<Props> = (props) => {
     <PrevAndNextNavigations 
       prevNavigation={{href: prevLink}}
       nextNavigation={{href: nextLink}}
+      iconClassName='w-8'
     >
       {children}
     </PrevAndNextNavigations>

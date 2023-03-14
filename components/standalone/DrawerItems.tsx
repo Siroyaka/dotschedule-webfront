@@ -25,8 +25,8 @@ const DrawerItems: React.FC<Props> = (props) => {
             style={{ transition: 'all .15s ease' }}
             draggable={false}
           >
-            <div className={'mr-4'}>
-              <NoticeIconSvg />
+            <div className={'mr-4 flex items-center'}>
+              <NoticeIconSvg className='w-6'/>
             </div>
             <div>
               <span className={'text-lg'}>このサイトについて</span>
@@ -35,8 +35,8 @@ const DrawerItems: React.FC<Props> = (props) => {
         </li>
         <li className={'w-full'}>
           <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} href={DISCORD_LINK} style={{transition: 'all .15s ease'}} target='_blank' rel='noreferrer noopener'>
-            <div className={'mr-4'}>
-              <CommunityIconSvg />
+            <div className={'mr-4 flex items-center'}>
+              <CommunityIconSvg className='w-6'/>
             </div>
             <div>
               <span className={'text-lg'}>Discord</span>
@@ -45,8 +45,8 @@ const DrawerItems: React.FC<Props> = (props) => {
         </li>
         <li className={'w-full'}>
           <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} href={MESSAGE_FORM_URL} style={{transition: 'all .15s ease'}} target='_blank' rel='noreferrer noopener'>
-            <div className={'mr-4'}>
-              <MessageIconSvg />
+            <div className={'mr-4 flex items-center'}>
+              <MessageIconSvg className='w-6'/>
             </div>
             <div>
               <span className={'text-lg'}>お問い合わせ</span>

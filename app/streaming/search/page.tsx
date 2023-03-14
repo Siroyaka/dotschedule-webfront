@@ -146,9 +146,9 @@ const Page = async ({searchParams}: Props) => {
 
     return (
         <section id='search-result' className='mt-2'>
-            <header className='mx-2 flex'>
+            <header className='mx-2'>
                 <h1>{data.length}件</h1>
-                <div id='search-page-selector' className=''>
+                <div id='search-page-selector' className='mt-2'>
                     <PageSelector
                         totalLen={Math.ceil(data.length / 20)}
                         viewNum={10}
@@ -157,7 +157,7 @@ const Page = async ({searchParams}: Props) => {
                         pagePath={'/streaming/search'}
                         otherQuerys={searchParams}
                         parentClassName={'flex'}
-                        childClassName={'text-ml px-3'}
+                        childClassName={'text-ml px-1 sm:px-2 md:px-3'}
                         disableLinkClassName={'text-black'}
                         enableLinkClassName={'text-blue-400'}
                     />
