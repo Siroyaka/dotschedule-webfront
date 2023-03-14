@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { getJTCNow } from 'library/DateFunctions';
 
-export const revalidate = 1;
+export const dynamic = 'force-dynamic';
 
 async function Page() {
     const d = getJTCNow();
