@@ -58,11 +58,11 @@ const ListCabinet: React.FC<{openCloseFunction: (boolean) => void, isOpen: boole
         <React.Fragment>
             <div className='relative bg-gray-100'>
                 <div className='w-full flex justify-between align-middle items-center'>
-                    <h1 className='ml-2 text-md'>
+                    <h1 className='ml-2 text-xs sm:text-base'>
                         ■ {title}
                     </h1>
                     <div className={`${isOpen ? 'rotate-[-180deg]' : ''} duration-300 transition text-gray-400`}>
-                        <AccordionArrowSvg size={30}/>
+                        <AccordionArrowSvg className='w-6 sm:w-8'/>
                     </div>
                 </div>
                 <button onClick={() => openCloseFunction(x => !x)} className='absolute w-full inset-y-0' />

@@ -10,7 +10,7 @@ import Navigation from "./Navigation";
 interface OwnProps {
   prevNavigation: Omit<React.ComponentProps<typeof Navigation>, "children">,
   nextNavigation: Omit<React.ComponentProps<typeof Navigation>, "children">,
-  size?: number,
+  iconClassName?: string,
   children?: React.ReactNode
 }
 
@@ -21,19 +21,17 @@ const PrevAndNextArrow: React.FC<Props> = (props) => {
     children,
     prevNavigation,
     nextNavigation,
-    size,
+    iconClassName,
   } = props;
-
-  const svgSize = size ?? 40;
 
   return (
     <React.Fragment>
       <Navigation {...prevNavigation}>
-        <NavigationBeforeSvg size={svgSize} />
+        <NavigationBeforeSvg className={iconClassName}/>
       </Navigation>
       {children}
       <Navigation {...nextNavigation}>
-        <NavigationNextSvg size={svgSize} />
+        <NavigationNextSvg className={iconClassName}/>
       </Navigation>
     </React.Fragment>
   );

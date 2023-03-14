@@ -7,6 +7,6 @@ type Props = Omit<VanilaProps, 'icon'>;
 
 export const Menu: React.FC<Props> = (props) => {
   return(
-    <Vanila ariaLabel='menu-button' icon={<MenuSvg />} {...props} />
+    <Vanila ariaLabel='menu-button' icon={<MenuSvg className='w-6'/>} {...props} />
   )
 }

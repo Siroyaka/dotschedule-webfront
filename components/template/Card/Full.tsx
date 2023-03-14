@@ -33,7 +33,7 @@ const Full: React.FC<Props> = (props) => {
     <CardOutLine>
       {onLive ? (
         <div className='absolute top-0 right-0' style={{color:'red'}}>
-          <RoundIconSvg />
+          <RoundIconSvg className='w-6'/>
         </div>
       ): (
         null

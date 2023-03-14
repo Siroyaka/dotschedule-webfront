@@ -73,11 +73,11 @@ const MonthSwitch: React.FC<Props> = (props) => {
     <React.Fragment>
       <section id='monthSwitch' className='flex items-center justify-between py-2 px-2'>
         <LinkComponent href={`/${componentName}/${prevMonth.year}/${prevMonth.month}`} disabled={oldest}>
-          <NavigationBeforeSvg size={40}/>
+          <NavigationBeforeSvg className='w-8'/>
         </LinkComponent>
         <h2 className='text-xl cursor-pointer' onClick={openMenu}>{year}年{month}月</h2>
         <LinkComponent href={`/${componentName}/${nextMonth.year}/${nextMonth.month}`} disabled={false}>
-          <NavigationNextSvg size={40}/>
+          <NavigationNextSvg className='w-8'/>
         </LinkComponent>
       </section>
       {menuVisible ? (

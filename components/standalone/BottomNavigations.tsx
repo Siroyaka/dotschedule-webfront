@@ -59,25 +59,25 @@ const BottomNavigations = () => {
       <ul className='flex h-full'>
         <li className="flex-1">
           <TabItems href={todayPath}>
-            <TodaySvg />
+            <TodaySvg className='w-6'/>
             <span>Today</span> 
           </TabItems>
         </li>
         <li className="flex-1">
           <TabItems href={routePath !== 'calendar' ? `/streaming/calendar${linkChild}` : undefined}>
-            <CalendarSvg />
+            <CalendarSvg className='w-6'/>
             <span>Calendar</span> 
           </TabItems>
         </li>
         <li className="flex-1">
           <TabItems href={routePath !== 'monthlist' ? `/streaming/monthlist${linkChild}` : undefined}>
-            <ListSvg />
+            <ListSvg className='w-6'/>
             <span>List</span>
           </TabItems>
         </li>
         <li className="flex-1">
           <TabItems href={routePath !== 'search' ? '/streaming/search' : undefined}>
-            <SearchIconSvg />
+            <SearchIconSvg className='w-6'/>
             <span>Search</span>
           </TabItems>
         </li>

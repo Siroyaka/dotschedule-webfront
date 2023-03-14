@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface OwnProps {
-  size?: number,
+  className?: string,
   children?: React.ReactNode
 }
 
 type Props = OwnProps;
 
 export const OutModule: React.FC<Props> = (props) => {
-  const { children, size } = props;
-  const s = size ?? 24;
+  const { children, className } = props;
+  
   return(
-    <svg xmlns="http://www.w3.org/2000/svg" height={s} viewBox={`0 0 24 24`} width={s} style={{fill:'currentcolor'}}>
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox={`0 0 24 24`} style={{fill:'currentcolor'}}>
       {children}
     </svg>
   )
