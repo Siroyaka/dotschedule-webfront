@@ -38,7 +38,7 @@ const IconsSelector: React.FC<{list: SearchMember[], setMemberState: (id: string
     return (
         <ul className='w-full flex flex-wrap items-start justify-center transition animation-spin'>
             {list.map((data, i) =>
-                <li key={`charactor-icon-${i}`} className={'m-2 min-w-max'}>
+                <li key={`charactor-icon-${i}`} className={'m-1 sm:m-2 min-w-max'}>
                     <button
                         className={`
                             searchmenu-button ${data.isSelect ? 'searchmenu-button-on' : 'searchmenu-button-off'}
@@ -419,8 +419,9 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                                 <aside
                                     id='calendar'
                                     className={`
-                                        absolute z-50 top-10
+                                        fixed z-50 top-20
                                         min-w-[300px] max-w-[350px]
+                                        max-h-[450px]
                                         bg-white
                                         border shadow
                                     `}
