@@ -8,6 +8,7 @@ module.exports = async (phase, { defaultConfig }) => {
       domains: ['i.ytimg.com', 'yt3.ggpht.com'],
       unoptimized: true,
     },
+    reactStrictMode: true,
     experimental: {
       appDir: true,
     },
