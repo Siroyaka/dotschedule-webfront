@@ -53,6 +53,8 @@ const Page = async (props: Pageprops) => {
     )
   }
 
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
   const fetchResult = await Fetch(checkResult.year, checkResult.month)
 
   return(

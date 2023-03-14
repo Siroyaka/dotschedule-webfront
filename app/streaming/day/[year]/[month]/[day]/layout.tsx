@@ -1,9 +1,7 @@
-import React, { Suspense } from "react"
+import React from "react"
 
 import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
 import { SlugCheck, StreamingScheduleSlug } from './slug'
-
-import Loading from './loading';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -24,9 +22,7 @@ const Layout = ({params, children}: LayoutProps) => {
                     <h1 className='text-xl px-4 text-center'>{sectionTitle}</h1>
                 </SchedulesNavigation>
             </header>
-            <Suspense fallback={<Loading />}>
-                {children}
-            </Suspense>
+            {children}
         </section>
     )
 }

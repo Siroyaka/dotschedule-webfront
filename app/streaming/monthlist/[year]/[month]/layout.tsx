@@ -1,11 +1,9 @@
-import React, { Suspense } from "react"
+import React from "react"
 
 import MonthSwitch from 'components/standalone/MonthSwitch';
 import { getJTCNow } from 'library/DateFunctions';
 
 import { Slug, SlugCheck } from './slug';
-
-import Loading from './loading';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -33,9 +31,7 @@ const Layout = async ({params, children}: LayoutProps) => {
       <header>
         <MonthSwitch start={start} end={end} year={checkResult.year} month={checkResult.month} componentName='streaming/monthlist' />
       </header>
-      <Suspense fallback={<Loading />}>
-        {children}
-      </Suspense>
+      {children}
     </section>
   )
 }
