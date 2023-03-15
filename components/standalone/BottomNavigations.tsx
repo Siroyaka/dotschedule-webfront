@@ -3,20 +3,16 @@
 import React from 'react';
 
 import Link from 'next/link';
-import { usePathname, useSelectedLayoutSegments } from 'next/navigation';
+import { useSelectedLayoutSegments } from 'next/navigation';
 
 import path from 'path';
-
-import Bottoms from 'components/template/Bottoms';
-import { TodaySvg, CalendarSvg, ListSvg, SearchIconSvg } from 'components/parts/svgIcons';
-import { getJTCNow } from 'library/DateFunctions';
 
 export interface NavItem {
     title: string
     href: string
     routeMatch?: string
     reuseChild?: {
-        getDefaultItem: () => string[]
+        defaultItems: string[]
         reuseLength: number
     }
     icon?: React.ReactNode
@@ -28,7 +24,7 @@ interface OwnProps {
 
 export type Props = OwnProps;
 
-const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props) => {
+export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props) => {
     const {
         href,
         routeMatch,
@@ -48,7 +44,7 @@ const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props) => {
 
     if (reuseChild) {
         const childs = segments.slice(1);
-        const linkSlag = childs.length >= reuseChild.reuseLength ? childs.slice(0, reuseChild.reuseLength) : reuseChild.getDefaultItem();
+        const linkSlag = childs.length >= reuseChild.reuseLength ? childs.slice(0, reuseChild.reuseLength) : reuseChild.defaultItems;
         tabLink = path.join(href, ...linkSlag);
     }
 
@@ -70,22 +66,3 @@ const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props) => {
         </React.Fragment>
     )
 }
-
-const BottomNavigations2: React.FC<OwnProps> = ({ items }) => {
-    return (
-        <Bottoms>
-            <ul className='flex h-full'>
-                {items.map((value) => (
-                    <li className='flex-1' key={`bottom-tab-link-${value.title}`}>
-                        <LinkTab {...value}>
-                            {value.icon}
-                            <span>{value.title}</span>
-                        </LinkTab>
-                    </li>
-                ))}
-            </ul>
-        </Bottoms>
-    );
-}
-
-export default BottomNavigations2;

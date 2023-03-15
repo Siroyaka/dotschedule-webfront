@@ -9,6 +9,8 @@ interface LayoutProps {
     children: React.ReactNode
 }
 
+export const revalidate = 5;
+
 export const metadata = {
     title: ogpMetaData.title,
     themeColor: basicMetaData.themeColor,
@@ -38,7 +40,6 @@ export const metadata = {
 const Layout = ({ children }: LayoutProps) => {
     return (
         <React.Fragment>
-
             <PageHeaderSection title=".Schedule" />
             <main className='py-12 h-full'>
                 {children}
