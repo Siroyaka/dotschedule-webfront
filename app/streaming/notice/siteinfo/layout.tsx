@@ -6,9 +6,9 @@ interface LayoutProps {
 
 const Layout = ({children}: LayoutProps) => {
     return (
-        <article className='max-w-4xl mx-8 lg:mx-auto my-8 sm:my-16 overflow-y-auto h-full'>
-            <header>
-                <h1 className='text-2xl sm:text-4xl text-center w-full mb-8 sm:mb-16'>このサイトについて</h1>
+        <article className='max-w-4xl mx-8 lg:mx-auto mt-8 pb-32 overflow-y-auto'>
+            <header className='mb-8 sm:mb-16 text-center'>
+                <h1 className='text-2xl sm:text-4xl'>このサイトについて</h1>
             </header>
             {children}
         </article>

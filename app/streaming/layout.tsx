@@ -2,7 +2,8 @@ import React from 'react';
 
 import { twMetaData, ogpMetaData, iosMetaData, basicMetaData } from 'library/InitialMetaData';
 
-import 'styles/tailwind.css';
+import BottomNavContainer from 'components/container/BottomNavContainer';
+import PageHeaderSection from 'components/field/PageHeaderSection';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -36,12 +37,16 @@ export const metadata = {
 
 const Layout = ({ children }: LayoutProps) => {
     return (
-        <html lang="ja">
-            <head />
-            <body>
+        <React.Fragment>
+
+            <PageHeaderSection title=".Schedule" />
+            <main className='py-12 h-full'>
                 {children}
-            </body>
-        </html>
+            </main>
+            <footer>
+                <BottomNavContainer />
+            </footer>
+        </React.Fragment>
     );
 }
 

@@ -19,7 +19,7 @@ const DrawerItems: React.FC<Props> = (props) => {
         <li className={'w-full'}>
           <Link
             href={{
-              pathname: '/notice/siteinfo'
+              pathname: '/streaming/notice/siteinfo'
             }}
             className={'block py-2 px-2 text-left hover:bg-blue-100 flex'}
             style={{ transition: 'all .15s ease' }}
