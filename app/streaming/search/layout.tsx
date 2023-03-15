@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"
+import React from "react"
 
 import LoadingField from 'components/field/Loading';
 
@@ -161,9 +161,7 @@ const Layout = async ({children}: LayoutProps) => {
             <header id='streaming_search_header' className="px-2 pt-2 h-auto">
                 <StreamingSearchMenu {...menuValues} memberList={menuValues.memberList} />
             </header>
-            <Suspense fallback={<LoadingField />}>
-                {children}
-            </Suspense>
+            {children}
         </section>
     )
 }

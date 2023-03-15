@@ -2,7 +2,7 @@ import React, { Suspense } from "react"
 
 import MonthSwitch from 'components/standalone/MonthSwitch';
 import { getJTCNow } from 'library/DateFunctions';
-import LoadingField from 'components/field/Loading';
+import Loading from './loading';
 
 import { Slug, SlugCheck } from './slug';
 
@@ -32,7 +32,7 @@ const Layout = async ({params, children}: LayoutProps) => {
       <header>
         <MonthSwitch start={start} end={end} year={checkResult.year} month={checkResult.month} componentName='streaming/calendar' />
       </header>
-      <Suspense fallback={<LoadingField />}>
+      <Suspense fallback={<Loading />}>
         {children}
       </Suspense>
     </section>

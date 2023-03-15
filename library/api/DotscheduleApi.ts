@@ -138,8 +138,9 @@ export class MonthDataRequest {
         this.client.AddHeader(header2Key, header2Value)
     }
 
-    async Get(year: number, month: number) {
+    async Get(year: number, month: number, revalidate: false | number = false) {
         const queryValue = `${('000' + year).slice(-4)}-${('0' + month).slice(-2)}`;
+        this.client.SetRevalidate(revalidate);
         this.client.AddRequestValue("month", queryValue)
 
         const res = await this.client.Get<DotscheduleAPIResponse<DayStreamerData[]>>();

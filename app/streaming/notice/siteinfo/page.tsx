@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Head from 'next/head';
-
 import { getHtmlFromMarkdown } from 'library/IOModules';
 import path from 'path';
 
@@ -17,7 +15,7 @@ const Page = async () => {
     return (
         <div
             id='notice-contents'
-            className='shadow-md border-2 px-8 py-8 '
+            className='shadow-md border-2 px-8 py-8'
             dangerouslySetInnerHTML={{ __html: contents }}
         >
         </div>

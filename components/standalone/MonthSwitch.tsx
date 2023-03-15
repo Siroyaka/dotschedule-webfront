@@ -46,6 +46,7 @@ const LinkComponent: React.FC<LinkComponentProps> = (props) => {
             pathname: href
           }}
           draggable={false}
+          prefetch={false}
           className='absolute h-full w-full top-0 left-0'
         >
         </Link>

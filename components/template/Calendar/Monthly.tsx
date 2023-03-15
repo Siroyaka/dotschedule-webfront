@@ -30,14 +30,27 @@ const Monthly: React.FC<Props> = (props) => {
                       {day.day}
                     </span>
                   </div>
-                  <Link
-                    className='absolute top-0 left-0 w-full h-full'
-                    href={{
-                      pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
-                    }}
-                    prefetch={prefetch}
-                  >
-                  </Link>
+                  {
+                    prefetch ? (
+                      <Link
+                        className='absolute top-0 left-0 w-full h-full'
+                        href={{
+                          pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                        }}
+                        prefetch={false}
+                      >
+                      </Link>
+                    ) : (
+                      <Link
+                        className='absolute top-0 left-0 w-full h-full'
+                        href={{
+                          pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                        }}
+                        prefetch={false}
+                      >
+                      </Link>
+                    )
+                  }
                 </React.Fragment>
               </li>
             ))}

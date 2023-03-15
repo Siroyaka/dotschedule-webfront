@@ -9,8 +9,6 @@ import { DayStreamerDataListToDayIcons } from 'library/Converter';
 import { MonthDataRequest } from 'library/api/DotscheduleApi'
 import { Slug, SlugCheck } from './slug';
 
-export const revalidate = 30
-
 interface Pageprops {
   params: Slug
 }
@@ -23,7 +21,7 @@ const Fetch = async(year: number, month: number) => {
   const monthCalendar = getMonthCalendar(year, month);
 
   const request = new MonthDataRequest()
-  const {isError, errorMessage, data, status, statusText} = await request.Get(year, month)
+  const {isError, errorMessage, data, status, statusText} = await request.Get(year, month, 60)
   if (isError) {
     console.log(errorMessage);
     return ({

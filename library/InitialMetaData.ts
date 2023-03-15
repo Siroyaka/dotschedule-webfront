@@ -9,7 +9,9 @@ export const twMetaData: {
 export const basicMetaData = {
     viewPort: {
         initialScale: 1,
-        width: "device-width"
+        width: "device-width",
+        minimumScale: 1,
+        maximumScale: 1
     },
     icon: '/favicon.ico',
     themeColor: "#FAC141",

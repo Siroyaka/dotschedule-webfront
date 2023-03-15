@@ -1,7 +1,6 @@
-import React, { Suspense } from "react"
+import React from "react"
 
 import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
-import LoadingField from 'components/field/Loading';
 import { SlugCheck, StreamingScheduleSlug } from './slug'
 
 interface LayoutProps {
@@ -9,7 +8,7 @@ interface LayoutProps {
     params: StreamingScheduleSlug
 }
 
-const Layout = ({params, children}: LayoutProps) => {
+const Layout = async ({params, children}: LayoutProps) => {
     const { year, month, day } = params;
     const result = SlugCheck(year, month, day);
     const sectionTitle = result.result ? `${year}年${month}月${day}日`: "無効なページ";
@@ -23,9 +22,7 @@ const Layout = ({params, children}: LayoutProps) => {
                     <h1 className='text-xl px-4 text-center'>{sectionTitle}</h1>
                 </SchedulesNavigation>
             </header>
-            <Suspense fallback={<LoadingField />}>
-                {children}
-            </Suspense>
+            {children}
         </section>
     )
 }
