@@ -37,6 +37,7 @@ const Monthly: React.FC<Props> = (props) => {
                         href={{
                           pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
                         }}
+                        prefetch={false}
                       >
                       </Link>
                     ) : (

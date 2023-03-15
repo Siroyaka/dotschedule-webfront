@@ -38,6 +38,7 @@ const ListCalendar: React.FC<Props> = (props) => {
                         pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
                       }}
                       className='w-full h-full absolute top-0 left-0'
+                      prefetch={false}
                     >
                     </Link>
                   ) : (

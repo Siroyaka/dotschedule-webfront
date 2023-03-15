@@ -24,6 +24,7 @@ const DrawerItems: React.FC<Props> = (props) => {
             className={'block py-2 px-2 text-left hover:bg-blue-100 flex'}
             style={{ transition: 'all .15s ease' }}
             draggable={false}
+            prefetch={false}
           >
             <div className={'mr-4 flex items-center'}>
               <NoticeIconSvg className='w-6'/>
