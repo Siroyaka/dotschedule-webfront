@@ -31,14 +31,26 @@ const ListCalendar: React.FC<Props> = (props) => {
         {monthCalendar.map((week) => (
           week.filter((day) => day.year === year && day.month === month).map((day) => (
               <li key={`list-calendar-${day.year}-${day.month}-${day.day}`} className='relative border-b-2 px-2 active:bg-blue-100 ease-in-out transform transition-colors duration-150' style={{minHeight: '5rem'}}>
-                <Link
-                  href={{
-                    pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
-                  }}
-                  className='w-full h-full absolute top-0 left-0'
-                  prefetch={prefetch}
-                >
-                </Link>
+                {
+                  prefetch ? (
+                    <Link
+                      href={{
+                        pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                      }}
+                      className='w-full h-full absolute top-0 left-0'
+                    >
+                    </Link>
+                  ) : (
+                    <Link
+                      href={{
+                        pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                      }}
+                      className='w-full h-full absolute top-0 left-0'
+                      prefetch={false}
+                    >
+                    </Link>
+                  )
+                }
                 <div className='flex flex-row'>
                   <div className='w-8'>
                     <span>{day.day}</span>

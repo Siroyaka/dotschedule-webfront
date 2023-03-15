@@ -19,7 +19,7 @@ const BottomNavContainer: React.FC = () => {
         },
         {
             title: 'Calendar',
-            href: 'streaming/calendar',
+            href: '/streaming/calendar',
             icon: <CalendarSvg className='w-6'/>,
             routeMatch: 'calendar',
             reuseChild: {
@@ -29,7 +29,7 @@ const BottomNavContainer: React.FC = () => {
         },
         {
             title: 'List',
-            href: 'streaming/monthlist',
+            href: '/streaming/monthlist',
             icon: <ListSvg className='w-6'/>,
             routeMatch: 'monthlist',
             reuseChild: {
@@ -39,7 +39,7 @@ const BottomNavContainer: React.FC = () => {
         },
         {
             title: 'Search',
-            href: 'streaming/search',
+            href: '/streaming/search',
             icon: <SearchIconSvg className='w-6'/>,
             routeMatch: 'search'
         }

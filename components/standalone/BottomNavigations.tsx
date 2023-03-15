@@ -46,6 +46,7 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
         const childs = segments.slice(1);
         const linkSlag = childs.length >= reuseChild.reuseLength ? childs.slice(0, reuseChild.reuseLength) : reuseChild.defaultItems;
         tabLink = path.join(href, ...linkSlag);
+        console.log(tabLink);
     }
 
     return (
