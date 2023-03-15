@@ -22,6 +22,7 @@ const Navigation: React.FC<Props> = (props) => {
             pathname: href
           }}
           draggable={false}
+          prefetch={false}
         >
         </Link>
       }

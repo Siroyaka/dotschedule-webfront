@@ -1,12 +1,10 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import type { Metadata } from 'next';
 
 import { DayScheduleRequest } from 'library/api/DotscheduleApi'
 
 import { SlugCheck, StreamingScheduleSlug } from './slug'
-
-import Loading from './loading';
 
 import ContentPage from './contentpage';
 
@@ -17,8 +15,6 @@ interface MetaProps {
 interface PageProps {
     params: StreamingScheduleSlug
 }
-
-export const revalidate = 20;
 
 export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     const { year, month, day } = props.params;
@@ -32,8 +28,7 @@ export async function generateMetadata(props: MetaProps): Promise<Metadata> {
 
 const FetchData = async (year: number, month: number, day: number) => {
     const req = new DayScheduleRequest();
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    return await req.Get(year, month, day, 0);
+    return await req.Get(year, month, day, 5);
 }
 
 async function Page(props: PageProps) {

@@ -15,7 +15,6 @@ interface MetaProps {
   params: Slug
 }
 
-
 const Fetch = async(year: number, month: number) => {
   const monthCalendar = getMonthCalendar(year, month);
 
@@ -53,8 +52,6 @@ const Page = async (props: Pageprops) => {
       <div>無効なページです</div>
     )
   }
-
-    await new Promise(resolve => setTimeout(resolve, 2000));
 
   const fetchResult = await Fetch(checkResult.year, checkResult.month)
 

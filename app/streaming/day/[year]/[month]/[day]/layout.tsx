@@ -3,8 +3,6 @@ import React from "react"
 import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
 import { SlugCheck, StreamingScheduleSlug } from './slug'
 
-export const revalidate = 30;
-
 interface LayoutProps {
     children: React.ReactNode
     params: StreamingScheduleSlug
