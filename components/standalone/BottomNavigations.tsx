@@ -34,7 +34,7 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
 
     let tabLink = href;
 
-    const segments = routeMatch !== undefined || reuseChild !== undefined ? useSelectedLayoutSegments() : [];
+    const segments = useSelectedLayoutSegments();
 
     let isMatch = false;
     if (routeMatch !== undefined && segments.length > 0) {
