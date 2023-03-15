@@ -18,7 +18,7 @@ interface PageProps {
     params: StreamingScheduleSlug
 }
 
-export const revalidate = 5
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     const { year, month, day } = props.params;
