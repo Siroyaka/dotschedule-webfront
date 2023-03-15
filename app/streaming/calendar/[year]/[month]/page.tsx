@@ -15,6 +15,8 @@ interface MetaProps {
   params: Slug
 }
 
+export const dynamic = 'force-dynamic';
+
 const Fetch = async(year: number, month: number) => {
   const monthCalendar = getMonthCalendar(year, month);
 
