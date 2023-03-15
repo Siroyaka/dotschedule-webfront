@@ -3,12 +3,14 @@ import React from "react"
 import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
 import { SlugCheck, StreamingScheduleSlug } from './slug'
 
+export const revalidate = 30;
+
 interface LayoutProps {
     children: React.ReactNode
     params: StreamingScheduleSlug
 }
 
-const Layout = ({params, children}: LayoutProps) => {
+const Layout = async ({params, children}: LayoutProps) => {
     const { year, month, day } = params;
     const result = SlugCheck(year, month, day);
     const sectionTitle = result.result ? `${year}年${month}月${day}日`: "無効なページ";
