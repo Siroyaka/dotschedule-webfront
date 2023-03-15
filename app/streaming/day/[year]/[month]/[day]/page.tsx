@@ -18,7 +18,7 @@ interface PageProps {
     params: StreamingScheduleSlug
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 20;
 
 export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     const { year, month, day } = props.params;
@@ -32,7 +32,7 @@ export async function generateMetadata(props: MetaProps): Promise<Metadata> {
 
 const FetchData = async (year: number, month: number, day: number) => {
     const req = new DayScheduleRequest();
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
     return await req.Get(year, month, day, 5);
 }
 
