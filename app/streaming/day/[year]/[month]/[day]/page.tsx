@@ -32,7 +32,7 @@ export async function generateMetadata(props: MetaProps): Promise<Metadata> {
 
 const FetchData = async (year: number, month: number, day: number) => {
     const req = new DayScheduleRequest();
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 10000));
     return await req.Get(year, month, day, 5);
 }
 
