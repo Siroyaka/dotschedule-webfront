@@ -33,7 +33,7 @@ export async function generateMetadata(props: MetaProps): Promise<Metadata> {
 const FetchData = async (year: number, month: number, day: number) => {
     const req = new DayScheduleRequest();
     await new Promise(resolve => setTimeout(resolve, 3000));
-    return await req.Get(year, month, day, 5);
+    return await req.Get(year, month, day, 0);
 }
 
 async function Page(props: PageProps) {
