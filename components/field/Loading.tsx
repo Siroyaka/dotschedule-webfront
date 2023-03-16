@@ -3,7 +3,7 @@ import React from 'react';
 const LoadingField = () => {
   return(
     <React.Fragment>
-      <h1>Loading...</h1>
+      <h1 id='loading-field'></h1>
     </React.Fragment>
   )
 }
