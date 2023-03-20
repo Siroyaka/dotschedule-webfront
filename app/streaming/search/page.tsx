@@ -166,6 +166,22 @@ const Page = async ({searchParams}: Props) => {
             <div>
                 <SchedulesField cardData={cardData} />
             </div>
+            <footer className='mx-2 my-2'>
+                <div id='search-page-selector' className='flex items-center justify-center'>
+                    <PageSelector
+                        totalLen={Math.ceil(data.length / 20)}
+                        viewNum={10}
+                        nowPage={apiRequestParams.page}
+                        pageQueryName={'page'}
+                        pagePath={'/streaming/search'}
+                        otherQuerys={searchParams}
+                        parentClassName={'flex flex-wrap'}
+                        childClassName={'text-ml w-6 text-center'}
+                        disableLinkClassName={'text-black'}
+                        enableLinkClassName={'text-blue-400'}
+                    />
+                </div>
+            </footer>
         </section>
     )
 }
