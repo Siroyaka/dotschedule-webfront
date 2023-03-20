@@ -22,7 +22,9 @@ const ClientViews: React.FC<Props> = ({ schedules, isError }) => {
     const cardData = schedules?.map(x => DayScheduleToCardType(x)) ?? [];
 
     return (
-        <SchedulesField cardData={cardData} />
+        <article id='schedules' className='mx-2 my-4'>
+            <SchedulesField cardData={cardData} />
+        </article>
     )
 }
 

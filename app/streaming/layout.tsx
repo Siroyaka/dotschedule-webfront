@@ -3,6 +3,7 @@ import React from 'react';
 import { twMetaData, ogpMetaData, iosMetaData, basicMetaData } from 'library/InitialMetaData';
 
 import BottomNavContainer from 'components/container/BottomNavContainer';
+import ContentMain from 'components/container/ContentMain';
 import PageHeaderSection from 'components/field/PageHeaderSection';
 
 interface LayoutProps {
@@ -41,11 +42,22 @@ const Layout = ({ children }: LayoutProps) => {
     return (
         <React.Fragment>
             <PageHeaderSection title=".Schedule" />
-            <main className='py-12 h-full'>
+            <ContentMain nonScrolls={['calendar']}>
                 {children}
-            </main>
-            <footer>
-                <BottomNavContainer />
+            </ContentMain>
+            <footer className='fixed inset-x-5 bottom-2 z-10 bg-white h-12 rounded-full border shadow'>
+                <BottomNavContainer 
+                    linkClassName={{
+                        base: 'rounded-full text-xs text-center py-1',
+                        match: 'bg-blue-500',
+                        unmatch: 'hover:bg-blue-200'
+                    }}
+                    childClassName={{
+                        base: 'text-xs flex flex-col items-center',
+                        match: 'text-white',
+                        unmatch: 'text-black'
+                    }}
+                />
             </footer>
         </React.Fragment>
     );

@@ -14,7 +14,7 @@ type Props = OwnProps;
 const SchedulesField: React.FC<Props> = (props) => {
   const { cardData } = props;
   return (
-    <ul className='flex flex-wrap py-4 px-2'>
+    <ul className='flex flex-wrap'>
       {cardData.map((cardInfo, i) => (
         <li
           key={`card-${cardInfo.start}-${i}`}

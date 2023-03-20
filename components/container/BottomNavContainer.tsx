@@ -2,12 +2,23 @@ import React from 'react';
 
 import { NavItem, LinkTab } from 'components/standalone/BottomNavigations';
 
-import Bottoms from 'components/template/Bottoms';
-
 import { TodaySvg, CalendarSvg, ListSvg, SearchIconSvg } from 'components/parts/svgIcons';
 import { getJTCNow } from 'library/DateFunctions';
 
-const BottomNavContainer: React.FC = () => {
+interface Props {
+    linkClassName?: {
+        base: string,
+        match?: string,
+        unmatch?: string
+    }
+    childClassName?: {
+        base: string,
+        match?: string,
+        unmatch?: string
+    }
+}
+
+const BottomNavContainer: React.FC<Props> = ({linkClassName, childClassName}) => {
     const now = getJTCNow();
     const nowYear = now.getFullYear().toString();
     const nowMonth = (now.getMonth() + 1).toString();
@@ -45,18 +56,16 @@ const BottomNavContainer: React.FC = () => {
         }
     ]
     return (
-        <Bottoms>
-            <ul className='flex h-full'>
-                {navItems.map((value) => (
-                    <li className='flex-1' key={`bottom-tab-link-${value.title}`}>
-                        <LinkTab {...value}>
-                            {value.icon}
-                            <span>{value.title}</span>
-                        </LinkTab>
-                    </li>
-                ))}
-            </ul>
-        </Bottoms>
+        <ul className='flex h-full'>
+            {navItems.map((value) => (
+                <li className='flex-1 rounded-full' key={`bottom-tab-link-${value.title}`}>
+                    <LinkTab {...value} linkClassName={linkClassName} childClassName={childClassName}>
+                        {value.icon}
+                        <span>{value.title}</span>
+                    </LinkTab>
+                </li>
+            ))}
+        </ul>
     )
 }
 

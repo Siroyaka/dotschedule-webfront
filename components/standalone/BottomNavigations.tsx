@@ -16,6 +16,17 @@ export interface NavItem {
         reuseLength: number
     }
     icon?: React.ReactNode
+    linkClassName?: {
+        base: string,
+        match?: string,
+        unmatch?: string
+    }
+    childClassName?: {
+        base: string,
+        match?: string,
+        unmatch?: string
+    }
+
 }
 
 interface OwnProps {
@@ -30,6 +41,8 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
         routeMatch,
         reuseChild,
         children,
+        linkClassName,
+        childClassName,
     } = props;
 
     let tabLink = href;
@@ -40,7 +53,6 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
     if (routeMatch !== undefined && segments.length > 0) {
         isMatch = segments[0] === routeMatch;
     }
-    const linkOption = isMatch ? 'bg-blue-500' : 'hover:bg-blue-200 active:bg-blue-300  duration-150 ease-in transform transition-all';
 
     if (reuseChild) {
         const childs = segments.slice(1);
@@ -49,20 +61,22 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
     }
 
     return (
-        <React.Fragment>
-            <div className={`relative w-full h-full rounded text-xs text-center px-1 py-1 ${linkOption}`}>
-                <Link href={{
-                    pathname: tabLink,
-                }}
-                    draggable={false}
-                    prefetch={false}
-                    className='absolute top-0 left-0 h-full w-full'
-                >
-                </Link>
-                <div className={`${isMatch ? 'text-white' : 'text-black'} text-xs flex flex-col items-center`}>
-                    {children}
-                </div>
-            </div>
-        </React.Fragment>
+        <nav className={`
+            ${linkClassName?.base}
+            ${isMatch ? linkClassName?.match : linkClassName?.unmatch}
+        `}>
+            <Link href={{
+                pathname: tabLink,
+            }}
+                draggable={false}
+                prefetch={false}
+                className={`
+                    ${childClassName?.base}
+                    ${isMatch ? childClassName?.match : childClassName?.unmatch}
+                `}
+            >
+                {children}
+            </Link>
+        </nav>
     )
 }
