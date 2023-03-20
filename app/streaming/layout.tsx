@@ -41,11 +41,22 @@ const Layout = ({ children }: LayoutProps) => {
     return (
         <React.Fragment>
             <PageHeaderSection title=".Schedule" />
-            <main className='py-12 h-full'>
+            <main className='pt-12 pb-20'>
                 {children}
             </main>
-            <footer>
-                <BottomNavContainer />
+            <footer className='block fixed inset-x-5 bottom-2 z-10 bg-white h-12 border rounded-full'>
+                <BottomNavContainer 
+                    linkClassName={{
+                        base: 'rounded-full text-xs text-center px-1 py-1',
+                        match: 'bg-blue-500',
+                        unmatch: 'hover:bg-blue-200'
+                    }}
+                    childClassName={{
+                        base: '',
+                        match: '',
+                        unmatch: ''
+                    }}
+                />
             </footer>
         </React.Fragment>
     );

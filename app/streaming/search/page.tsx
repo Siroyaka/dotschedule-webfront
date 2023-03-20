@@ -145,8 +145,8 @@ const Page = async ({searchParams}: Props) => {
     const cardData = data.response_data?.map(x => DayScheduleToCardType(x, 'datetime')) ?? [];
 
     return (
-        <section id='search-result' className='mt-2'>
-            <header className='mx-2'>
+        <section id='search-result' className='mt-2 pt-4'>
+            <header className='mx-2 my-2'>
                 <h1>{data.length}件</h1>
                 <div id='search-page-selector' className='flex items-center justify-center'>
                     <PageSelector
