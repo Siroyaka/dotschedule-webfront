@@ -45,17 +45,17 @@ const Layout = ({ children }: LayoutProps) => {
             <ContentMain nonScrolls={['calendar']}>
                 {children}
             </ContentMain>
-            <footer className='block fixed inset-x-5 bottom-2 z-10 bg-white h-12 border rounded-full shadow'>
+            <footer className='fixed inset-x-5 bottom-2 z-10 bg-white h-12 rounded-full border shadow'>
                 <BottomNavContainer 
                     linkClassName={{
-                        base: 'rounded-full text-xs text-center px-1 py-1',
+                        base: 'rounded-full text-xs text-center py-1',
                         match: 'bg-blue-500',
                         unmatch: 'hover:bg-blue-200'
                     }}
                     childClassName={{
-                        base: '',
-                        match: '',
-                        unmatch: ''
+                        base: 'text-xs flex flex-col items-center',
+                        match: 'text-white',
+                        unmatch: 'text-black'
                     }}
                 />
             </footer>

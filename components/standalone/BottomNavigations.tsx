@@ -63,7 +63,7 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
     return (
         <nav className={`
             ${linkClassName?.base}
-            ${isMatch ? linkClassName?.match ?? '' : linkClassName?.unmatch ?? ''}
+            ${isMatch ? linkClassName?.match : linkClassName?.unmatch}
         `}>
             <Link href={{
                 pathname: tabLink,
@@ -71,9 +71,8 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
                 draggable={false}
                 prefetch={false}
                 className={`
-                    ${isMatch ? 'text-white' : 'text-black'} text-xs flex flex-col items-center
                     ${childClassName?.base}
-                    ${isMatch ? childClassName?.match ?? '' : childClassName?.unmatch ?? ''}
+                    ${isMatch ? childClassName?.match : childClassName?.unmatch}
                 `}
             >
                 {children}
