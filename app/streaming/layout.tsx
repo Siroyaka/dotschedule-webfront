@@ -48,9 +48,9 @@ const Layout = ({ children }: LayoutProps) => {
             <footer className='fixed inset-x-5 bottom-2 z-10 bg-white h-12 rounded-full border shadow'>
                 <BottomNavContainer 
                     linkClassName={{
-                        base: 'rounded-full text-xs text-center py-1',
+                        base: 'rounded-full text-xs text-center py-1 tap-no-response focus:outline-none',
                         match: 'bg-blue-500',
-                        unmatch: 'hover:bg-blue-200'
+                        unmatch: 'active:bg-blue-200'
                     }}
                     childClassName={{
                         base: 'text-xs flex flex-col items-center',

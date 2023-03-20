@@ -50,6 +50,9 @@ div#__next {
 }
 
 @layer components {
+    .tap-no-response {
+        -webkit-tap-highlight-color: transparent;
+    }
     .searchmenu-button {
         @apply py-1 px-2 text-xs sm:py-2 sm:px-4 sm:text-base focus:outline-none rounded-full truncate bg-opacity-100 hover:bg-opacity-80;
         -webkit-tap-highlight-color: transparent;
