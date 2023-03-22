@@ -9,13 +9,12 @@ interface OwnProps {
   year: number,
   month: number,
   monthCalendar: MonthCalendar,
-  prefetch: boolean,
 }
 
 type Props = OwnProps;
 
 const Monthly: React.FC<Props> = (props) => {
-  const { year, month, monthCalendar, prefetch } = props;
+  const { year, month, monthCalendar } = props;
 
   return(
     <div className='w-full h-full'>
@@ -30,27 +29,14 @@ const Monthly: React.FC<Props> = (props) => {
                       {day.day}
                     </span>
                   </div>
-                  {
-                    prefetch ? (
-                      <Link
-                        className='absolute top-0 left-0 w-full h-full'
-                        href={{
-                          pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
-                        }}
-                        prefetch={false}
-                      >
-                      </Link>
-                    ) : (
-                      <Link
-                        className='absolute top-0 left-0 w-full h-full'
-                        href={{
-                          pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
-                        }}
-                        prefetch={false}
-                      >
-                      </Link>
-                    )
-                  }
+                  <Link
+                    className='absolute top-0 left-0 w-full h-full'
+                    href={{
+                      pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                    }}
+                    prefetch={false}
+                  >
+                  </Link>
                 </React.Fragment>
               </li>
             ))}

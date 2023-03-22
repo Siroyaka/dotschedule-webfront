@@ -4,6 +4,8 @@ import { Metadata } from 'next';
 
 import CalendarField from 'components/field/Calendar';
 import { getMonthCalendar, getJTCNow } from 'library/DateFunctions';
+import { DayStreamerDataListToDayIcons } from 'library/Converter';
+import { MonthDataRequest } from 'library/api/DotscheduleApi'
 
 import { Slug, SlugCheck } from './slug';
 
@@ -18,9 +20,22 @@ interface MetaProps {
 const Fetch = async (year: number, month: number) => {
     const monthCalendar = getMonthCalendar(year, month);
 
-    const before3Month = getJTCNow();
-    before3Month.setMonth(before3Month.getMonth() - 3)
-    const prefetch = year > before3Month.getFullYear() || (year === before3Month.getFullYear() && month > before3Month.getMonth() + 1)
+    const request = new MonthDataRequest()
+    const { isError, errorMessage, data } = await request.Get(year, month, 60)
+    if (isError) {
+        console.log(errorMessage);
+        return ({
+            isError: true,
+            props: {
+                year,
+                month,
+                monthCalendar,
+                avaters: {}
+            }
+        })
+    }
+
+    const avaters = DayStreamerDataListToDayIcons(data.response_data);
 
     return {
         isError: false,
@@ -28,7 +43,7 @@ const Fetch = async (year: number, month: number) => {
             year,
             month,
             monthCalendar,
-            prefetch: prefetch,
+            avaters
         }
     }
 

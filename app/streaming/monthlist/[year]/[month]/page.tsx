@@ -30,7 +30,6 @@ const Fetch = async (year: number, month: number) => {
                 year,
                 month,
                 monthCalendar,
-                prefetch: false,
                 avaters: {}
             }
         })
@@ -38,17 +37,12 @@ const Fetch = async (year: number, month: number) => {
 
     const avaters = DayStreamerDataListToDayIcons(data.response_data);
 
-    const before3Month = getJTCNow();
-    before3Month.setMonth(before3Month.getMonth() - 3)
-    const prefetch = year > before3Month.getFullYear() || (year === before3Month.getFullYear() && month > before3Month.getMonth() + 1)
-
     return {
         isError: false,
         props: {
             year,
             month,
             monthCalendar,
-            prefetch: prefetch,
             avaters,
         }
     }

@@ -41,7 +41,7 @@ export const metadata = {
 const Layout = ({ children }: LayoutProps) => {
     return (
         <React.Fragment>
-            <PageHeaderSection title=".Schedule" />
+            <PageHeaderSection title="" />
             <ContentMain nonScrolls={['calendar']}>
                 {children}
             </ContentMain>
