@@ -8,7 +8,6 @@ interface OwnProps {
   monthCalendar: MonthCalendar,
   year: number,
   month: number,
-  prefetch: boolean,
 }
 
 type Props = OwnProps;
