@@ -55,7 +55,7 @@ export const DayScheduleToCardType = (s: DaySchedule, timeType?: 'time' | 'datet
     headerAvater: s.StreamerData.Icon ?? '',
     name: s.StreamerData.Name,
     start: start,
-    durationValue: parseDurationNum(s.StreamingData.Duration),
+    durationValue: s.StreamingData.Status === 3 ? "配信予定" : parseDurationNum(s.StreamingData.Duration),
     mediaSrc: s.StreamingData.Thumbnail,
     mediahref: s.StreamingData.URL,
     title: s.StreamingData.Title,
