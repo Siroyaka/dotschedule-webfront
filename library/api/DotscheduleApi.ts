@@ -97,8 +97,6 @@ export class StreamerData {
     Name: string
     ID: string
     Icon: string
-    Link: string
-    Platform: string
 }
 
 export class StreamingData {
