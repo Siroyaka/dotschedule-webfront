@@ -109,6 +109,8 @@ const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParam
         from: fromDate,
         to: toDate,
         title: titleQuery,
+        maxResult: 20,
+        sort: "newer"
     };
 }
 
@@ -144,23 +146,27 @@ const Page = async ({searchParams}: Props) => {
 
     const cardData = data.response_data?.map(x => DayScheduleToCardType(x, 'datetime')) ?? [];
 
+    const searchPageSelector = (
+        <PageSelector
+            totalLen={Math.ceil(data.length / (apiRequestParams.maxResult ?? 100))}
+            viewNum={10}
+            nowPage={apiRequestParams.page}
+            pageQueryName={'page'}
+            pagePath={'/streaming/search'}
+            otherQuerys={searchParams}
+            parentClassName={'flex flex-wrap'}
+            childClassName={'text-ml w-6 text-center'}
+            disableLinkClassName={'text-black'}
+            enableLinkClassName={'text-blue-400'}
+        />
+    )
+
     return (
         <section id='search-result' className='mt-2 pt-4'>
             <header className='mx-2 my-2'>
                 <h1>{data.length}件</h1>
                 <div id='search-page-selector' className='flex items-center justify-center'>
-                    <PageSelector
-                        totalLen={Math.ceil(data.length / 20)}
-                        viewNum={10}
-                        nowPage={apiRequestParams.page}
-                        pageQueryName={'page'}
-                        pagePath={'/streaming/search'}
-                        otherQuerys={searchParams}
-                        parentClassName={'flex flex-wrap'}
-                        childClassName={'text-ml w-6 text-center'}
-                        disableLinkClassName={'text-black'}
-                        enableLinkClassName={'text-blue-400'}
-                    />
+                    {searchPageSelector}
                 </div>
             </header>
             <div>
@@ -168,18 +174,7 @@ const Page = async ({searchParams}: Props) => {
             </div>
             <footer className='mx-2 my-2'>
                 <div id='search-page-selector' className='flex items-center justify-center'>
-                    <PageSelector
-                        totalLen={Math.ceil(data.length / 20)}
-                        viewNum={10}
-                        nowPage={apiRequestParams.page}
-                        pageQueryName={'page'}
-                        pagePath={'/streaming/search'}
-                        otherQuerys={searchParams}
-                        parentClassName={'flex flex-wrap'}
-                        childClassName={'text-ml w-6 text-center'}
-                        disableLinkClassName={'text-black'}
-                        enableLinkClassName={'text-blue-400'}
-                    />
+                    {searchPageSelector}
                 </div>
             </footer>
         </section>
