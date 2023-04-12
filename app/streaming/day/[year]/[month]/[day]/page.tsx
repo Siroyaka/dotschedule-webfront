@@ -2,7 +2,6 @@ import React from 'react';
 
 import type { Metadata } from 'next';
 
-import { DayScheduleRequest } from 'library/api/DotscheduleApi'
 import { StreamingSearchRequest, StreamingSearchRequestParams } from 'library/api/DotscheduleApi';
 
 import { SlugCheck, StreamingScheduleSlug } from './slug'
@@ -40,7 +39,7 @@ const FetchData = async (year: number, month: number, day: number) => {
     }
 
     const req = new StreamingSearchRequest();
-    return await req.Get(requestParams);
+    return await req.Get(requestParams, 10);
 }
 
 async function Page(props: PageProps) {
