@@ -9,7 +9,7 @@ import { SlugCheck, StreamingScheduleSlug } from './slug'
 import ContentPage from './contentpage';
 import { IDate } from 'library/DateFunctions';
 
-const revalidate = 10;
+export const revalidate = 10;
 
 interface MetaProps {
     params: StreamingScheduleSlug
