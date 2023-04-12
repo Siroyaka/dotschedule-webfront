@@ -1,6 +1,5 @@
 import { DaySchedule, DayStreamerData } from './api/DotscheduleApi'
 import { CardType } from 'components/field/Schedules';
-import { streamerDataMap } from './Constructions';
 
 // 1分未満の場合は秒表示、1分以上の場合は~時間~分表示(後者の場合でも1時間未満なら~時間を表示しない)
 const parseDurationNum = (duration: number | undefined) => {
