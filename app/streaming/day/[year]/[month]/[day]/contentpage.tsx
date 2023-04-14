@@ -1,6 +1,6 @@
 'use client'
 
-import { DaySchedule } from "library/api/DotscheduleApi";
+import { DaySchedule, DotscheduleAPIResponse } from "library/api/DotscheduleApi";
 
 import SchedulesField from 'components/field/Schedules';
 import DataFetchError from 'components/standalone/DataFetchError'
@@ -8,18 +8,20 @@ import DataFetchError from 'components/standalone/DataFetchError'
 import { DayScheduleToCardType } from 'library/Converter';
 
 interface Props {
-    schedules?: DaySchedule[]
+    schedules: DotscheduleAPIResponse<DaySchedule[]>
     isError: boolean
 }
 
 const ClientViews: React.FC<Props> = ({ schedules, isError }) => {
     if (isError) {
         return (
-            <DataFetchError />
+            <article id='schedules' className='mx-2 my-4 text-center'>
+                <DataFetchError />
+            </article>
         )
     }
 
-    const cardData = schedules?.map(x => DayScheduleToCardType(x)) ?? [];
+    const cardData = schedules?.response_data?.map(x => DayScheduleToCardType(x)) ?? [];
 
     return (
         <article id='schedules' className='mx-2 my-4'>

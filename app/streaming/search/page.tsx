@@ -132,7 +132,9 @@ const Page = async ({searchParams}: Props) => {
 
     if (isError) {
         return (
-            <DataFetchError />
+            <div className='mx-2'>
+                <DataFetchError />
+            </div>
         )
     }
 
