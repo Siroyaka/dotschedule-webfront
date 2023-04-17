@@ -37,7 +37,8 @@ const FetchData = async (year: number, month: number, day: number) => {
         page: 1,
         from: d,
         to: d,
-        sort: "older"
+        sort: "older",
+        reason: "dayschedule"
     }
 
     const req = new StreamingSearchRequest();
