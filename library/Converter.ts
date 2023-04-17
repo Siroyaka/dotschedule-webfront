@@ -24,6 +24,7 @@ export const formatDateUTC = (date: Date, format: string) => {
   format = format.replace(/dd/g, ('0' + (date.getUTCDate()).toString()).slice(-2));
   format = format.replace(/d/g, (date.getUTCDate()).toString());
   format = format.replace(/HH/g, ('0' + (date.getUTCHours()).toString()).slice(-2));
+  format = format.replace(/H/g, (date.getUTCHours().toString()).slice(-2));
   format = format.replace(/mm/g, ('0' + (date.getUTCMinutes()).toString()).slice(-2));
   format = format.replace(/ss/g, (date.getUTCSeconds()).toString());
   format = format.replace(/SS/g, (date.getUTCMilliseconds()).toString());
@@ -41,11 +42,11 @@ export const DayScheduleToCardType = (s: DaySchedule, timeType?: 'time' | 'datet
   let start = '';
   switch (timeType) {
     case 'time': {
-      start = formatDateUTC(d, 'HH:mm');
+      start = formatDateUTC(d, 'H:mm');
       break;
     }
     case 'datetime': {
-      start = formatDateUTC(d, 'yyyy/M/d HH:mm');
+      start = formatDateUTC(d, 'yyyy/M/d H:mm');
       break;
     }
   }
