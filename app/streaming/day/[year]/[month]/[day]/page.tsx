@@ -37,7 +37,8 @@ const FetchData = async (year: number, month: number, day: number) => {
         page: 1,
         from: d,
         to: d,
-        sort: "older"
+        sort: "older",
+        reason: "dayschedule"
     }
 
     const req = new StreamingSearchRequest();
@@ -57,7 +58,7 @@ async function Page(props: PageProps) {
     const { isError, data } = await FetchData(result.year, result.month, result.day)
 
     return (
-        <ContentPage isError={isError} schedules={data.response_data}/>
+        <ContentPage isError={isError} schedules={data}/>
     )
 
 }

@@ -53,7 +53,7 @@ export class StreamingSearchRequest {
         this.client.AddHeader(header2Key, header2Value)
     }
 
-    async Get({members, from, to, page, title, maxResult, sort}: StreamingSearchRequestParams, revalidate: number | false = false) {
+    async Get({members, from, to, page, title, maxResult, sort, reason}: StreamingSearchRequestParams, revalidate: number | false = false) {
         if (members !== undefined && members.length > 0) {
             this.client.AddRequestValue("member", members?.join(','));
         }
@@ -69,6 +69,10 @@ export class StreamingSearchRequest {
         if (maxResult !== undefined) {
             this.client.AddRequestValue("maxresult", maxResult.toString());
         }
+        if (reason !== undefined) {
+            this.client.AddRequestValue("reason", reason);
+        }
+
         this.client.AddRequestValue("page", page?.toString() ?? '1');
 
         this.client.AddRequestValue("sort", sort);
@@ -90,7 +94,8 @@ export interface StreamingSearchRequestParams {
     title?: string,
     page: number,
     maxResult?: number,
-    sort: "newer" | "older"
+    sort: "newer" | "older",
+    reason?: string
 }
 
 export class DotscheduleAPIResponse<T> {
