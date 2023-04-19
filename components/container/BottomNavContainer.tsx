@@ -25,7 +25,8 @@ const BottomNavContainer: React.FC<Props> = ({linkClassName, childClassName}) =>
     const navItems: NavItem[] = [
         {
             title: 'Today',
-            href: `/streaming/day/${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`,
+            //href: `/streaming/day/${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`,
+            href: '/',
             icon: <TodaySvg className='w-6'/>
         },
         {

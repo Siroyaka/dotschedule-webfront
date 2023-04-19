@@ -2,9 +2,7 @@ import React from 'react';
 
 import { twMetaData, ogpMetaData, iosMetaData, basicMetaData } from 'library/InitialMetaData';
 
-import BottomNavContainer from 'components/container/BottomNavContainer';
 import ContentMain from 'components/container/ContentMain';
-import PageHeaderSection from 'components/field/PageHeaderSection';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -41,24 +39,9 @@ export const metadata = {
 const Layout = ({ children }: LayoutProps) => {
     return (
         <React.Fragment>
-            <PageHeaderSection title="" />
             <ContentMain nonScrolls={['calendar']}>
                 {children}
             </ContentMain>
-            <footer className='fixed inset-x-5 bottom-2 z-10 bg-white h-12 rounded-full border shadow'>
-                <BottomNavContainer 
-                    linkClassName={{
-                        base: 'rounded-full text-xs text-center py-1 tap-no-response focus:outline-none',
-                        match: 'bg-blue-500',
-                        unmatch: 'active:bg-blue-200'
-                    }}
-                    childClassName={{
-                        base: 'text-xs flex flex-col items-center',
-                        match: 'text-white',
-                        unmatch: 'text-black'
-                    }}
-                />
-            </footer>
         </React.Fragment>
     );
 }
