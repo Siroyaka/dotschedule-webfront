@@ -2,6 +2,9 @@ import React from 'react';
 
 import { twMetaData, ogpMetaData, iosMetaData, basicMetaData } from 'library/InitialMetaData';
 
+import BottomNavContainer from 'components/container/BottomNavContainer';
+import PageHeaderSection from 'components/field/PageHeaderSection';
+
 import 'styles/tailwind.css';
 
 interface LayoutProps {
@@ -39,7 +42,22 @@ const Layout = ({ children }: LayoutProps) => {
         <html lang="ja">
             <head />
             <body>
+                <PageHeaderSection title="" />
                 {children}
+                <footer className='fixed inset-x-5 bottom-2 z-10 bg-white h-12 rounded-full border shadow'>
+                    <BottomNavContainer
+                        linkClassName={{
+                            base: 'rounded-full text-xs text-center py-1 tap-no-response focus:outline-none',
+                            match: 'bg-blue-500',
+                            unmatch: 'active:bg-blue-200'
+                        }}
+                        childClassName={{
+                            base: 'text-xs flex flex-col items-center',
+                            match: 'text-white',
+                            unmatch: 'text-black'
+                        }}
+                    />
+                </footer>
             </body>
         </html>
     );
