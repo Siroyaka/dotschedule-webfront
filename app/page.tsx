@@ -27,8 +27,6 @@ const FetchData = async (year: number, month: number, day: number) => {
 
 async function Page() {
     const d = getJTCNow();
-    d.setHours(d.getHours() - 14)
-    d.setMinutes(d.getMinutes() - 10)
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
     const day = d.getDate();
