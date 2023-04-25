@@ -5,16 +5,10 @@ import React from 'react';
 import Link from 'next/link';
 import { useSelectedLayoutSegments } from 'next/navigation';
 
-import path from 'path';
-
 export interface NavItem {
     title: string
     href: string
-    routeMatch?: string
-    reuseChild?: {
-        defaultItems: string[]
-        reuseLength: number
-    }
+    routeMatch?: string[]
     icon?: React.ReactNode
     linkClassName?: {
         base: string,
@@ -39,7 +33,6 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
     const {
         href,
         routeMatch,
-        reuseChild,
         children,
         linkClassName,
         childClassName,
@@ -50,14 +43,14 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
     const segments = useSelectedLayoutSegments();
 
     let isMatch = false;
-    if (routeMatch !== undefined && segments.length > 0) {
-        isMatch = segments[0] === routeMatch;
-    }
-
-    if (reuseChild) {
-        const childs = segments.slice(1);
-        const linkSlag = childs.length >= reuseChild.reuseLength ? childs.slice(0, reuseChild.reuseLength) : reuseChild.defaultItems;
-        tabLink = path.join(href, ...linkSlag);
+    if (routeMatch !== undefined && segments.length >= routeMatch.length) {
+        isMatch = true;
+        for (let i = 0; i < routeMatch.length; i++) {
+            if(segments[i] !== routeMatch[i]) {
+                isMatch = false;
+                break;
+            }
+        }
     }
 
     return (

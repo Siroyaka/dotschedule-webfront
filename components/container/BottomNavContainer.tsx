@@ -25,35 +25,26 @@ const BottomNavContainer: React.FC<Props> = ({linkClassName, childClassName}) =>
     const navItems: NavItem[] = [
         {
             title: 'Today',
-            //href: `/streaming/day/${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`,
             href: '/',
             icon: <TodaySvg className='w-6'/>
         },
         {
             title: 'Calendar',
-            href: '/streaming/calendar',
+            href: `/streaming/calendar/${nowYear}/${nowMonth}`,
             icon: <CalendarSvg className='w-6'/>,
-            routeMatch: 'calendar',
-            reuseChild: {
-                defaultItems: [nowYear, nowMonth],
-                reuseLength: 2
-            }
+            routeMatch: ['streaming', 'calendar']
         },
         {
             title: 'List',
-            href: '/streaming/monthlist',
+            href: `/streaming/monthlist/${nowYear}/${nowMonth}`,
             icon: <ListSvg className='w-6'/>,
-            routeMatch: 'monthlist',
-            reuseChild: {
-                defaultItems: [nowYear, nowMonth],
-                reuseLength: 2
-            }
+            routeMatch: ['streaming', 'monthlist']
         },
         {
             title: 'Search',
             href: '/streaming/search',
             icon: <SearchIconSvg className='w-6'/>,
-            routeMatch: 'search'
+            routeMatch: ['streaming', 'search']
         }
     ]
     return (
