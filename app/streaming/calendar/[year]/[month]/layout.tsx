@@ -12,7 +12,7 @@ interface LayoutProps {
 }
 
 const Layout = async ({params, children}: LayoutProps) => {
-  const checkResult = SlugCheck(params.year, params.month);
+  const checkResult = SlugCheck(params);
 
   const nextMonth = getJTCNow();
   nextMonth.setMonth(nextMonth.getMonth() + 1);
