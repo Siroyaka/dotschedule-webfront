@@ -1,6 +1,9 @@
 export interface Slug {
-    year: string
-    month: string
+    c_year: string
+    c_month: string
+    year?: string
+    month?: string
+    day?: string
 }
 
 export const SlugCheck = (year: string, month: string): {result: boolean, year: number, month: number} => {

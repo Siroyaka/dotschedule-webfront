@@ -12,7 +12,6 @@ interface LayoutProps {
 }
 
 const Layout = async ({params, children}: LayoutProps) => {
-
   const checkResult = SlugCheck(params.year, params.month);
 
   const nextMonth = getJTCNow();
