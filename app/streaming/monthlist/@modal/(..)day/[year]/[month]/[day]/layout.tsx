@@ -16,7 +16,7 @@ const Layout = async ({params, children}: LayoutProps) => {
         <Modal className="w-full md:w-4/5 xl:w-3/4">
             <section
                 id={`streaming-schedule`}
-                className='overflow-y-auto h-5/6 mx-4 bg-white pb-20'
+                className='overflow-y-auto h-3/4 mx-4 bg-white pb-32 mt-12'
             >
                 <header id='streaming_schedule_header' className="flex items-center justify-between pt-4 px-2">
                     <h1 className='text-xl px-4 text-center'>{sectionTitle}</h1>
