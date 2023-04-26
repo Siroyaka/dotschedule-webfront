@@ -40,7 +40,7 @@ export default function Modal({ children, className }: {children: React.ReactNod
     >
       <div
         ref={wrapper}
-        className={`h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 ${className}`}
+        className={`h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${className}`}
       >
         {children}
       </div>
