@@ -58,7 +58,7 @@ async function Page(props: PageProps) {
     const { isError, data } = await FetchData(result.year, result.month, result.day)
 
     return (
-        <ContentPage isError={isError} schedules={data}/>
+        <ContentPage isError={isError} schedules={data} mode="lg"/>
     )
 
 }

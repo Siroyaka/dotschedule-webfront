@@ -1,14 +1,19 @@
 export interface Slug {
-    year: string
-    month: string
+    year?: string
+    month?: string
 }
 
-export const SlugCheck = (year: string, month: string): {result: boolean, year: number, month: number} => {
+export const SlugCheck = (slug?: Slug): {result: boolean, year: number, month: number} => {
     const errorResult = {
         result: false,
         year: 0,
         month: 0
     }
+    if (slug === undefined) {
+        return errorResult;
+    }
+    const year = slug.year ?? "";
+    const month = slug.month ?? "";
     if (year.length !== 4) {
         return errorResult
     }

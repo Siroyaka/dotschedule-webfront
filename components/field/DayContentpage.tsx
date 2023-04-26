@@ -10,9 +10,10 @@ import { DayScheduleToCardType } from 'library/Converter';
 interface Props {
     schedules: DotscheduleAPIResponse<DaySchedule[]>
     isError: boolean
+    mode?: "sm" | "md" | "lg" | "xl"
 }
 
-const ClientViews: React.FC<Props> = ({ schedules, isError }) => {
+const DayContentPage: React.FC<Props> = ({ schedules, isError, mode }) => {
     if (isError) {
         return (
             <article id='schedules' className='mx-2 my-4 text-center'>
@@ -25,9 +26,9 @@ const ClientViews: React.FC<Props> = ({ schedules, isError }) => {
 
     return (
         <article id='schedules' className='mx-2 my-4'>
-            <SchedulesField cardData={cardData} />
+            <SchedulesField cardData={cardData} mode={mode} />
         </article>
     )
 }
 
-export default ClientViews;
+export default DayContentPage;

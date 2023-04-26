@@ -50,8 +50,9 @@ const Fetch = async (year: number, month: number) => {
 }
 
 export async function generateMetadata(props: MetaProps): Promise<Metadata> {
-    const { year, month } = props.params;
-    const result = SlugCheck(year, month)
+    const year = props.params.year;
+    const month = props.params.month;
+    const result = SlugCheck(props.params)
     if (!result.result) {
         return { title: "無効なページです" }
     }
@@ -61,7 +62,7 @@ export async function generateMetadata(props: MetaProps): Promise<Metadata> {
 
 const Page = async (props: Pageprops) => {
 
-    const checkResult = SlugCheck(props.params.year, props.params.month);
+    const checkResult = SlugCheck(props.params);
     if (!checkResult.result) {
         return (
             <div>無効なページです</div>
