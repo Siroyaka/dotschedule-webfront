@@ -8,7 +8,6 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, modal }: LayoutProps) => {
-    logger.debug("loading monthlist root layout");
     return (
         <div className='relative h-full'>
             {children}

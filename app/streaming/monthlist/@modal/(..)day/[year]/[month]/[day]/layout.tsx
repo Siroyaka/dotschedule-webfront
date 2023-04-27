@@ -15,8 +15,6 @@ const Layout = async ({params, children}: LayoutProps) => {
     const result = SlugCheck(year, month, day);
     const sectionTitle = result.result ? `${year}年${month}月${day}日`: "無効なページ";
 
-    logger.debug("loading monthlist @modal day layout");
-
     return (
         <Modal className="w-full md:w-4/5 xl:w-3/4">
             <section

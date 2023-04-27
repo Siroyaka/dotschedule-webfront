@@ -29,6 +29,8 @@ export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     return { title: title }
 }
 
+export const revalidate = 10;
+
 const FetchData = async (year: number, month: number, day: number) => {
     const d: IDate = {
         year, month, day
@@ -48,8 +50,6 @@ const FetchData = async (year: number, month: number, day: number) => {
 async function Page(props: PageProps) {
     const { year, month, day } = props.params;
     const result = SlugCheck(year, month, day)
-
-    logger.debug("loading monthlist @modal day page");
 
     if (!result.result) {
         // error page
