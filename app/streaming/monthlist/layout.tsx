@@ -1,11 +1,11 @@
 import React from 'react';
 
+import logger from 'library/logger'
+
 interface LayoutProps {
     children: React.ReactNode
     modal: React.ReactNode
 }
-
-export const revalidate = 5;
 
 const Layout = ({ children, modal }: LayoutProps) => {
     return (

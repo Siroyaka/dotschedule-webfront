@@ -1,9 +1,5 @@
-import React from 'react';
-
 const Default = () => {
-    return (
-        <div></div>
-    );
+    return null;
 }
 
 export default Default;
