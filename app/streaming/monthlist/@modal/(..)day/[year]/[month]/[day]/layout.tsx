@@ -3,6 +3,8 @@ import React from "react"
 import { SlugCheck, StreamingScheduleSlug } from 'library/slugs/DaySlug';
 import Modal from 'components/template/Modal'
 
+import logger from 'library/logger'
+
 interface LayoutProps {
     children: React.ReactNode
     params: StreamingScheduleSlug
@@ -12,6 +14,9 @@ const Layout = async ({params, children}: LayoutProps) => {
     const { year, month, day } = params;
     const result = SlugCheck(year, month, day);
     const sectionTitle = result.result ? `${year}年${month}月${day}日`: "無効なページ";
+
+    logger.debug("loading monthlist @modal day layout");
+
     return (
         <Modal className="w-full md:w-4/5 xl:w-3/4">
             <section

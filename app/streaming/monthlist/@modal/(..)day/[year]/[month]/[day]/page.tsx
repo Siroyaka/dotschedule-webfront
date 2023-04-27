@@ -9,7 +9,7 @@ import { SlugCheck, StreamingScheduleSlug } from 'library/slugs/DaySlug';
 import ContentPage from 'components/field/DayContentpage';
 import { IDate } from 'library/DateFunctions';
 
-export const revalidate = 10;
+import logger from 'library/logger';
 
 interface MetaProps {
     params: StreamingScheduleSlug
@@ -48,6 +48,9 @@ const FetchData = async (year: number, month: number, day: number) => {
 async function Page(props: PageProps) {
     const { year, month, day } = props.params;
     const result = SlugCheck(year, month, day)
+
+    logger.debug("loading monthlist @modal day page");
+
     if (!result.result) {
         // error page
         return (

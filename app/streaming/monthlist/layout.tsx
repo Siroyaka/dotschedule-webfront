@@ -1,13 +1,14 @@
 import React from 'react';
 
+import logger from 'library/logger'
+
 interface LayoutProps {
     children: React.ReactNode
     modal: React.ReactNode
 }
 
-export const revalidate = 5;
-
 const Layout = ({ children, modal }: LayoutProps) => {
+    logger.debug("loading monthlist root layout");
     return (
         <div className='relative h-full'>
             {children}
