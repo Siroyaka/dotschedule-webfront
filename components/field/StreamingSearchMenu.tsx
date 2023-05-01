@@ -9,6 +9,7 @@ import {
     CloseSvg
 } from 'components/parts/svgIcons';
 import { AccordionArrowSvg } from 'components/parts/svgIcons';
+import SwitchButton from 'components/parts/switchbutton';
 
 import { getMonthCalendar } from 'library/DateFunctions';
 import { IDate, iDateToString, getJTCNow } from 'library/DateFunctions';
@@ -478,7 +479,23 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             </div>
             <div id='search-option-area' className='mt-2'>
                 <ListCabinet openCloseFunction={setOpenOptionMenu} isOpen={openOptionMenu} title='Option'>
-
+                    <div className='flex'>
+                        <div className=''>
+                            <h1>並び順</h1>
+                            <div className='flex'>
+                                <a>古い順</a>
+                                <SwitchButton className='mx-2' onClick={SwitchSortOrder} isOn={pageState.pageValue.sort === 'newer'}/>
+                                <a>新しい順</a>
+                            </div>
+                        </div>
+                        <div className='ml-4'>
+                            <h1>ページごとの表示数</h1>
+                            <div className='flex'>
+                                <div>20</div>
+                                <a>件</a>
+                            </div>
+                        </div>
+                    </div>
                 </ListCabinet>
             </div>
             <div id='search-button' className='text-right mt-4'>
