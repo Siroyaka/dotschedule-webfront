@@ -1,20 +1,26 @@
 import React from 'react'
 
 import SchedulesField from 'components/field/Schedules';
+import SchedulesListField from 'components/field/ScheduleList';
 import DataFetchError from 'components/standalone/DataFetchError'
 import PageSelector from 'components/standalone/PageSelector';
-import { DayScheduleToCardType } from 'library/Converter';
+import { DayScheduleToCardType, ScheduleListToListView } from 'library/Converter';
 import { IDate, iDateToDate } from 'library/DateFunctions';
-import { StreamingSearchRequest, StreamingSearchRequestParams } from 'library/api/DotscheduleApi';
+import { DaySchedule, DotscheduleAPIResponse, StreamingSearchRequest, StreamingSearchRequestParams } from 'library/api/DotscheduleApi';
 
 interface Props {
-    searchParams: {
-        page?: string
-        members?: string
-        from?: string
-        to?: string
-        title?: string
-    }
+    searchParams: SearchParams
+}
+
+interface SearchParams {
+    page?: string
+    members?: string
+    from?: string
+    to?: string
+    title?: string
+    viewmode?: string
+    sort?: string
+    maxresult?: string
 }
 
 export const dynamic = 'force-dynamic';
@@ -83,7 +89,7 @@ const dateRequestParamToIDate = (v?: string): IDate | undefined => {
 }
 
 const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParams => {
-    const {page, members, from, to, title} = searchParams;
+    const {page, members, from, to, title, sort, maxresult} = searchParams;
 
     const memberList = members ? members.replaceAll(';', '').split(',').filter(x => ids.has(x)) : [];
 
@@ -103,14 +109,17 @@ const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParam
         }
     }
 
+    let maxResultNum = parseInt(maxresult ?? "20");
+    maxResultNum = Math.min(isNaN(maxResultNum) ? 20 : maxResultNum, 200);
+
     return {
         page: ipage,
         members: memberList,
         from: fromDate,
         to: toDate,
         title: titleQuery,
-        maxResult: 20,
-        sort: "newer"
+        maxResult: maxResultNum,
+        sort: (sort ?? "") === "older" ? "older" : "newer"
     };
 }
 
@@ -146,6 +155,63 @@ const Page = async ({searchParams}: Props) => {
         )
     }
 
+    switch (searchParams.viewmode ?? '') {
+        case 'list': {
+            return ListMode({
+                data,
+                apiRequestParams,
+                searchParams,
+            });
+        }
+        default: {
+            return CardMode({
+                data,
+                apiRequestParams,
+                searchParams,
+            });
+        }
+    }
+}
+
+const ListMode = ({data, apiRequestParams, searchParams}: {data: DotscheduleAPIResponse<DaySchedule[]>, apiRequestParams: StreamingSearchRequestParams, searchParams: SearchParams}) => {
+    const listData = data.response_data?.map(x => ScheduleListToListView(x, 'datetime', false));
+
+    const searchPageSelector = (
+        <PageSelector
+            totalLen={Math.ceil(data.length / (apiRequestParams.maxResult ?? 100))}
+            viewNum={10}
+            nowPage={apiRequestParams.page}
+            pageQueryName={'page'}
+            pagePath={'/streaming/search'}
+            otherQuerys={searchParams}
+            parentClassName={'flex flex-wrap'}
+            childClassName={'text-ml w-6 text-center'}
+            disableLinkClassName={'text-black'}
+            enableLinkClassName={'text-blue-400'}
+        />
+    )
+
+    return (
+        <section id='search-result' className='mt-2 pt-4'>
+            <header className='mx-2 my-2'>
+                <h1>{data.length}件</h1>
+                <div id='search-page-selector' className='flex items-center justify-center'>
+                    {searchPageSelector}
+                </div>
+            </header>
+            <div>
+                <SchedulesListField listData={listData}/>
+            </div>
+            <footer className='mx-2 my-2'>
+                <div id='search-page-selector' className='flex items-center justify-center'>
+                    {searchPageSelector}
+                </div>
+            </footer>
+        </section>
+    )
+}
+
+const CardMode = ({data, apiRequestParams, searchParams}: {data: DotscheduleAPIResponse<DaySchedule[]>, apiRequestParams: StreamingSearchRequestParams, searchParams: SearchParams}) => {
     const cardData = data.response_data?.map(x => DayScheduleToCardType(x, 'datetime')) ?? [];
 
     const searchPageSelector = (
