@@ -52,11 +52,18 @@ export const metadata = {
 }
 
 const isSearchParamBlank = ({searchParams}: Props) => {
-    const membersBlank = searchParams.members === undefined || searchParams.members.trim() === "";
-    const fromBlank = searchParams.from === undefined || searchParams.from.trim() === "";
-    const toBlank = searchParams.to === undefined || searchParams.to.trim() === "";
-    const titleBlank = searchParams.title === undefined || searchParams.title.trim() === "";
-    return membersBlank && fromBlank && toBlank && titleBlank;
+    const isBlank = (param?: string) => {
+        return (param ?? "").trim() === "";
+    }
+    return (
+        isBlank(searchParams.members) &&
+        isBlank(searchParams.from) &&
+        isBlank(searchParams.to) &&
+        isBlank(searchParams.title) &&
+        isBlank(searchParams.page) &&
+        isBlank(searchParams.sort) &&
+        isBlank(searchParams.maxresult)
+    )
 }
 
 const dateRequestParamToIDate = (v?: string): IDate | undefined => {
