@@ -9,6 +9,7 @@ import {
     CloseSvg
 } from 'components/parts/svgIcons';
 import { AccordionArrowSvg } from 'components/parts/svgIcons';
+import SwitchButton from 'components/parts/switchbutton';
 
 import { getMonthCalendar } from 'library/DateFunctions';
 import { IDate, iDateToString, getJTCNow } from 'library/DateFunctions';
@@ -32,6 +33,8 @@ interface PageValue {
     to?: IDate
     title?: string
     tags?: string[]
+    sort: "newer" | "older"
+    maxResult: number
 }
 
 const IconsSelector: React.FC<{list: SearchMember[], setMemberState: (id: string, isSelect: boolean) => void}> = ({list, setMemberState}) => {
@@ -251,7 +254,7 @@ const pageValueIsBlank = ({members, title, tags, from, to}: PageValue) => {
     return membersBlank && titleBlank && tagsBlank && fromBlank && toBlank;
 }
 
-const pageValueToLinkQuery = ({members, from, to, title, tags}: PageValue) => {
+const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult}: PageValue) => {
     return {
         'members': members?.join(',') ?? '',
         'from': from !== undefined ? iDateToString(from, '-', true) : '',
@@ -259,6 +262,8 @@ const pageValueToLinkQuery = ({members, from, to, title, tags}: PageValue) => {
         'title': title?.replaceAll(';', '') ?? '',
         'page': 1,
         'tags': tags?.join(',') ?? '',
+        'sort': sort,
+        'maxresult': Math.max(Math.min(maxResult, 200), 1)
     }
 }
 
@@ -268,7 +273,9 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
         pageValue: {
             members: [],
             title: '',
-            tags: []
+            tags: [],
+            sort: "newer",
+            maxResult: 20
         },
         calendarState: 'none',
         modalMode: 'none'
@@ -278,6 +285,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
     const [openEnrollment, setOpenEnrollment] = React.useState(true);
     const [openUnEnrollment, setOpenUnEnrollment] = React.useState(false);
     const [openDateSelector, setOpenDateSelector] = React.useState(false);
+    const [openOptionMenu, setOpenOptionMenu] = React.useState(false);
 
     const changeMemberState = React.useCallback((id: string, isSelect: boolean) => {
         setPageState(x => {
@@ -358,13 +366,39 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                 modalMode: 'none'
             }
         })
-    }, [])
+    }, []);
 
     const setModalOff = React.useCallback(() => {
         setPageState(x => {
             return {
                 ...x,
                 modalMode: 'none'
+            }
+        })
+    }, []);
+
+    const SwitchSortOrder = React.useCallback((flg: boolean) => {
+        setPageState(x => {
+            const newPageValue: PageValue = {
+                ...x.pageValue,
+                sort: flg ? "newer" : "older"
+            }
+            return {
+                ...x,
+                pageValue: newPageValue
+            }
+        })
+    }, []);
+
+    const SetMaxResult = React.useCallback((value: number) => {
+        setPageState(x => {
+            const newPageValue: PageValue = {
+                ...x.pageValue,
+                maxResult: value
+            }
+            return {
+                ...x,
+                pageValue: newPageValue
             }
         })
     }, []);
@@ -443,42 +477,45 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                     </div>
                 </ListCabinet>
             </div>
+            <div id='search-option-area' className='mt-2'>
+                <ListCabinet openCloseFunction={setOpenOptionMenu} isOpen={openOptionMenu} title='Option'>
+                    <div className='flex'>
+                        <div className=''>
+                            <h1>並び順</h1>
+                            <div className='flex'>
+                                <a>古い順</a>
+                                <SwitchButton className='mx-2' onClick={SwitchSortOrder} isOn={pageState.pageValue.sort === 'newer'}/>
+                                <a>新しい順</a>
+                            </div>
+                        </div>
+                        <div className='ml-4'>
+                            <h1>ページごとの表示数</h1>
+                            <div className='flex'>
+                                <div>20</div>
+                                <a>件</a>
+                            </div>
+                        </div>
+                    </div>
+                </ListCabinet>
+            </div>
             <div id='search-button' className='text-right mt-4'>
-                {
-                    !pageValueIsBlank(pageState.pageValue) ? (
-                        <Link
-                            href={{
-                                pathname: '/streaming/search',
-                                query: pageValueToLinkQuery(pageState.pageValue)
-                            }}
-                            className={`
-                            inline-block bg-gray-200 rounded
-                            px-4 py-2 mx-4
-                            shadow-gray-600/100
-                            click-action-item
-                            text-xl
-                            `}
-                            draggable={false}
-                            prefetch={false}
-                        >
-                            検索
-                        </ Link>
-                    ) : (
-                        <a
-                            className={`
-                            inline-block bg-gray-200 rounded
-                            px-4 py-2 mx-4
-                            shadow-gray-600/100
-                            text-gray-400
-                            click-nonaction-item
-                            text-xl
-                            `}
-                            draggable={false}
-                        >
-                            検索
-                        </a>
-                    )
-                }
+                <Link
+                    href={{
+                        pathname: '/streaming/search',
+                        query: pageValueToLinkQuery(pageState.pageValue)
+                    }}
+                    className={`
+                        inline-block bg-gray-200 rounded
+                        px-4 py-2 mx-4
+                        shadow-gray-600/100
+                        click-action-item
+                        text-xl
+                        `}
+                    draggable={false}
+                    prefetch={false}
+                >
+                    検索
+                </ Link>
             </div>
             {
                 pageState.modalMode !== 'none' ? (
