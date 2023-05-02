@@ -484,7 +484,12 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                             <h1>並び順</h1>
                             <div className='flex'>
                                 <a>古い順</a>
-                                <SwitchButton className='mx-2' onClick={SwitchSortOrder} isOn={pageState.pageValue.sort === 'newer'}/>
+                                <SwitchButton
+                                    className='mx-2'
+                                    onClick={SwitchSortOrder}
+                                    isOn={pageState.pageValue.sort === 'newer'}
+                                    offModeColor='blue'
+                                />
                                 <a>新しい順</a>
                             </div>
                         </div>
