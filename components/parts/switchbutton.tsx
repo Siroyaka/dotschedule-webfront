@@ -1,17 +1,23 @@
 import React from 'react';
 
-type bgcolor = 'green' | 'white' | 'gray' | 'blue' | 'orange' | 'black';
+type BgColor = 'green' | 'white' | 'gray' | 'blue' | 'orange' | 'black';
+
+type ButtonColor = 'green' | 'white' | 'gray' | 'blue' | 'orange' | 'black';
+
+type Speed = 'veryslow' | 'slow' | 'middle' | 'fast' | 'veryfast';
 
 interface SwitchButtonProps {
     onClick: (flg: boolean) => void
     isOn: boolean
-    onModeColor?: bgcolor
-    offModeColor?: bgcolor
-    buttonColor?: bgcolor
+    onModeColor?: BgColor
+    offModeColor?: BgColor
+    buttonColor?: ButtonColor
     className?: string
+    buttonMoveSpeed?: Speed
+    bgChangeSpeed?: Speed
 }
 
-const convertBgColor = (bgcolor: bgcolor) => {
+const convertBgColor = (bgcolor: BgColor) => {
     switch(bgcolor) {
         case 'green': return 'bg-green-400';
         case 'white': return 'bg-white';
@@ -22,7 +28,7 @@ const convertBgColor = (bgcolor: bgcolor) => {
     }
 }
 
-const convertButtonColor = (buttonColor: bgcolor) => {
+const convertButtonColor = (buttonColor: ButtonColor) => {
     switch(buttonColor) {
         case 'green': return 'bg-green-500';
         case 'white': return 'bg-white';
@@ -32,20 +38,52 @@ const convertButtonColor = (buttonColor: bgcolor) => {
     }
 }
 
-const SwitchButton: React.FC<SwitchButtonProps> = ({onClick, isOn, onModeColor, offModeColor, buttonColor, className}) => {
-    if (onModeColor === undefined) onModeColor = 'green';
-    if (offModeColor === undefined) offModeColor = 'gray';
-    if (buttonColor === undefined) buttonColor = 'white';
+const convertSpeed = (s: Speed) => {
+    switch(s) {
+        case 'veryslow': return 'duration-700'
+        case 'slow': return 'duration-500'
+        case 'middle': return 'duration-300'
+        case 'fast': return 'duration-150'
+        case 'veryfast': return 'duration-75'
+    }
+}
+
+const SwitchButton: React.FC<SwitchButtonProps> = (props) => {
+    const {
+        onClick,
+        isOn,
+        onModeColor,
+        offModeColor,
+        buttonColor,
+        className,
+        bgChangeSpeed,
+        buttonMoveSpeed
+    } = props;
 
     const outlineClass = isOn ?
-        `${convertBgColor(onModeColor)} justify-end` :
-        `${convertBgColor(offModeColor)} justify-start`;
+        `${convertBgColor(onModeColor ?? 'green')} justify-end` :
+        `${convertBgColor(offModeColor ?? 'gray')} justify-start`;
+    
+    const buttonCenterStyle = {
+        height: "1.2rem",
+        width: "1.2rem",
+        top: "0.09rem",
+        transform: isOn ? "translate(1.6rem)" : "translate(0.1rem)"
+    };
+    
     return (
         <div
-            className={`cursor-pointer h-6 w-12 rounded-full border shadow flex items-center transition-all ease-in-out duration-500 ${outlineClass} ${className}`}
+            className={`relative outline-none tap-no-response cursor-pointer rounded-full border shadow transition-all ease-in-out ${convertSpeed(bgChangeSpeed ?? 'middle')} ${outlineClass} ${className}`}
             onClick={() => onClick(!isOn)}
+            style={{
+                height: "1.5rem",
+                width: "3rem"
+            }}
         >
-            <div className={`h-5 w-5 rounded-full mx-0.5 ${convertButtonColor(buttonColor)}`} />
+            <div
+                className={`absolute transition ${convertSpeed(buttonMoveSpeed ?? 'middle')} rounded-full ${convertButtonColor(buttonColor ?? 'white')}`}
+                style={buttonCenterStyle}
+            />
         </div>
     )
 }
