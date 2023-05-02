@@ -10,6 +10,7 @@ import {
 } from 'components/parts/svgIcons';
 import { AccordionArrowSvg } from 'components/parts/svgIcons';
 import SwitchButton from 'components/parts/switchbutton';
+import Stepper from 'components/parts/stepper';
 
 import { getMonthCalendar } from 'library/DateFunctions';
 import { IDate, iDateToString, getJTCNow } from 'library/DateFunctions';
@@ -391,6 +392,9 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
     }, []);
 
     const SetMaxResult = React.useCallback((value: number) => {
+        if (value < 20 || value > 200) {
+            return
+        }
         setPageState(x => {
             const newPageValue: PageValue = {
                 ...x.pageValue,
@@ -480,9 +484,9 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             <div id='search-option-area' className='mt-2'>
                 <ListCabinet openCloseFunction={setOpenOptionMenu} isOpen={openOptionMenu} title='Option'>
                     <div className='flex'>
-                        <div className=''>
-                            <h1>並び順</h1>
-                            <div className='flex'>
+                        <div className='text-center border-2 py-1 rounded-lg'>
+                            <h1 className='border-b pb-1'>並び順</h1>
+                            <div className='flex px-2 pt-1'>
                                 <a>古い順</a>
                                 <SwitchButton
                                     className='mx-2'
@@ -493,12 +497,11 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                                 <a>新しい順</a>
                             </div>
                         </div>
-                        <div className='ml-4'>
-                            <h1>ページごとの表示数</h1>
-                            <div className='flex'>
-                                <div>20</div>
-                                <a>件</a>
-                            </div>
+                        <div className='ml-4 rounded-lg'>
+                            <h1 className='pb-1 px-2'>ページごとの表示数</h1>
+                            <Stepper onClick={SetMaxResult} mode='both' enableStep='both' stepValue={20} value={pageState.pageValue.maxResult}>
+                                {pageState.pageValue.maxResult}
+                            </Stepper>
                         </div>
                     </div>
                 </ListCabinet>
