@@ -62,7 +62,6 @@ export const LinkTab: React.FC<NavItem & {children?: React.ReactNode}> = (props)
                 pathname: tabLink,
             }}
                 draggable={false}
-                prefetch={false}
                 className={`
                     ${childClassName?.base}
                     ${isMatch ? childClassName?.match : childClassName?.unmatch}

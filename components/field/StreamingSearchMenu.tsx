@@ -12,6 +12,7 @@ import { AccordionArrowSvg } from 'components/parts/svgIcons';
 import SwitchButton from 'components/parts/switchbutton';
 import Stepper from 'components/parts/stepper';
 
+import MiniCalendar from 'components/standalone/MiniCalendar';
 import { getMonthCalendar } from 'library/DateFunctions';
 import { IDate, iDateToString, getJTCNow } from 'library/DateFunctions';
 
@@ -76,183 +77,6 @@ const ListCabinet: React.FC<{openCloseFunction: (boolean) => void, isOpen: boole
             </div>
         </React.Fragment>
     )
-}
-
-interface MiniCalendarState {
-    calendar: Readonly<Required<IDate>>[][],
-    year: number,
-    month: number,
-    enableCalendarShift: {
-        nextMonth: boolean,
-        prevMonth: boolean,
-    }
-}
-
-const MiniCalendarNavigation: React.FC<{
-    children?: React.ReactNode,
-    onClick: (number) => void,
-    value: number,
-    disable: boolean
-}> = ({
-    children,
-    onClick,
-    value,
-    disable
-}) => {
-    if (disable) {
-        return (
-            <div className='h-8 w-8 rounded-full flex items-center justify-center text-gray-200'>
-                {children}
-            </div>
-        )
-    }
-    return (
-    <button className='h-8 w-8 rounded-full flex items-center justify-center' onClick={() => onClick(value)}>
-        {children}
-    </button>
-    )
-}
-
-const createEnableCalendarShift = (year: number, month: number, allowDateRange?: {from: IDate, to: IDate}) => {
-    if (allowDateRange === undefined) {
-        return {
-            nextMonth: true,
-            prevMonth: true,
-        }
-    }
-    return {
-        nextMonth: allowDateRange.to.year > year || (allowDateRange.to.year === year && allowDateRange.to.month > month),
-        prevMonth: allowDateRange.from.year < year || (allowDateRange.from.year === year && allowDateRange.from.month < month),
-    }
-
-}
-
-const MiniCalendar: React.FC<{
-    defaultDate?: IDate
-    setDate?: (IDate) => void, title?: string,
-    allowDateRange?: {
-        from: IDate,
-        to: IDate
-    }
-}> = ({
-    defaultDate,
-    setDate, title,
-    allowDateRange,
-}) => {
-    const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
-    const now = getJTCNow();
-    const year = defaultDate?.year ?? now.getFullYear();
-    const month = defaultDate?.month ?? now.getMonth() + 1;
-    const enableCalendarShift = createEnableCalendarShift(year, month, allowDateRange);
-    const [calendarState, setCalendarState] = React.useState<MiniCalendarState>({
-        calendar: getMonthCalendar(year, month),
-        year,
-        month,
-        enableCalendarShift
-    });
-    const moveCalendarView = React.useCallback((addMonth: number) => {
-        setCalendarState((state) => {
-            let nextMonth = state.month + addMonth;
-            let nextYear = state.year;
-            while(nextMonth < 1) {
-                nextMonth += 12;
-                nextYear -= 1;
-            }
-            while(nextMonth > 12) {
-                nextMonth -= 12;
-                nextYear += 1;
-            }
-
-            if (allowDateRange !== undefined) {
-                if (allowDateRange.from.year > nextYear || (allowDateRange.from.year === nextYear && allowDateRange.from.month > nextMonth)) {
-                    nextYear = allowDateRange.from.year;
-                    nextMonth = allowDateRange.from.month;
-                }
-
-                if (allowDateRange.to.year < nextYear || (allowDateRange.to.year === nextYear && allowDateRange.to.month < nextMonth)) {
-                    nextYear = allowDateRange.to.year;
-                    nextMonth = allowDateRange.to.month;
-                }
-            }
-
-            const enableCalendarShift = createEnableCalendarShift(nextYear, nextMonth, allowDateRange);
-
-            return {
-                ...state,
-                calendar: getMonthCalendar(nextYear, nextMonth),
-                year: nextYear,
-                month: nextMonth,
-                enableCalendarShift
-            }
-        })
-    }, [])
-    return (
-        <section id='minicalendar'>
-            <header className='my-4'>
-                <div className='ml-4 mb-2'>
-                    <h1>{title}</h1>
-                </div>
-                <div className='flex items-center justify-between mx-4 border-b-2'>
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={-12} disable={!calendarState.enableCalendarShift.prevMonth}>
-                        <NavigationBeforeSvg />
-                    </MiniCalendarNavigation>
-                    {calendarState.year}年
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={12} disable={!calendarState.enableCalendarShift.nextMonth}>
-                        <NavigationNextSvg />
-                    </MiniCalendarNavigation>
-                </div>
-                <div className='flex items-center justify-between mt-2 mx-4'>
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={-1} disable={!calendarState.enableCalendarShift.prevMonth}>
-                        <NavigationBeforeSvg />
-                    </MiniCalendarNavigation>
-                    {calendarState.month}月
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={1} disable={!calendarState.enableCalendarShift.nextMonth}>
-                        <NavigationNextSvg />
-                    </MiniCalendarNavigation>
-                </div>
-            </header>
-            <ol className='grid grid-cols-7 m-2'>
-                {weekDays.map((weekDay) => (
-                    <React.Fragment key={`cal-${calendarState.year}-${calendarState.month}-weekday-${weekDay}`}>
-                        <li className='text-center text-ml'>
-                            {weekDay}
-                        </li>
-                    </React.Fragment>
-                ))}
-                {calendarState.calendar.map((week, i) => (
-                <React.Fragment key={`cal-${calendarState.year}-${calendarState.month}-week-${i + 1}`}>
-                    {week.map((day) => (
-                    <li
-                        key={`cal-${calendarState.year}-${calendarState.month}-week-${i + 1}-wd-${day.weekDay}`}
-                        className='flex text-center min-h-[50px] justify-center items-center'
-                    >
-                        {
-                            !day.otherMonth ? (
-                                <button className='bg-green-200 rounded-full h-8 w-8' onClick={() => setDate ? setDate(day) : null}>
-                                    <span className={'text-ml'}>
-                                        {day.otherMonth ? '' : day.day}
-                                    </span>
-                                </button>
-                            ) : (
-                                <span></span>
-                            )
-                        }
-                    </li>
-                    ))}
-                </React.Fragment>
-                ))}
-            </ol>
-        </section>
-    )
-}
-
-const pageValueIsBlank = ({members, title, tags, from, to}: PageValue) => {
-    const membersBlank = (members?.length ?? 0) === 0;
-    const titleBlank = (title?.length ?? 0) === 0;
-    const tagsBlank = (tags?.length ?? 0) === 0;
-    const fromBlank = from === undefined;
-    const toBlank = to === undefined;
-    return membersBlank && titleBlank && tagsBlank && fromBlank && toBlank;
 }
 
 const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult}: PageValue) => {
@@ -485,8 +309,10 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                 <ListCabinet openCloseFunction={setOpenOptionMenu} isOpen={openOptionMenu} title='Option'>
                     <div className='flex'>
                         <div className='text-center border-2 py-1 rounded-lg'>
-                            <h1 className='border-b pb-1'>並び順</h1>
-                            <div className='flex px-2 pt-1'>
+                            <div className='py-1 px-2 border-b h-1/2 flex items-center justify-center'>
+                                <h1 className=''>並び順</h1>
+                            </div>
+                            <div className='flex px-2 pt-1 h-1/2'>
                                 <a>古い順</a>
                                 <SwitchButton
                                     className='mx-2'
@@ -497,9 +323,11 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                                 <a>新しい順</a>
                             </div>
                         </div>
-                        <div className='ml-4 rounded-lg'>
-                            <h1 className='pb-1 px-2'>ページごとの表示数</h1>
-                            <Stepper onClick={SetMaxResult} mode='both' enableStep='both' stepValue={20} value={pageState.pageValue.maxResult}>
+                        <div className='ml-4 rounded-lg border-2 flex flex-col justify-between'>
+                            <div className='py-1 border-b h-1/2 px-12 flex items-center justify-center'>
+                                <h1 className=''>表示数</h1>
+                            </div>
+                            <Stepper className='h-1/2' onClick={SetMaxResult} mode='both' enableStep='both' stepValue={20} value={pageState.pageValue.maxResult}>
                                 {pageState.pageValue.maxResult}
                             </Stepper>
                         </div>

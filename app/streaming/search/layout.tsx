@@ -1,9 +1,8 @@
 import React from "react"
 
-import LoadingField from 'components/field/Loading';
-
 import { getJTCNow, dateToIDate } from 'library/DateFunctions';
 import StreamingSearchMenu, { SearchMember } from 'components/field/StreamingSearchMenu'
+import LoadingField from 'components/field/Loading';
 
 interface LayoutProps {
     children: React.ReactNode

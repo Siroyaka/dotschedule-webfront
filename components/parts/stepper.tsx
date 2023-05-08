@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { PlusIconSvg, MinusIconSvg } from 'components/parts/svgIcons';
+
 type BgColor = 'green' | 'white' | 'gray' | 'blue' | 'orange' | 'black';
 
 type ButtonColor = 'green' | 'white' | 'gray' | 'blue' | 'orange' | 'black';
@@ -70,23 +72,35 @@ const Stepper: React.FC<StepperProps> = (props) => {
         buttonMoveSpeed
     } = props;
 
-    return (
-        <div className={`flex border ${className}`}>
-            <div className='w-1/2 flex items-center justify-center'>
-                {children ?? value}
-            </div>
-            <div
-                className='w-1/4 tap-no-response border-l border-r text-center cursor-pointer'
+    const plusButton = mode === 'both' || mode === 'up' ? (
+        <div className={`w-1/${mode === 'both' ? '4' : '2'} border-l border-r flex items-center justify-center`}>
+            <button
+                className='tap-no-response w-7 h-7 mx-1 my-1 rounded-full bg-gray-100'
                 onClick={() => {onClick(stepValue + value)}}
             >
-                +
-            </div>
-            <div
-                className='w-1/4 tap-no-response text-center cursor-pointer'
-                onClick={() => {onClick((-1 * stepValue) + value)}}
+                <PlusIconSvg className='w-7' />
+            </button>
+        </div>
+    ) : null;
+
+    const minusButton = mode === 'both' || mode === 'down' ? (
+        <div className={`w-1/${mode === 'both' ? '4' : '2'} border-l border-r flex items-center justify-center`}>
+            <button
+                className='tap-no-response w-7 h-7 mx-1 my-1 rounded-full bg-gray-100'
+                onClick={() => { onClick((-1 * stepValue) + value) }}
             >
-                -
+                <MinusIconSvg className='w-7' />
+            </button>
+        </div>
+    ) : null;
+
+    return (
+        <div className={`flex ${className ?? ""}`}>
+            <div className='w-1/2 text-xl flex items-center justify-center'>
+                {children ?? value}
             </div>
+            {plusButton}
+            {minusButton}
         </div>
     )
 }
