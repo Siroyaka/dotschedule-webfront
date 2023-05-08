@@ -72,7 +72,7 @@ const SwitchButton: React.FC<SwitchButtonProps> = (props) => {
     };
     
     return (
-        <div
+        <button
             className={`relative outline-none tap-no-response cursor-pointer rounded-full border shadow transition-all ease-in-out ${convertSpeed(bgChangeSpeed ?? 'middle')} ${outlineClass} ${className}`}
             onClick={() => onClick(!isOn)}
             style={{
@@ -84,7 +84,7 @@ const SwitchButton: React.FC<SwitchButtonProps> = (props) => {
                 className={`absolute transition ${convertSpeed(buttonMoveSpeed ?? 'middle')} rounded-full ${convertButtonColor(buttonColor ?? 'white')}`}
                 style={buttonCenterStyle}
             />
-        </div>
+        </button>
     )
 }
 
