@@ -132,7 +132,7 @@ const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParam
 
 const fetchData = async(params: StreamingSearchRequestParams) => {
     const req = new StreamingSearchRequest();
-    return await req.Get(params, 10);
+    return await req.Get(params, 1);
 }
 
 const Page = async ({searchParams}: Props) => {
