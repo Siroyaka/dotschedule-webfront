@@ -7,6 +7,8 @@ interface LayoutProps {
     searchmenu: React.ReactNode
 }
 
+export const dynamic = 'force-dynamic';
+
 const Layout = async ({children, searchmenu}: LayoutProps) => {
     return (
         <section
