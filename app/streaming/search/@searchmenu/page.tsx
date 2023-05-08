@@ -122,6 +122,8 @@ const json = {
     ]
 }
 
+export const dynamic = 'force-dynamic';
+
 const FetchStreamingSearchMenuValues = async () => {
     const rangeStart = dateToIDate(new Date("2017-01-01T00:00:00Z"));
     const rangeEndDate = getJTCNow();
