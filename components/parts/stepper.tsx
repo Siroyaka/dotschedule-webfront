@@ -99,8 +99,8 @@ const Stepper: React.FC<StepperProps> = (props) => {
             <div className='w-1/2 text-base sm:text-xl flex items-center justify-center'>
                 {children ?? value}
             </div>
-            {plusButton}
             {minusButton}
+            {plusButton}
         </div>
     )
 }

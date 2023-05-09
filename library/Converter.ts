@@ -105,5 +105,6 @@ export const ScheduleListToListView = (schedule: DaySchedule, timeType: 'time' |
         headerRights: start,
         body: schedule.StreamingData.Title,
         url: schedule.StreamingData.URL,
+        participantsIcons: schedule.Participants.map(x => x.Icon)
     })
 }
