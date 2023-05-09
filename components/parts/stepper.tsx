@@ -75,10 +75,10 @@ const Stepper: React.FC<StepperProps> = (props) => {
     const plusButton = mode === 'both' || mode === 'up' ? (
         <div className={`w-1/${mode === 'both' ? '4' : '2'} border-l border-r flex items-center justify-center`}>
             <button
-                className='tap-no-response w-7 h-7 mx-1 my-1 rounded-full bg-gray-100'
-                onClick={() => {onClick(stepValue + value)}}
+                className='tap-no-response w-5 h-5 sm:w-7 sm:h-7 mx-2 my-2 rounded-full bg-gray-100'
+                onClick={() => { enableStep === 'both' || enableStep === 'up' ? onClick(stepValue + value) : {} }}
             >
-                <PlusIconSvg className='w-7' />
+                <PlusIconSvg className={`w-5 sm:w-7 ${ enableStep === 'down' ? 'text-gray-300' : ''}`} />
             </button>
         </div>
     ) : null;
@@ -86,21 +86,21 @@ const Stepper: React.FC<StepperProps> = (props) => {
     const minusButton = mode === 'both' || mode === 'down' ? (
         <div className={`w-1/${mode === 'both' ? '4' : '2'} border-l border-r flex items-center justify-center`}>
             <button
-                className='tap-no-response w-7 h-7 mx-1 my-1 rounded-full bg-gray-100'
-                onClick={() => { onClick((-1 * stepValue) + value) }}
+                className='tap-no-response w-5 h-5 sm:w-7 sm:h-7 mx-1 my-1 rounded-full bg-gray-100'
+                onClick={() => { enableStep === 'both' || enableStep === 'down' ? onClick((-1 * stepValue) + value) : {} }}
             >
-                <MinusIconSvg className='w-7' />
+                <MinusIconSvg className={`w-5 sm:w-7 ${ enableStep === 'up' ? 'text-gray-300' : ''}`} />
             </button>
         </div>
     ) : null;
 
     return (
         <div className={`flex ${className ?? ""}`}>
-            <div className='w-1/2 text-xl flex items-center justify-center'>
+            <div className='w-1/2 text-base sm:text-xl flex items-center justify-center'>
                 {children ?? value}
             </div>
-            {plusButton}
             {minusButton}
+            {plusButton}
         </div>
     )
 }

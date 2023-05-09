@@ -37,6 +37,16 @@ interface PageValue {
     tags?: string[]
     sort: "newer" | "older"
     maxResult: number
+    viewmode: 'card' | 'list'
+}
+
+const defaultPageValue: PageValue = {
+    members: [],
+    title: '',
+    tags: [],
+    sort: "newer",
+    maxResult: 20,
+    viewmode: 'card'
 }
 
 const IconsSelector: React.FC<{list: SearchMember[], setMemberState: (id: string, isSelect: boolean) => void}> = ({list, setMemberState}) => {
@@ -79,7 +89,7 @@ const ListCabinet: React.FC<{openCloseFunction: (boolean) => void, isOpen: boole
     )
 }
 
-const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult}: PageValue) => {
+const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult, viewmode}: PageValue) => {
     return {
         'members': members?.join(',') ?? '',
         'from': from !== undefined ? iDateToString(from, '-', true) : '',
@@ -88,20 +98,15 @@ const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult}:
         'page': 1,
         'tags': tags?.join(',') ?? '',
         'sort': sort,
-        'maxresult': Math.max(Math.min(maxResult, 200), 1)
+        'maxresult': Math.max(Math.min(maxResult, 200), 1),
+        'viewmode': viewmode
     }
 }
 
 const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}) => {
     const [pageState, setPageState] = React.useState<PageState>({
         memberList,
-        pageValue: {
-            members: [],
-            title: '',
-            tags: [],
-            sort: "newer",
-            maxResult: 20
-        },
+        pageValue: defaultPageValue,
         calendarState: 'none',
         modalMode: 'none'
     })
@@ -231,6 +236,19 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
         })
     }, []);
 
+    const SwitchViewMode = React.useCallback((flg: boolean) => {
+        setPageState(x => {
+            const newPageValue: PageValue = {
+                ...x.pageValue,
+                viewmode: flg ? "card" : "list"
+            }
+            return {
+                ...x,
+                pageValue: newPageValue
+            }
+        })
+    }, [])
+
     return (
         <React.Fragment>
             <div
@@ -307,29 +325,44 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
             </div>
             <div id='search-option-area' className='mt-2'>
                 <ListCabinet openCloseFunction={setOpenOptionMenu} isOpen={openOptionMenu} title='Option'>
-                    <div className='flex'>
+                    <div className='flex flex-wrap gap-4'>
                         <div className='text-center border-2 py-1 rounded-lg'>
                             <div className='py-1 px-2 border-b h-1/2 flex items-center justify-center'>
-                                <h1 className=''>並び順</h1>
+                                <h1 className='text-sm sm:text-base'>並び順</h1>
                             </div>
-                            <div className='flex px-2 pt-1 h-1/2'>
-                                <a>古い順</a>
+                            <div className='flex gap-2 px-2 pt-1 h-1/2 items-center'>
+                                <a className='whitespace-nowrap text-sm sm:text-base'>古い順</a>
                                 <SwitchButton
-                                    className='mx-2'
+                                    className=''
                                     onClick={SwitchSortOrder}
                                     isOn={pageState.pageValue.sort === 'newer'}
                                     offModeColor='blue'
                                 />
-                                <a>新しい順</a>
+                                <a className='whitespace-nowrap text-sm sm:text-base'>新しい順</a>
                             </div>
                         </div>
-                        <div className='ml-4 rounded-lg border-2 flex flex-col justify-between'>
+                        <div className='rounded-lg border-2 flex flex-col justify-between'>
                             <div className='py-1 border-b h-1/2 px-12 flex items-center justify-center'>
-                                <h1 className=''>表示数</h1>
+                                <h1 className='text-sm sm:text-base'>表示数</h1>
                             </div>
-                            <Stepper className='h-1/2' onClick={SetMaxResult} mode='both' enableStep='both' stepValue={20} value={pageState.pageValue.maxResult}>
+                            <Stepper className='h-1/2 text-sm sm:text-base' onClick={SetMaxResult} mode='both' enableStep={pageState.pageValue.maxResult <= 20 ? 'up' : pageState.pageValue.maxResult >= 200 ? 'down' : 'both'} stepValue={20} value={pageState.pageValue.maxResult}>
                                 {pageState.pageValue.maxResult}
                             </Stepper>
+                        </div>
+                        <div className='rounded-lg border-2 py-1'>
+                            <div className='py-1 border-b h-1/2 px-12 flex items-center justify-center'>
+                                <h1 className='text-sm sm:text-base'>Mode</h1>
+                            </div>
+                            <div className='flex gap-2 px-2 pt-1 h-1/2 items-center'>
+                                <a className='whitespace-nowrap text-sm sm:text-base'>List</a>
+                                <SwitchButton
+                                    className=''
+                                    onClick={SwitchViewMode}
+                                    isOn={pageState.pageValue.viewmode === 'card'}
+                                    offModeColor='blue'
+                                />
+                                <a className='whitespace-nowrap text-sm sm:text-base'>Card</a>
+                            </div>
                         </div>
                     </div>
                 </ListCabinet>

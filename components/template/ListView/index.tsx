@@ -26,6 +26,7 @@ interface ListViewProps {
     body?: string
     footerDom?: React.ReactNode
     url?: string
+    children?: React.ReactNode
 }
 
 const Header: React.FC<HeaderProps> = ({icon, left, right}) => {
@@ -77,20 +78,12 @@ const Body: React.FC<BodyProps> = ({text, url}) => {
     )
 }
 
-const Footer: React.FC<FooterProps> = ({children}) => {
-    return (
-        <div>
-            {children}
-        </div>
-    )
-}
-
 const ListView: React.FC<ListViewProps> = ({
     icon,
     headerLefts,
     headerRights,
     body,
-    footerDom,
+    children,
     url,
 }) => {
     return (
@@ -98,9 +91,7 @@ const ListView: React.FC<ListViewProps> = ({
             <div className='mx-2 my-1'>
                 <Header icon={icon} left={headerLefts} right={headerRights} />
                 <Body text={body} url={url} />
-                <Footer>
-                    {footerDom}
-                </Footer>
+                {children}
             </div>
         </div>
     )
