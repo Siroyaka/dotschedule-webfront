@@ -19,7 +19,7 @@ export const basicMetaData = {
 
 export const ogpMetaData = {
     url: "https://dotschedule-lite.siroyaka.net",
-    title: "どっとスケジュール Lite",
+    title: "どっとスケジュール",
     description: "どっとライブメンバーのYoutube配信スケジュールをまとめたサイトです。",
     image: "https://dotschedule-lite.siroyaka.net/asset/images/dotschedule_icon_tw.png"
 }
