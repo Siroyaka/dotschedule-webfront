@@ -5,7 +5,7 @@ import SchedulesNavigation from 'components/standalone/SchedulesNavigation';
 import ContentPage from './contentpage';
 import { IDate } from 'library/DateFunctions';
 
-export const revalidate = 10;
+export const dynamic = 'force-dynamic';
 
 import { getJTCNow } from 'library/DateFunctions';
 
