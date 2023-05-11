@@ -69,48 +69,48 @@ const MiniCalendar: React.FC<{
     const year = defaultDate?.year ?? now.getFullYear();
     const month = defaultDate?.month ?? now.getMonth() + 1;
     const enableCalendarShift = createEnableCalendarShift(year, month, allowDateRange);
-    const [calendarState, setCalendarState] = React.useState<MiniCalendarState>({
+
+    const [state, dispatch] = React.useReducer((state, addMonth: number) => {
+        let nextMonth = state.month + addMonth;
+        let nextYear = state.year;
+        while (nextMonth < 1) {
+            nextMonth += 12;
+            nextYear -= 1;
+        }
+        while (nextMonth > 12) {
+            nextMonth -= 12;
+            nextYear += 1;
+        }
+
+        if (allowDateRange !== undefined) {
+            if (allowDateRange.from.year > nextYear || (allowDateRange.from.year === nextYear && allowDateRange.from.month > nextMonth)) {
+                nextYear = allowDateRange.from.year;
+                nextMonth = allowDateRange.from.month;
+            }
+
+            if (allowDateRange.to.year < nextYear || (allowDateRange.to.year === nextYear && allowDateRange.to.month < nextMonth)) {
+                nextYear = allowDateRange.to.year;
+                nextMonth = allowDateRange.to.month;
+            }
+        }
+
+        const enableCalendarShift = createEnableCalendarShift(nextYear, nextMonth, allowDateRange);
+
+        return {
+            ...state,
+            calendar: getMonthCalendar(nextYear, nextMonth),
+            year: nextYear,
+            month: nextMonth,
+            enableCalendarShift
+        }
+    }, {
         calendar: getMonthCalendar(year, month),
         year,
         month,
         enableCalendarShift
     });
-    const moveCalendarView = React.useCallback((addMonth: number) => {
-        setCalendarState((state) => {
-            let nextMonth = state.month + addMonth;
-            let nextYear = state.year;
-            while(nextMonth < 1) {
-                nextMonth += 12;
-                nextYear -= 1;
-            }
-            while(nextMonth > 12) {
-                nextMonth -= 12;
-                nextYear += 1;
-            }
 
-            if (allowDateRange !== undefined) {
-                if (allowDateRange.from.year > nextYear || (allowDateRange.from.year === nextYear && allowDateRange.from.month > nextMonth)) {
-                    nextYear = allowDateRange.from.year;
-                    nextMonth = allowDateRange.from.month;
-                }
 
-                if (allowDateRange.to.year < nextYear || (allowDateRange.to.year === nextYear && allowDateRange.to.month < nextMonth)) {
-                    nextYear = allowDateRange.to.year;
-                    nextMonth = allowDateRange.to.month;
-                }
-            }
-
-            const enableCalendarShift = createEnableCalendarShift(nextYear, nextMonth, allowDateRange);
-
-            return {
-                ...state,
-                calendar: getMonthCalendar(nextYear, nextMonth),
-                year: nextYear,
-                month: nextMonth,
-                enableCalendarShift
-            }
-        })
-    }, [])
     return (
         <section id='minicalendar'>
             <header className='my-4'>
@@ -118,37 +118,37 @@ const MiniCalendar: React.FC<{
                     <h1>{title}</h1>
                 </div>
                 <div className='flex items-center justify-between mx-4 border-b-2'>
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={-12} disable={!calendarState.enableCalendarShift.prevMonth}>
+                    <MiniCalendarNavigation onClick={dispatch} value={-12} disable={!state.enableCalendarShift.prevMonth}>
                         <NavigationBeforeSvg />
                     </MiniCalendarNavigation>
-                    {calendarState.year}年
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={12} disable={!calendarState.enableCalendarShift.nextMonth}>
+                    {state.year}年
+                    <MiniCalendarNavigation onClick={dispatch} value={12} disable={!state.enableCalendarShift.nextMonth}>
                         <NavigationNextSvg />
                     </MiniCalendarNavigation>
                 </div>
                 <div className='flex items-center justify-between mt-2 mx-4'>
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={-1} disable={!calendarState.enableCalendarShift.prevMonth}>
+                    <MiniCalendarNavigation onClick={dispatch} value={-1} disable={!state.enableCalendarShift.prevMonth}>
                         <NavigationBeforeSvg />
                     </MiniCalendarNavigation>
-                    {calendarState.month}月
-                    <MiniCalendarNavigation onClick={moveCalendarView} value={1} disable={!calendarState.enableCalendarShift.nextMonth}>
+                    {state.month}月
+                    <MiniCalendarNavigation onClick={dispatch} value={1} disable={!state.enableCalendarShift.nextMonth}>
                         <NavigationNextSvg />
                     </MiniCalendarNavigation>
                 </div>
             </header>
             <ol className='grid grid-cols-7 m-2'>
                 {weekDays.map((weekDay) => (
-                    <React.Fragment key={`cal-${calendarState.year}-${calendarState.month}-weekday-${weekDay}`}>
+                    <React.Fragment key={`cal-${state.year}-${state.month}-weekday-${weekDay}`}>
                         <li className='text-center text-ml'>
                             {weekDay}
                         </li>
                     </React.Fragment>
                 ))}
-                {calendarState.calendar.map((week, i) => (
-                <React.Fragment key={`cal-${calendarState.year}-${calendarState.month}-week-${i + 1}`}>
+                {state.calendar.map((week, i) => (
+                <React.Fragment key={`cal-${state.year}-${state.month}-week-${i + 1}`}>
                     {week.map((day) => (
                     <li
-                        key={`cal-${calendarState.year}-${calendarState.month}-week-${i + 1}-wd-${day.weekDay}`}
+                        key={`cal-${state.year}-${state.month}-week-${i + 1}-wd-${day.weekDay}`}
                         className='flex text-center min-h-[50px] justify-center items-center'
                     >
                         {
