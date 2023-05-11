@@ -76,7 +76,7 @@ const Stepper: React.FC<StepperProps> = (props) => {
         <div className={`w-1/${mode === 'both' ? '4' : '2'} border-l border-r flex items-center justify-center`}>
             <button
                 className='tap-no-response w-5 h-5 sm:w-7 sm:h-7 mx-2 my-2 rounded-full bg-gray-100'
-                onClick={() => { enableStep === 'both' || enableStep === 'up' ? onClick(stepValue + value) : {} }}
+                onClick={() => { enableStep === 'both' || enableStep === 'up' ? onClick(stepValue) : {} }}
             >
                 <PlusIconSvg className={`w-5 sm:w-7 ${ enableStep === 'down' ? 'text-gray-300' : ''}`} />
             </button>
@@ -87,7 +87,7 @@ const Stepper: React.FC<StepperProps> = (props) => {
         <div className={`w-1/${mode === 'both' ? '4' : '2'} border-l border-r flex items-center justify-center`}>
             <button
                 className='tap-no-response w-5 h-5 sm:w-7 sm:h-7 mx-1 my-1 rounded-full bg-gray-100'
-                onClick={() => { enableStep === 'both' || enableStep === 'down' ? onClick((-1 * stepValue) + value) : {} }}
+                onClick={() => { enableStep === 'both' || enableStep === 'down' ? onClick(-1 * stepValue) : {} }}
             >
                 <MinusIconSvg className={`w-5 sm:w-7 ${ enableStep === 'up' ? 'text-gray-300' : ''}`} />
             </button>
