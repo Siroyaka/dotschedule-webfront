@@ -1,5 +1,6 @@
 import React from "react";
 
+import { NavigationNextSvg, NavigationBeforeSvg } from 'components/parts/svgIcons';
 import Link from 'next/link';
 
 interface Props {
@@ -9,9 +10,13 @@ interface Props {
     pageQueryName: string
     pagePath: string
     otherQuerys?: {}
+    numbersClassName?: string
     parentClassName?: string
+    childNumberClassName?: string
     childClassName?: string
-    disableLinkClassName?: string
+    arrowLinkClassName?: string
+    disableArrowClassName?: string
+    nowPageNumClassName?: string
     enableLinkClassName?: string
 }
 
@@ -52,8 +57,12 @@ const PageSelecter: React.FC<Props> = ({
     pagePath,
     otherQuerys,
     parentClassName,
+    numbersClassName,
+    childNumberClassName,
     childClassName,
-    disableLinkClassName,
+    arrowLinkClassName,
+    disableArrowClassName,
+    nowPageNumClassName,
     enableLinkClassName
 }) => {
     const pages = viewPages(nowPage, totalLen, viewNum);
@@ -61,39 +70,85 @@ const PageSelecter: React.FC<Props> = ({
         return (
             <div></div>
         )
-    } 
+    }
     return (
         <React.Fragment>
-            <ol className={parentClassName}>
+            <div className={parentClassName}>
                 {
-                    pages.map((i, _) => {
-                        if (i === nowPage) {
+                    nowPage !== 1 ? (
+                        <div className={`${arrowLinkClassName}`}>
+                            <Link href={{
+                                pathname: pagePath,
+                                query: {
+                                    ...otherQuerys,
+                                    [pageQueryName]: nowPage - 1
+                                }
+
+                            }}
+                                draggable={false}
+                            >
+                                <NavigationBeforeSvg className="w-8"/>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className={`${disableArrowClassName}`}>
+                            <NavigationBeforeSvg className="w-8"/>
+                        </div>
+                    )
+                }
+                <ol className={numbersClassName}>
+                    {
+                        pages.map((i, _) => {
+                            if (i === nowPage) {
+                                return (
+                                    <li key={`page-${i}`} className={`${childNumberClassName} ${nowPageNumClassName}`}>
+                                        {i}
+                                    </li>
+                                )
+                            }
                             return (
-                                <li key={`page-${i}`} className={`${childClassName} ${disableLinkClassName}`}>
-                                    {i}
+                                <li key={`page-${i}`} className={`${childNumberClassName} ${enableLinkClassName}`}>
+                                    <Link href={{
+                                        pathname: pagePath,
+                                        query: {
+                                            ...otherQuerys,
+                                            [pageQueryName]: i
+                                        }
+
+                                    }}
+                                        draggable={false}
+                                        prefetch={false}
+                                    >
+                                        {i}
+                                    </Link>
                                 </li>
                             )
-                        }
-                        return (
-                            <li key={`page-${i}`} className={`${childClassName} ${enableLinkClassName}`}>
-                                <Link href={{
-                                    pathname: pagePath,
-                                    query: {
-                                        ...otherQuerys,
-                                        [pageQueryName]: i
-                                    }
-                                    
-                                }}
-                                    draggable={false}
-                                    prefetch={false}
-                                >
-                                    {i}
-                                </Link>
-                            </li>
-                        )
-                    })
+                        })
+                    }
+                </ol>
+                {
+                    pages[pages.length - 1] > nowPage ? (
+                        <div className={`${arrowLinkClassName}`}>
+                            <Link href={{
+                                pathname: pagePath,
+                                query: {
+                                    ...otherQuerys,
+                                    [pageQueryName]: nowPage + 1
+                                }
+
+                            }}
+                                draggable={false}
+                            >
+                                <NavigationNextSvg className="w-8"/>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className={`${disableArrowClassName}`}>
+                            <NavigationNextSvg className="w-8"/>
+                        </div>
+                    )
                 }
-            </ol>
+            </div>
         </React.Fragment>
     )
 }

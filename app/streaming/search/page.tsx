@@ -193,7 +193,10 @@ const ListMode = ({data, apiRequestParams, searchParams}: {data: DotscheduleAPIR
             otherQuerys={searchParams}
             parentClassName={'flex flex-wrap'}
             childClassName={'text-ml w-6 text-center'}
-            disableLinkClassName={'text-black'}
+            numbersClassName={'flex flex-wrap'}
+            childNumberClassName={'text-ml w-6 text-center'}
+            disableArrowClassName={'text-gray-200'}
+            nowPageNumClassName={'text-black'}
             enableLinkClassName={'text-blue-400'}
         />
     )
@@ -229,9 +232,13 @@ const CardMode = ({data, apiRequestParams, searchParams}: {data: DotscheduleAPIR
             pageQueryName={'page'}
             pagePath={'/streaming/search'}
             otherQuerys={searchParams}
-            parentClassName={'flex flex-wrap'}
-            childClassName={'text-ml w-6 text-center'}
-            disableLinkClassName={'text-black'}
+            parentClassName={'flex flex-wrap items-center justify-center gap-4'}
+            childClassName={'text-ml text-center'}
+            numbersClassName={'flex flex-wrap gap-3 items-center justify-center'}
+            childNumberClassName={'text-base sm:text-lg w-7 sm:w-8 text-center'}
+            arrowLinkClassName={'text-lg sm:text-xl text-center'}
+            disableArrowClassName={'text-gray-200'}
+            nowPageNumClassName={'text-black'}
             enableLinkClassName={'text-blue-400'}
         />
     )
