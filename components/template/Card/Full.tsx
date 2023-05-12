@@ -30,7 +30,7 @@ const Full: React.FC<Props> = (props) => {
     charactorIconSources,
   } = props;
   return (
-    <CardOutLine>
+    <CardOutLine className='animate-fade-in'>
       {onLive ? (
         <div className='absolute top-0 right-0' style={{color:'red'}}>
           <RoundIconSvg className='w-6'/>
