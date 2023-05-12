@@ -1,9 +1,9 @@
-import React from "react"
+import React, { Suspense } from "react";
 
 import { getJTCNow, dateToIDate } from 'library/DateFunctions';
-import StreamingSearchMenu, { SearchMember } from 'components/field/StreamingSearchMenu'
+import StreamingSearchMenu, { SearchMember } from 'components/field/StreamingSearchMenu';
 
-import searchMemberListJson from 'library/data/searchmemberlist.json'
+import searchMemberListJson from 'library/data/searchmemberlist.json';
 
 import LoadingField from 'components/field/Loading';
 
@@ -44,7 +44,9 @@ const Layout = async ({children}: LayoutProps) => {
             <header id='streaming_search_header' className="px-2 pt-2 h-auto">
                 <StreamingSearchMenu {...menuValues} memberList={menuValues.memberList} />
             </header>
-            {children}
+            <Suspense fallback={<LoadingField />}>
+                {children}
+            </Suspense>
         </section>
     )
 }
