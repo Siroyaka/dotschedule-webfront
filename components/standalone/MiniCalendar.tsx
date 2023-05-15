@@ -119,20 +119,20 @@ const MiniCalendar: React.FC<{
                 </div>
                 <div className='flex items-center justify-between mx-4 border-b-2'>
                     <MiniCalendarNavigation onClick={dispatch} value={-12} disable={!state.enableCalendarShift.prevMonth}>
-                        <NavigationBeforeSvg />
+                        <NavigationBeforeSvg className='w-8 h-8'/>
                     </MiniCalendarNavigation>
                     {state.year}年
                     <MiniCalendarNavigation onClick={dispatch} value={12} disable={!state.enableCalendarShift.nextMonth}>
-                        <NavigationNextSvg />
+                        <NavigationNextSvg className='w-8 h-8'/>
                     </MiniCalendarNavigation>
                 </div>
                 <div className='flex items-center justify-between mt-2 mx-4'>
                     <MiniCalendarNavigation onClick={dispatch} value={-1} disable={!state.enableCalendarShift.prevMonth}>
-                        <NavigationBeforeSvg />
+                        <NavigationBeforeSvg className='w-8 h-8'/>
                     </MiniCalendarNavigation>
                     {state.month}月
                     <MiniCalendarNavigation onClick={dispatch} value={1} disable={!state.enableCalendarShift.nextMonth}>
-                        <NavigationNextSvg />
+                        <NavigationNextSvg className='w-8 h-8'/>
                     </MiniCalendarNavigation>
                 </div>
             </header>
