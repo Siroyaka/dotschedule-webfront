@@ -11,18 +11,18 @@
   "dependencies": {
     "@babel/core": "^7.21.8",
     "@fullhuman/postcss-purgecss": "^5.0.0",
-    "@types/marked": "^4.3.0",
-    "@types/node": "^20.1.0",
+    "@types/marked": "^5.0.0",
+    "@types/node": "^20.2.3",
     "@types/react": "^18.2.6",
     "@types/redux": "^3.6.31",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
     "highlight.js": "^11.8.0",
-    "marked": "^5.0.1",
-    "next": "13.4.1",
+    "marked": "^5.0.2",
+    "next": "13.4.3",
     "postcss": "^8.4.23",
-    "postcss-preset-env": "^8.3.2",
+    "postcss-preset-env": "^8.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
@@ -32,6 +32,6 @@
     "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "eslint-config-next": "13.4.1"
+    "eslint-config-next": "13.4.3"
   }
 }
