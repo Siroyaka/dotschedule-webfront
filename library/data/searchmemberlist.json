@@ -109,9 +109,51 @@
             "Enrollment": 1
         },
         {
+            "Name": "鬼頭みさき",
+            "ID": "kitomisaki",
+            "Icon": "https://yt3.googleusercontent.com/ILZNJ7f1Li413K8yGPzGOUX0ktRt5B4f3J2e2hjCB8D1G_QrV2anrx3UhMAOT0Yi3F46f803=s176-c-k-c0x00ffffff-no-rj",
+            "Enrollment": 1
+        },
+        {
+            "Name": "紅蓮罰まる",
+            "ID": "gurenbatsumaru",
+            "Icon": "https://yt3.googleusercontent.com/4hOFROl6jOzxN0szFMZ28rBienuTbNrhofi8B1MNUIPd_AGCiFZQN3WSWg8KUlYRW1zizWvm-A8=s176-c-k-c0x00ffffff-no-rj",
+            "Enrollment": 1
+        },
+        {
+            "Name": "斜落せつな",
+            "ID": "sharakusetsuna",
+            "Icon": "https://yt3.googleusercontent.com/5EWC1lDUSxc1F_S3MOEHNrCF_yd58KJtByq91MaPgnwHQ3rWXbOPSjKeEKHjWDlt8o386yuyzw=s176-c-k-c0x00ffffff-no-rj",
+            "Enrollment": 1
+        },
+        {
+            "Name": "秘間慈ぱね",
+            "ID": "himajipane",
+            "Icon": "https://yt3.googleusercontent.com/9OTQrDcz_ert9DlQ248QIowksLAVc06DPPbIL5grNTHs7a1Wa_n6QX76yLOt7YL729bjQCL2=s176-c-k-c0x00ffffff-no-rj",
+            "Enrollment": 1
+        },
+        {
+            "Name": "甘噛あめ",
+            "ID": "amagamiame",
+            "Icon": "https://yt3.googleusercontent.com/TygqLxL0ivHDrPhl0f2j8j4W5CDnooPEQaYlsIhiR4CI_fJ5fCTGVba-fI61GKeE-T3MrGUuqA=s176-c-k-c0x00ffffff-no-rj",
+            "Enrollment": 1
+        },
+        {
+            "Name": "十六夜ちはや",
+            "ID": "izayoichihaya",
+            "Icon": "https://yt3.googleusercontent.com/ghpse2gNtxORfgiu8mOdD9lZjw6l0TS4Hyucw25DG7ZS-DPD-9RnhVP5As1H64FOxFR-Rfreqw=s176-c-k-c0x00ffffff-no-rj",
+            "Enrollment": 1
+        },
+        {
             "Name": "どっとらいぶ公式チャンネル",
             "ID": "dotlive_official",
             "Icon": "https://yt3.ggpht.com/a/AATXAJx0feTqFDgJte485tbjo5gKs9-ITFxU4nHJ5Q=s100-c-k-c0xffffffff-no-rj-mo",
+            "Enrollment": 1
+        },
+        {
+            "Name": "ぶいぱい【公式】",
+            "ID": "vpi_official",
+            "Icon": "https://yt3.googleusercontent.com/xPiDQVYIJSV-OGg_Ni9wfQxdbAKfLfLxdcTqegjDaATgUqsFqJn-idnU-rGrrYwFJ-zf_zIs=s176-c-k-c0x00ffffff-no-rj",
             "Enrollment": 1
         }
     ]
