@@ -45,6 +45,13 @@ const ids: Set<string> = new Set([
     'yaezawanatori',
     'yamatoiori',
     'yozakuratama',
+    'vpi_official',
+    'kitomisaki',
+    'gurenbatsumaru',
+    'sharakusetsuna',
+    'himajipane',
+    'amagamiame',
+    'izayoichihaya'
 ]);
 
 export const metadata = {
