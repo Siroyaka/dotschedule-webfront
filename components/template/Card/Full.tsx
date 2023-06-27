@@ -48,12 +48,12 @@ const Full: React.FC<Props> = (props) => {
         src={mediaSrc}
         href={mediahref}
       />
-      <CharactorIcons
-        charactorIconSources={charactorIconSources}
-      />
       <CardContents>
         {children}
       </CardContents>
+      <CharactorIcons
+        charactorIconSources={charactorIconSources}
+      />
     </CardOutLine>
   );
 }

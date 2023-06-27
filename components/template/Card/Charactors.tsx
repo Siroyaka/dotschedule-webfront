@@ -11,7 +11,7 @@ type Props = OwnProps;
 const Charactors: React.FC<Props> = (props) => {
   const { charactorIconSources } = props;
   return(
-    <ul className='w-full flex flex-wrap items-start'>
+    <ul className='py-2 w-full flex flex-wrap items-start'>
       {charactorIconSources.map((iconSource, i) => 
         <li key={`charactor-icon-${i}`} className='flex-shrink-0' style={{width: '10%'}}>
           <Image

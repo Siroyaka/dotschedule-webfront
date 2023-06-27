@@ -9,7 +9,7 @@ type Props = OwnProps;
 const Contents: React.FC<Props> = (props) => {
   const { children } = props;
   return(
-    <div className='px-3 pt-4 pb-6'>
+    <div className='my-2 px-2 pt-1'>
       {children}
     </div>
   )
