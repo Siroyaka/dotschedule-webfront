@@ -16,26 +16,34 @@ const Header: React.FC<Props> = (props) => {
   const { avaterSrc, name, startTime, duration } = props;
 
   return (
-    <section className='flex flex-row my-1'>
+    <header className='flex flex-row gap-1 py-2 px-2'>
       {avaterSrc && avaterSrc.length > 0 ? 
         <Image
           width={50}
           height={50}
-          className='rounded-full h-14 w-14 px-1 py-1 flex-shrink-0'
+          className='rounded-full h-14 w-14 flex-shrink-0'
           alt={`${name}-avater`}
           src={avaterSrc}
           />
       : 
-        <NoImageAvater />
+        <div className={`rounded-full bg-gray-200 flex-shrink-0 text-center flex justify-center items-center h-14 w-14 text-2xl` }>
+          他
+        </div>
       }
-      <article className='mx-1 my-1 w-full'>
-        <h1 className='text-lg'>{name}</h1>
-        <div className='flex flex-row justify-between text-gray-700 text-sm'>
-          <span>{startTime}</span>
-          <span>{duration}</span>
+      <article className='flex flex-1 truncate justify-between'>
+        <div>
+          <h1 className='text-xl'>{name}</h1>
         </div>
       </article>
-    </section>
+      <div className='flex flex-col text-gray-600 text-xs justify-end items-end gap-1'>
+        <div>
+          <a>{startTime}</a>
+        </div>
+        <div>
+          <a>{duration}</a>
+        </div>
+      </div>
+    </header>
   );
 }
 export default Header;
