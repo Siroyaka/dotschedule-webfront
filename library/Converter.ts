@@ -50,6 +50,11 @@ export const DayScheduleToCardType = (s: DaySchedule, timeType: 'time' | 'dateti
         }
     }
 
+    let participantsList = s.Participants?.filter(x => x.ID != 'dotlive_official') ?? [];
+    if(participantsList.length === 1 && participantsList[0].ID === s.StreamerData.ID) {
+        participantsList = [];
+    }
+
     return ({
         headerAvater: s.StreamerData.Icon ?? '',
         name: s.StreamerData.Name,
@@ -59,7 +64,7 @@ export const DayScheduleToCardType = (s: DaySchedule, timeType: 'time' | 'dateti
         mediahref: s.StreamingData.URL,
         title: s.StreamingData.Title,
         onLive: s.StreamingData.Status === 2,
-        charactorIconSources: s.Participants?.filter(x => x.ID != 'dotlive_official').map(x => x.Icon) ?? []
+        charactorIconSources: participantsList.map(x => x.Icon) ?? []
     })
 
 }
