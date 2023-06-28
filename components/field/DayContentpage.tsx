@@ -22,7 +22,7 @@ const DayContentPage: React.FC<Props> = ({ schedules, isError, mode }) => {
         )
     }
 
-    const cardData = schedules?.response_data?.map(x => DayScheduleToCardType(x)) ?? [];
+    const cardData = schedules?.response_data?.map(x => DayScheduleToCardType(x, 'datetime')) ?? [];
 
     return (
         <article id='schedules' className='mx-2 my-4'>
