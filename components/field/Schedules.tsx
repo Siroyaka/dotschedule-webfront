@@ -1,8 +1,8 @@
 import React, { ComponentProps } from 'react';
 
-import { CardFullTemplate } from 'components/template/Card';
+import { CardForSchedule } from 'components/template/Card';
 
-export type CardType = ComponentProps<typeof CardFullTemplate> & { title: string };
+export type CardType = ComponentProps<typeof CardForSchedule>;
 
 interface OwnProps {
     cardData: CardType[],
@@ -40,9 +40,9 @@ const SchedulesField: React.FC<Props> = (props) => {
                     key={`card-${cardInfo.start}-${i}`}
                     className={`w-full px-2 py-2 flex justify-center ${cardSizeQuery}`}
                 >
-                    <CardFullTemplate {...cardInfo}>
+                    <CardForSchedule {...cardInfo}>
                         {cardInfo.title}
-                    </CardFullTemplate>
+                    </CardForSchedule>
                 </li>
             ))}
         </ul>

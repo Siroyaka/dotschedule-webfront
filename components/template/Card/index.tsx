@@ -12,6 +12,8 @@ export { default as CardContents } from './Contents';
 
 export { default as CardFullTemplate } from './Full';
 
+export { default as CardForSchedule } from './ScheduleCard';
+
 export { default as CardNews } from './News';
 
 export { default as CharactorIcons } from './Charactors';
