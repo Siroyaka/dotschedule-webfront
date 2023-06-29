@@ -10,6 +10,8 @@ import Stepper from 'components/parts/stepper';
 import MiniCalendar from 'components/standalone/MiniCalendar';
 import { IDate, iDateToString } from 'library/DateFunctions';
 
+import LinkAlways from 'components/parts/link_always';
+
 interface Props {
     memberList: SearchMember[]
     rangeStart: IDate
@@ -372,11 +374,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                 </ListCabinet>
             </div>
             <div id='search-button' className='text-right mt-4'>
-                <Link
-                    href={{
-                        pathname: '/streaming/search',
-                        query: pageValueToLinkQuery(state.pageValue)
-                    }}
+                <LinkAlways
                     className={`
                         inline-block bg-gray-200 rounded
                         px-4 py-2 mx-4
@@ -386,9 +384,11 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                         `}
                     draggable={false}
                     prefetch={false}
+                    pathname='/streaming/search'
+                    query={pageValueToLinkQuery(state.pageValue)}
                 >
                     検索
-                </ Link>
+                </ LinkAlways>
             </div>
             {
                 state.modalMode !== 'none' ? (
