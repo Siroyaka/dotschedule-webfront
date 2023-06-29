@@ -13,7 +13,7 @@ interface SameCheckParams {
 
 type Props = Omit<React.ComponentProps<typeof Link>, 'href'> & SameCheckParams;
 
-export const isSameLink = (param: SameCheckParams) => {
+export const useIsSameLink = (param: SameCheckParams) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -59,7 +59,7 @@ export const isSameLink = (param: SameCheckParams) => {
 
 const LinkAlways: React.FC<Props> = (props) => {
     const router = useRouter();
-    if(isSameLink(props)) {
+    if(useIsSameLink(props)) {
         const clickButton = () => {
             console.log('refresh');
             router.refresh();
