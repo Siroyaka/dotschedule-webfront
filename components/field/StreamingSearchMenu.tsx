@@ -16,6 +16,7 @@ interface Props {
     memberList: SearchMember[]
     rangeStart: IDate
     rangeEnd: IDate
+    c, s: string
 }
 
 interface PageState {
@@ -85,7 +86,7 @@ const ListCabinet: React.FC<{openCloseFunction: (boolean) => void, isOpen: boole
     )
 }
 
-const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult, viewmode}: PageValue) => {
+const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult, viewmode}: PageValue, c, s: string) => {
     return {
         'members': members?.join(',') ?? '',
         'from': from !== undefined ? iDateToString(from, '-', true) : '',
@@ -95,7 +96,9 @@ const pageValueToLinkQuery = ({members, from, to, title, tags, sort, maxResult, 
         'tags': tags?.join(',') ?? '',
         'sort': sort,
         'maxresult': Math.max(Math.min(maxResult, 200), 1),
-        'viewmode': viewmode
+        'viewmode': viewmode,
+        'c': c,
+        's': s
     }
 }
 
@@ -192,7 +195,7 @@ const calendarVisible = (state: PageState, { calendarType }: { calendarType: 'fr
     }
 }
 
-const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}) => {
+const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd, c, s}) => {
 
     const reducer = (state: PageState, action: SearchMenuAction): PageState => {
         switch (action.type) {
@@ -385,7 +388,7 @@ const StreamingSearchMenu: React.FC<Props> = ({memberList, rangeStart, rangeEnd}
                     draggable={false}
                     prefetch={false}
                     pathname='/streaming/search'
-                    query={pageValueToLinkQuery(state.pageValue)}
+                    query={pageValueToLinkQuery(state.pageValue, c, s)}
                 >
                     検索
                 </ LinkAlways>
