@@ -95,7 +95,9 @@ export interface StreamingSearchRequestParams {
     page: number,
     maxResult?: number,
     sort: "newer" | "older",
-    reason?: string
+    reason?: string,
+    c: string | null,
+    s: string | null
 }
 
 export class DotscheduleAPIResponse<T> {

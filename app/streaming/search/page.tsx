@@ -7,6 +7,8 @@ import PageSelector from 'components/standalone/PageSelector';
 import { DayScheduleToCardType, ScheduleListToListView } from 'library/Converter';
 import { IDate, iDateToDate } from 'library/DateFunctions';
 import { DaySchedule, DotscheduleAPIResponse, StreamingSearchRequest, StreamingSearchRequestParams } from 'library/api/DotscheduleApi';
+import { Sq } from 'library/api/Const';
+import { compareHash } from 'library/hardread';
 
 interface Props {
     searchParams: SearchParams
@@ -21,6 +23,8 @@ interface SearchParams {
     viewmode?: string
     sort?: string
     maxresult?: string
+    c?: string
+    s?: string
 }
 
 export const dynamic = 'force-dynamic';
@@ -62,14 +66,18 @@ const isSearchParamBlank = ({searchParams}: Props) => {
     const isBlank = (param?: string) => {
         return (param ?? "").trim() === "";
     }
+
     return (
-        isBlank(searchParams.members) &&
+        (isBlank(searchParams.members) &&
         isBlank(searchParams.from) &&
         isBlank(searchParams.to) &&
         isBlank(searchParams.title) &&
         isBlank(searchParams.page) &&
         isBlank(searchParams.sort) &&
-        isBlank(searchParams.maxresult)
+        isBlank(searchParams.maxresult))
+//        ||
+//        isBlank(searchParams.c) ||
+//        isBlank(searchParams.s)
     )
 }
 
@@ -103,7 +111,7 @@ const dateRequestParamToIDate = (v?: string): IDate | undefined => {
 }
 
 const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParams => {
-    const {page, members, from, to, title, sort, maxresult} = searchParams;
+    const {page, members, from, to, title, sort, maxresult, c, s} = searchParams;
 
     const memberList = members ? members.replaceAll(';', '').split(',').filter(x => ids.has(x)) : [];
 
@@ -133,8 +141,43 @@ const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParam
         to: toDate,
         title: titleQuery,
         maxResult: maxResultNum,
-        sort: (sort ?? "") === "older" ? "older" : "newer"
+        sort: (sort ?? "") === "older" ? "older" : "newer",
+        c: c ?? null,
+        s: s ?? null
     };
+}
+
+const verification = async (sp: StreamingSearchRequestParams) => {
+    if(sp.c === "" || sp.s === '') {
+        return false;
+    }
+
+    if(sp.c === null) {
+        return false;
+    }
+    if(sp.s === null) {
+        return false;
+    }
+
+    const n = new Date();
+
+    const n_minus_10 = new Date();
+    n_minus_10.setMinutes(n_minus_10.getMinutes() - 10);
+    const c = parseInt(sp.c);
+    const overNow = n.getTime() < c;
+    const overLimit = n_minus_10.getTime() >= c;
+
+    if(isNaN(c) || overNow || overLimit) {
+        return false;
+    }
+
+    const ch = await compareHash(sp.s, (sp.c + Sq.searchSalt1));
+
+    if(!ch) {
+        return false;
+    }
+
+    return true;
 }
 
 const fetchData = async(params: StreamingSearchRequestParams) => {
@@ -150,6 +193,15 @@ const Page = async ({searchParams}: Props) => {
     }
 
     const apiRequestParams = searchParamsConvert({searchParams});
+
+    const veri = await verification(apiRequestParams);
+    if (!veri) {
+        return (
+            <div className='mx-2'>
+                <h1>検索結果なし</h1>
+            </div>
+        )
+    }
 
     const {isError, data} = await fetchData(apiRequestParams);
 

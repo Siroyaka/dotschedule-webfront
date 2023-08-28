@@ -5,3 +5,7 @@ export const APIConfig = {
     header1: process.env.HEADER1 ?? '',
     header2: process.env.HEADER2 ?? '',
 }
+
+export const Sq = {
+    searchSalt1: process.env.SEARCH_SALT1 ?? ''
+}

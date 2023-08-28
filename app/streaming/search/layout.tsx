@@ -7,6 +7,9 @@ import searchMemberListJson from 'library/data/searchmemberlist.json';
 
 import LoadingField from 'components/field/Loading';
 
+import { Sq } from 'library/api/Const';
+import { hashed } from 'library/hardread';
+
 interface LayoutProps {
     children: React.ReactNode
 }
@@ -19,6 +22,10 @@ const FetchStreamingSearchMenuValues = async () => {
 
     const apiResponse = searchMemberListJson;
 
+    const now = new Date().getTime();
+    const c = now;
+    const s = await hashed(now + Sq.searchSalt1);
+
     const memberList: SearchMember[] = apiResponse.MemberList.map(x => {
         return {
             isSelect: false,
@@ -30,6 +37,7 @@ const FetchStreamingSearchMenuValues = async () => {
         memberList,
         rangeStart,
         rangeEnd,
+        c,s
     };
 }
 
