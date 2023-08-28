@@ -142,20 +142,18 @@ const searchParamsConvert = ({searchParams}: Props): StreamingSearchRequestParam
         title: titleQuery,
         maxResult: maxResultNum,
         sort: (sort ?? "") === "older" ? "older" : "newer",
-        c: c ?? null,
-        s: s ?? null
     };
 }
 
-const verification = async (sp: StreamingSearchRequestParams) => {
+const verification = async (sp: SearchParams) => {
     if(sp.c === "" || sp.s === '') {
         return false;
     }
 
-    if(sp.c === null) {
+    if(sp.c === undefined) {
         return false;
     }
-    if(sp.s === null) {
+    if(sp.s === undefined) {
         return false;
     }
 
@@ -194,7 +192,7 @@ const Page = async ({searchParams}: Props) => {
 
     const apiRequestParams = searchParamsConvert({searchParams});
 
-    const veri = await verification(apiRequestParams);
+    const veri = await verification(searchParams);
     if (!veri) {
         return (
             <div className='mx-2'>
