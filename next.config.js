@@ -11,6 +11,7 @@ module.exports = async (phase, { defaultConfig }) => {
     reactStrictMode: true,
     experimental: {
       appDir: true,
+      serverActions: true,
     },
   }
   return nextConfig

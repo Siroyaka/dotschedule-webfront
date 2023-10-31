@@ -43,7 +43,6 @@ export class RequestClient {
     }
 
     async Get<T>(): Promise<ResponseValue<T>> {
-
         let url = this.url;
 
         if (this.requestValues.size > 0) {

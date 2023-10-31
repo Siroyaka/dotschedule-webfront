@@ -32,7 +32,8 @@ const ListCalendar: React.FC<Props> = (props) => {
                         <li key={`list-calendar-${day.year}-${day.month}-${day.day}`} className='relative border-b-2 px-2 active:bg-blue-100 ease-in-out transform transition-colors duration-150' style={{ minHeight: '5rem' }}>
                             <Link
                                 href={{
-                                    pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                                    pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`,
+                                    query: { from: 'inner' }
                                 }}
                                 className='w-full h-full absolute top-0 left-0'
                             >
