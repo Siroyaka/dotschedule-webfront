@@ -1,10 +1,11 @@
 import fs from 'fs';
-import { marked } from 'marked';
+import { marked, MarkedOptions } from 'marked';
 import highlightjs from 'highlight.js';
 
-const markedOption: marked.MarkedOptions = ({
+const markedOption: MarkedOptions = ({
   highlight: function(code, lang) {
-    return highlightjs.highlightAuto(code, [lang]).value;
+    const l = lang === undefined ? undefined : [lang];
+    return highlightjs.highlightAuto(code, l).value;
   },
   pedantic: false,
   gfm: true,

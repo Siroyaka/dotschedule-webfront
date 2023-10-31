@@ -32,7 +32,8 @@ const Monthly: React.FC<Props> = (props) => {
                   <Link
                     className='absolute top-0 left-0 w-full h-full'
                     href={{
-                      pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`
+                      pathname: `/streaming/day/${day.year}/${day.month}/${day.day}`,
+                      query: { from: 'inner' }
                     }}
                     prefetch={false}
                   >

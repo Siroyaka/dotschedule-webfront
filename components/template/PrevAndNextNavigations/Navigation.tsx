@@ -21,7 +21,8 @@ const Navigation: React.FC<Props> = (props) => {
         <Link
           className='absolute h-full w-full top-0 left-0'
           href={{
-            pathname: href
+            pathname: href,
+            query: { from: 'inner' }
           }}
           draggable={false}
           prefetch={false}

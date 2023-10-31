@@ -17,6 +17,11 @@ interface MetaProps {
 
 interface PageProps {
     params: StreamingScheduleSlug
+    searchParams: SearchParams
+}
+
+interface SearchParams {
+    from: string
 }
 
 export async function generateMetadata(props: MetaProps): Promise<Metadata> {
@@ -33,6 +38,7 @@ const FetchData = async (year: number, month: number, day: number) => {
     const d: IDate = {
         year, month, day
     }
+
     const requestParams: StreamingSearchRequestParams = {
         page: 1,
         from: d,
@@ -45,8 +51,23 @@ const FetchData = async (year: number, month: number, day: number) => {
     return await req.Get(requestParams, 10);
 }
 
+const searchParamsCheck = (p: SearchParams) => {
+    if(p.from === null || p.from === undefined) {
+        return false;
+    }
+    if(p.from === 'inner') {
+        return true;
+    }
+}
+
 async function Page(props: PageProps) {
     const { year, month, day } = props.params;
+    if(!searchParamsCheck(props.searchParams)) {
+        return (
+            <></>
+        )
+    }
+
     const result = SlugCheck(year, month, day)
     if (!result.result) {
         // error page
