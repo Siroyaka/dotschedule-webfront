@@ -9,10 +9,6 @@ module.exports = async (phase, { defaultConfig }) => {
       unoptimized: true,
     },
     reactStrictMode: true,
-    experimental: {
-      appDir: true,
-      serverActions: true,
-    },
   }
   return nextConfig
 }

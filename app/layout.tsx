@@ -34,7 +34,9 @@ export const metadata = {
         capable: iosMetaData.capable,
         statusBarStyle: iosMetaData.statusBarStyle,
         title: iosMetaData.title,
-    }
+    },
+    googlebot: 'noindex',
+    robots: 'noindex',
 }
 
 const Layout = ({ children }: LayoutProps) => {
