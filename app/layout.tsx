@@ -36,7 +36,7 @@ export const metadata = {
         title: iosMetaData.title,
     },
     googlebot: 'noindex',
-    robots: 'noindex',
+    robots: 'noindex,nofollow',
 }
 
 const Layout = ({ children }: LayoutProps) => {
