@@ -2,8 +2,8 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { MessageIconSvg, NoticeIconSvg, CommunityIconSvg } from 'components/parts/svgIcons';
-import { DISCORD_LINK, MESSAGE_FORM_URL } from 'library/Constructions';
+import { NoticeIconSvg, CommunityIconSvg } from 'components/parts/svgIcons';
+import { DISCORD_LINK } from 'library/Constructions';
 
 interface OwnProps {
   closeDrawer: () => void
@@ -41,16 +41,6 @@ const DrawerItems: React.FC<Props> = (props) => {
             </div>
             <div>
               <span className={'text-lg'}>Discord</span>
-            </div>
-          </a>
-        </li>
-        <li className={'w-full'}>
-          <a className={'block py-2 px-2 text-left hover:bg-blue-100 flex'} href={MESSAGE_FORM_URL} style={{transition: 'all .15s ease'}} target='_blank' rel='noreferrer noopener'>
-            <div className={'mr-4 flex items-center'}>
-              <MessageIconSvg className='w-6'/>
-            </div>
-            <div>
-              <span className={'text-lg'}>お問い合わせ</span>
             </div>
           </a>
         </li>
